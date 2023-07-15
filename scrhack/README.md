@@ -99,11 +99,11 @@ manual for more information.
 # How to Contribute
 
 To become a contributor, clone the code and do heavy testing. If you find an
-issue, please report it using the [issue tracker](../../issues). You can
+issue, please report it using the [issue tracker](../../../issues). You can
 also, e.g., make new test files to the packages. See the
 [`l3build`](https://ctan.prg/pkg/l3build) manual for more information about
 tests. If you've created a new test and think that it would be useful. Please
-either do a pull request or [add a new issue](../../issues/new/choose) and
+either do a pull request or [add a new issue](../../../issues/new/choose) and
 include your test file.
 
 Another kind of contribution would be to contact an author of one of the
@@ -113,15 +113,15 @@ corresponding enhancement package from this project into her or his package.
 # How to Report Issues
 
 If you think you have found a bug (or another kind of issue) using `scrhack`
-you should use the [issue tracker](../../issues). Please first search for
+you should use the [issue tracker](../../../issues). Please first search for
 similar issues already reported and maybe also already fixed and closed. Maybe
 the replies to such a similar report would help you too.
 
 If your issue is new, you should report it also using the [issue
-tracker](../../issues). Please be kind, not only when writing the report but
-also when reading replies and commenting or answering. And please always add a
-minimal working example and usually the relevant parts of the `log`-file to
-your report. Please use the [markdown for
+tracker](../../../issues). Please be kind, not only when writing the report
+but also when reading replies and commenting or answering. And please always
+add a minimal working example and usually the relevant parts of the `log`-file
+to your report. Please use the [markdown for
 code](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks)
 to add such files into the text of your report. The correct language
 identifier for LaTeX code would be `latex`. For `log`-files you won't need any

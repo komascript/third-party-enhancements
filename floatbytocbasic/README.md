@@ -1,4 +1,4 @@
-# Package `floatbytocbasic'
+# Package `floatbytocbasic`
 
 Copyright © 2008–2023 Markus Kohm
 

@@ -1,4 +1,4 @@
-# Package `scrhack'
+# Package `scrhack`
 
 Copyright © 2008–2023 Markus Kohm
 

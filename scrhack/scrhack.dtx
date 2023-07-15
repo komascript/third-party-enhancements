@@ -1,0 +1,485 @@
+% \iffalse meta-comment
+% ======================================================================
+% scrhack.dtx
+% Copyright © 2008–2023 Markus Kohm
+%
+% This work is a KOMA-Script spin-off.  For the original sources of
+% KOMA-Script's `scrhack.sty' see file `scrhack.dtx' in the KOMA-Script
+% sources at <https://sourceforge.net/p/koma-script/code/>.
+%
+% Development is taking place as part of `scrhack' at
+% <https://github.com/komascript/thirdpartyhacks>.  New issues should
+% be reported there as well as known issues can be found.
+%
+% This work may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, version 1.3c of the license.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.<3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later and of this work.
+%
+% This work has the LPPL maintenance status "author-maintained".
+%
+% The Current Maintainer and author of this work is Markus Kohm.
+%
+% This work consists of the file `scrhack.dtx',
+% `scrhack-2023-07-07,dtx', and `README.md'.
+%
+% The recommended way to install `scrhack' is to use
+% the package manager of your TeX distribution.
+% ======================================================================
+%
+%<*dtx>
+\ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
+\ProvidesFile{scrhack.dtx}
+%</dtx>
+%<package>\providecommand\DeclareRelease[3]{}
+%<package>\providecommand\DeclareCurrentRelease[2]{}
+%<package>\DeclareRelease{v3.41}{2023-07-07}{scrhack-2023-07-07.sty}
+%<package>\DeclareCurrentRelease{}{2023-07-15}
+%<*dtx|package>
+%<package>\ProvidesPackage{scrhack}
+             [2023-07-15 v3.42
+%<dtx>              sources and unpack driver of
+              scrhack emulation package]
+%</dtx|package>
+%<*dtx>
+\ifx\documentclass\undefined
+  \input docstrip.tex
+  \generate{%
+    \file{scrhack.sty}{%
+      \from{scrhack.dtx}{package}%
+    }%
+  }%
+\else
+  \let\endbatchfile\relax
+\fi
+\endbatchfile
+\documentclass[ngerman,USenglish]{koma-script-source-doc}
+\usepackage{babel}
+\usepackage{csquotes}
+\usepackage[style=alphabetic]{biblatex}
+\begin{filecontents}[force]{\jobname.bib}
+@online{pkg:koma-script,
+  author={Markus Kohm},
+  version={3.41},
+  date={2023-07-07},
+  title={{\KOMAScript} --- A bundle of versatile classes and packages},
+  url={https://ctan.org/pkg/koma-script},
+  urldate={2023-07-14},
+  note={The \KOMAScript{} bundle provides replacements for the \pkg*{article},
+        \pkg*{report}, and \pkg*{book} classes with emphasis on typography and
+        versatility. There is also a letter class.},
+}
+@manual{pkg:koma-script:manual:de,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={Die Anleitung},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-de.pdf},
+  urldate={2023-07-04},
+}
+@manual{pkg:koma-script:manual:en,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={The Guide},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-en.pdf},
+  urldate={2023-07-14},
+}
+@article{latexnews35,
+  author={{The {\LaTeX} Team}},
+  shortauthor={TLT},
+  year={2022},
+  month={6},
+  title={Issue 35},
+  journal={{\LaTeX} News},
+  url={http://mirrors.ctan.org/macros/latex/base/ltnews35.pdf},
+  urldate={2023-07-14},
+}
+\end{filecontents}
+\addbibresource{\jobname.bib}
+\setcounter{StandardModuleDepth}{2}
+\providecommand*{\seclabel}[1]{\label{sec:#1}}
+\begin{document}
+  \nocite{pkg:koma-script}
+  \DocInput{scrhack.dtx}
+\end{document}
+%</dtx>
+%\fi
+%
+% \changes{v0.1}{2023/07/14}{start of \KOMAScript{} spin-off}
+%
+% \GetFileInfo{scrhack.dtx}
+% \title{Emulating Previous \href{https://komascript.de/}{\KOMAScript} Package
+%   ``\pkg*{scrhack}''}
+% \author{\href{mailto:komascript@gmx.info}{Markus Kohm}}
+% \date{Version \filedate{} \fileversion}
+% \maketitle
+% \begin{abstract}
+%   For several years \href{https://komascript.de/}{\KOMAScript} provided a
+%   package \pkg*{scrhack}, that has been made not only to improve the
+%   compatibility of third-party packages with
+%   \href{https://komascript.de/}{\KOMAScript} classes, but also to generally
+%   improve third-party packages. The package consisted not only in the
+%   package file \file{scrhack.sty} but also in several so called \emph{hacks}
+%   as separate files with extension \file{.hak}. In the course of splitting
+%   off former KOMA-Script packages from the KOMA-Script collection, it was
+%   decided to create independent packages from the individual hacks. These
+%   new independent packages then serve as replacements for the original
+%   packages they were intended to improve. In addition, to preserve the
+%   functionality of loading the enhancements only when the corresponding
+%   original package is loaded, a new scrhack was created to do just that.
+% \end{abstract}
+%
+% \tableofcontents
+%
+%\iffalse
+%<*doc>
+%\fi
+% \section{History}
+% \label{sec:history}
+Some packages from other authors do not work well with
+\href{https://komascript.de/}{\KOMAScript}. It is often very tedious for the
+author of \href{https://komascript.de/}{\KOMAScript} to convince the authors
+of these packages to make specific improvements. This also applies to packages
+whose development has been discontinued. That's why the \pkg*{scrhack} was
+created. This package alters the commands and definitions of other to work
+better with \href{https://komascript.de/}{\KOMAScript}. Some changes are also
+useful when using other classes.
+
+In the early days of \href{https://komascript.de/}{\KOMAScript}, users wanted
+to handle lists of floating environments created with the \pkg{float} package
+in the same way as the list of figures and list of tables created by
+\href{https://komascript.de/}{\KOMAScript} itself. At that time the author of
+\href{https://komascript.de/}{\KOMAScript} contacted the author of
+\pkg{float} to propose an interface to support such an enhancement. A
+somewhat modified form of that interface was implemented with the
+\cs{float@listhead} and \cs{float@addtolists} commands.
+
+Later it became apparent that these two commands were not flexible enough to
+fully support all of \href{https://komascript.de/}{\KOMAScript}'s
+capabilities. Unfortunately, the author of \pkg{float} had already ceased
+development by that point, so further changes to this package cannot be
+expected.
+
+Other package authors have also adopted these two commands, and it became
+apparent that the implementation in some packages, including \pkg{float},
+means that all these packages can only be loaded in a specific order, even
+though they are otherwise unrelated to each other.
+
+To overcome all these disadvantages and problems,
+\href{https://komascript.de/}{\KOMAScript} no longer officially supports this
+old interface. Instead, \href{https://komascript.de/}{\KOMAScript} warns if
+the old interface is used. At the same time, the \pkg{tocbasic} package has
+been designed and implemented as a central interface for managing of table of
+contents and similar content lists.  This package provides many more
+advantages and features than the two old commands.
+
+Although the effort to use this package is very small, so far the authors of
+most of the packages that use the old interface have not made any adjustments.
+Therefore the \KOMAScript author designed a new
+package \pkg*{scrhack} as part of
+\href{https://komascript.de/}{\KOMAScript}. That package contained appropriate
+modifications of the packages
+\pkg{float}, \pkg{floatrow}, \pkg{listings}, and later on also for
+\pkg{nomencl} and some others not related to that interface. Merely loading
+\pkg*{scrhack} was sufficient to make these packages recognize not only the
+setting of the \href{https://komascript.de/}{\KOMAScript} option \opt{listof},
+but, e.g., also to react to the language switching features of the
+\pkg{babel} package. You can find more information
+about the features available by switching packages to \pkg{tocbasic} in
+\cite{pkg:koma-script:manual:en} or \cite{pkg:koma-script:manual:de}.
+
+With release of version 3.42 package \pkg*{scrhack} has been removed from
+\href{https://komascript.de/}{\KOMAScript}. The code of the former package has
+been split into several standalone packages, that can be loaded individually
+if needed. However, for compatibility and maybe for convenience there is also
+a new standalone package \pkg*{scrhack} almost compatible with the old
+one.
+
+\section{Using \texorpdfstring{\pkg*{scrhack}}{scrhack}}
+\seclabel{usage}
+
+It is recommended to load the \pkg*{scrhack} package using:
+\begin{verbatim}
+  \usepackage{scrhack}
+\end{verbatim}
+as early as possible. In particular, loading should be done before the
+affected packages. The package also provides several options, one for each
+hack. Usually the options are named identically to the package, that is
+patched by the hack. All these options are boolean options. You can switch
+such an option on assigning value \optvalue{true} or using it without
+value. You can switch off such an option assigning value
+\optvalue{false}. Switching off an option means to not automatically load the
+corresponding enhancement package after the package, that has to be
+patched. Therefore switching off an option results in not patching the
+corresponding package.
+
+\paragraph{Notes:}
+\begin{itemize}
+\item From version 3.42 you cannot use \cs{KOMAoptions} or \cs{KOMAoption} any
+  longer to change the options. Instead loading \pkg*{scrhack} again with
+  other options does not result in an option clash, but in a change of the
+  option settings.
+\item Switching off an option of an already loaded enhancement package is
+  ignored (with warning). It does not unload the enhancement package or switch
+  back to a not patched functionality.
+\item Switching on an option of a not yet loaded enhancement package would
+  result in loading the enhancement package.
+\item From version 3.42 instead of loading \pkg*{scrhack} you can
+  alternatively load the individual enhancement package only if needed.
+\item If you need the old legacy version of \pkg*{scrhack} from
+  \href{https://komascript.de/}{\KOMAScript} 3.41 you can use:
+\begin{verbatim}
+  \usepackage{scrhack}[=2023-07-07]
+\end{verbatim}
+  or
+\begin{verbatim}
+  \usepackage{scrhack}[=v3.41]
+\end{verbatim}
+  However, this depends on internal packages of
+  \href{https://komascript.de/}{\KOMAScript}.
+\item The hacks of the legacy version have been frozen. So the
+  hacks may break with packages or \LaTeX{} versions released after
+  2023-07-07. There is no support for such combinations!
+\item Loading the legacy version more than once with different option setting
+  still results in option clash errors.
+\end{itemize}
+
+\paragraph{Available options with \pkg*{scrhack}:}
+\begin{description}
+\item[\opt{float=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  After package \pkg{float} is loaded, load also package \pkg{floatbytocbasic}
+  to fix the issue explained in \autoref{sec:history}. This also provides the
+  full functionality of \pkg{tocbasic} to \pkg{float}.
+\end{description}
+
+\paragraph{Available options with the legacy version:}
+\begin{description}
+\item[\opt{float=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  After package \pkg{float} is loaded, load \file{float.hak} to fix the issue
+  explained in \autoref{sec:history}. This also provides the full
+  functionality of \pkg{tocbasic} to \pkg{float}.
+\item[\opt{floatrow=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  After package \pkg{floatrow} is loaded, load \file{floatrow.hak} to fix the
+  issue explained in \autoref{sec:history}. This also provides the full
+  functionality of \pkg{tocbasic} to \pkg{floatrow}.
+\item[\opt{hyperref=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  Versions of \pkg{hyperref} before 6.79h set the link anchors after the
+  heading of the starred versions of commands like \cs{part*}, \cs{chapter*},
+  etc. instead of before them. Since then, this problem has been resolved at
+  the suggestion of \KOMAScript's author. But because the change took more
+  than a year, a patch was added to \pkg*{scrhack}. Although this can also be
+  deactivated with \opt{hyperref=false}, you should instead use an up-to-date
+  \pkg{hyperref} release. In this case the legacy version of \pkg*{scrhack}
+  automatically deactivates this unnecessary patch.
+\item[\opt{listings=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  After package \pkg{listings} is loaded, load \file{listings.hak} to fix the
+  issue explained in \autoref{sec:history}. This also provides the full
+  functionality of \pkg{tocbasic} to \pkg{listings}.
+\item[\opt{lscape=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  The \pkg{lscape} package defines a \env{landscape} environment to set the
+  page contents, but not the header or footer in landscape mode. Inside this
+  environment, \len{textheight}is set to the value of \len{textwidth}, but
+  \len{textwidth} is not set to the former value of \len{textheight}. This is
+  inconsistent. As far as I know, \len{textwidth} is left unchanged because
+  setting it to \len{textheight} could interfere with other packages or user
+  commands. But changing \len{textheight} also has this potential, and indeed
+  it breaks, for example, \pkg{showframe} and \pkg{scrlayer}. Thus it would be
+  best if \len{textheight} too remained unchanged. After package \pkg{lscape}
+  is loaded, the legacy version of \pkg*{scrhack} loads \file{lscape.hak},
+  that uses the \pkg{xpatch} package to modify the \env{landscape}
+  environment's start macro \cs{landscape} appropriately.
+
+  Incidentally, the \pkg{pdflscape} package also uses \pkg{lscape}, so this
+  option affects the functioning of this package too.
+\item[\opt{nomencl=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  After package \pkg{nomencl} is loaded, load \file{nomencl.hak} to fix the
+  issue explained in \autoref{sec:history}. This is a little bit more
+  complicated, because the \pkg*{nomencl} author has tried to also adapt his
+  package to support \pkg{tocbasic}. Unfortunately he has ignored some of my
+  recommendations, so I've needed additional patches to provide the full
+  functionality of \pkg{tocbasic} to \pkg{listings}.
+\item[\opt{setspace=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  Some packages assume that the class-internal macro \cs{@ptsize} both is
+  defined and expands to an integer.  For compatibility,
+  \href{https://komascript.de/}{\KOMAScript} defines \cs{@ptsize} even if the
+  basic font size is something other than 10\,pt, 11\,pt, or 12\,pt.
+  \href{https://komascript.de/}{\KOMAScript} also allows non-integer font
+  sizes. So \cs{@ptsize} can, of course, also expand to a non-integer number.
+
+  One of the packages that cannot cope with a non-integer \cs{@ptsize} is
+  \pkg{setspace}. Additionally, the values set by this package are always
+  dependent on the basic font size, even if the setting is made in the context
+  of another font size. The legacy version of \pkg{scrhack} loads the hack
+  \file{setspace.hak} after package \pkg{setspace} to solves both problems by
+  redefining \cs{onehalfspacing} and \cs{doublespacing} to set the spacing
+  relative to the actual font size.
+
+  \textbf{Note:} if you use \pkg{setspace} with either the
+  \opt{onehalfspacing} or \opt{doublespacing} option, you must load
+  \pkg*{scrhack} first.
+\item[\opt{standardsections=\meta{boolean}}] \hfill
+  initial: \optvalue{false}, default: \optvalue{true}\\
+  Various packages assume that the sectioning commands are defined in a
+  specific way, corresponding to the definitions in the standard classes. But
+  for some classes this is not the case. For example, the
+  \href{https://komascript.de/}{\KOMAScript} classes use a completely
+  different implementation to provide many additional features. But this can
+  cause problems for packages that depend on the definition of the standard
+  classes.  The legacy version of \pkg*{scrhack} offers the option to force
+  the sectioning commands \cs{part}, \cs{chapter}, \cs{section},
+  \cs{subsection}, \cs{subsubsection}, \cs{paragraph}, and \cs{subparagraph}
+  to be compatible with those in the standard classes. When \cs{chapter} is
+  defined, the definitions are based on those in \cls{book}. When \cs{chapter}
+  is undefined, the definitions of \cls{article} are used.
+
+  If you are using a \href{https://komascript.de/}{\KOMAScript} class, several
+  features of these classes are also deactivated as side effect. For example,
+  the commands to define or modify sectioning commands or option
+  \opt{headings} are no longer available, and commands like \cs{partformat}
+  have different defaults.
+
+  Because this hack has the potential to do more harm than good, it issues
+  several warnings. Also it is not activated simply by loading the legacy
+  version of \pkg*{scrhack} package. If you want to use it, you must explicitly
+  activate this option when you load the package. Late activation or
+  deactivation is not supported.
+
+  Since there are often less invasive solutions to fix the problem of package
+  incompatibilities, using this hack is not recommended. It is provided only
+  as a last resort for emergencies.
+\end{description}
+% 
+% \iffalse
+%</doc>
+% \fi
+%
+% \MaybeStop{\printbibliography[heading=bibintoc]\PrintIndex}
+%
+% \iffalse
+%<*package>
+%<@@=scrhack>
+% \fi
+% \section{Implementation}
+%
+% Because \pkg*{scrhack} is not longer a
+% \href{https://komascript.de/}{\KOMAScript} package, it does not use the
+% \texttt{KOMA} family for options any longer. Instead it uses the new
+% \LaTeX{} kernel feature of key-value-options introduced in
+% \cite{latexnews35}. So we need at least \LaTeX{} 2022-06-01:
+%    \begin{macrocode}
+\ifnum 0=\ifcsname IfFormatAtLeastTF\endcsname
+    \IfFormatAtLeastTF{2022-06-01}{1}{0}%
+  \else
+    0%
+  \fi\relax
+  \PackageError{scrhack}{LaTeX kernel too old}{%
+    The package needs at least LaTeX 2022-06-01.\MessageBreak
+    This error is fatal. Loading will be aborted.%
+  }%
+  \endinput
+\fi
+%    \end{macrocode}
+%
+% Now we can declare the options using the new key-value interface:
+%    \begin{macrocode}
+\ExplSyntaxOn
+\DeclareKeys{%
+  float.code  = \@@_switch_float:n { #1 },
+  float.usage = preamble,
+}
+%    \end{macrocode}
+%
+% \ExplSyntaxOn
+% \begin{macro}{\__scrhack_switch_float:n}
+% \ExplSyntaxOff
+% This is used to switch the state and add or remove the hook if needed. A new
+% boolean is used to know, whether the hook has been put. Using
+% \opt{float=true}, if package \pkg{floatbytocbasic} already has been loaded
+% isn't a foul. So we just write an information to the \file{log}. But using
+% \opt{float=false}, if package \pkg{floatbytocbasic} already has been loaded
+% may be wrong. So we use a warning message. We also warn if a not allowed
+% value is used.
+%    \begin{macrocode}
+\bool_new:N \@@_float_bool
+
+\msg_new:nnn { scrhack } { option-too-late }
+  {
+    option~`#1'~after~loading~package~`#2'~ignored.
+  }
+
+\cs_new:Nn \@@_switch_float:n
+  {
+    \str_case:nnF {#1}
+      {
+        {true}  {
+                  \@ifpackageloaded { floatbytocbasic }
+                    {
+                      \msg_info:nnnn { scrhack } { option-too-late }
+                        { float = true } { floatbytocbasic }
+                    }
+                    {
+                      \bool_if:NF \@@_float_bool
+                        {
+                          \hook_gput_code:nnn { package/float/after } { scrhack }
+                            {
+                              \RequirePackage { floatbytocbasic }
+                            }
+                          \bool_gset_true:N \@@_float_bool
+                        }  
+                    }
+                }
+        {false} {
+                  \@ifpackageloaded { floatbytocbasic }
+                    {
+                      \msg_warning:nnnn { scrhack } { option-too-late }
+                        { float=false } { floatbytocbasic }
+                    }
+                    {
+                      \bool_if:NT \@@_float_bool
+                        {
+                          \hook_gremove_code:nn { package/float/after } { scrhack }
+                        }
+                      \bool_gset_false:N \@s@_float_bool
+                    }
+                }
+      }
+      {
+        \msg_warning:nnn { keys } { boolean-values-only } { float }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \ExplSyntaxOff
+% Last but not least, we set the defaults and process the options.
+%    \begin{macrocode}
+\ExplSyntaxOff
+\SetKeys{float=true}
+\ProcessKeyOptions\relax
+%    \end{macrocode}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
+% \PrintChanges
+%  
+% \endinput
+% Local Variables:
+% mode: doctex
+% ispell-local-dictionary: "en_US"
+% eval: (flyspell-mode 1)
+% TeX-master: t
+% eval: (setcar (or (cl-member "Index" (setq-local TeX-command-list (copy-alist TeX-command-list)) :key #'car :test #'string-equal) (setq-local TeX-command-list (cons nil TeX-command-list))) '("Index" "mkindex %s" TeX-run-index nil t :help "makeindex for dtx"))
+% End:

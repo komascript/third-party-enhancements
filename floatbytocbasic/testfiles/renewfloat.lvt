@@ -1,0 +1,27 @@
+# testfile `renewfloat.sty'
+# to test:
+# - \renewfloat for new extension + new environment
+# - \renewfloat for new extension + existing environment
+# - \renewfloat for known extension + new environment
+# - \renewfloat for known extension + existing environment
+
+\input regression-test.tex
+\documentclass{article}
+\usepackage{floatbytocbasic}
+\START
+\TEST{\renewfloat for new extension + new environment}{%
+  \renewfloat{newnew}{tbp}{nn}%
+}
+\newenvironment{newold}{}{}
+\TEST{\renewfloat for new extension + existing environment}{%
+  \renewfloat{newold}{tbp}{no}%
+}
+\TEST{\renewfloat for known extension + new environment}{%
+  \renewfloat{oldnew}{tbp}{nn}%
+}
+\TEST{\renewfloat for known extension + existing environment}{%
+  \renewfloat{newold}{tbp}{nn}%
+}
+\END
+\begin{document}
+\end{document}

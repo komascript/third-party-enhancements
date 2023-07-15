@@ -1,0 +1,51 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: \newfloat for new extension + new environment
+============================================================
+Package tocbasic Info: omitting babel extension for `nn'
+(tocbasic)             because of missing \bbl@set@language on input line ....
+\@float@every@newnew=\toks...
+\c@newnew=\count...
+============================================================
+============================================================
+TEST 2: \newfloat for new extension + existing environment
+============================================================
+! LaTeX Error: Command \newold already defined.
+               Or name \end... illegal, see p.192 of the manual.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+============================================================
+============================================================
+TEST 3: \newfloat for known extension + new environment
+============================================================
+! Package floatbytocbasic Error: extension `nn' already registered.
+See the floatbytocbasic package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...}
+Each file extension should be used only once.
+You, the class, or another package already uses `nn'.
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+============================================================
+============================================================
+TEST 4: \newfloat for known extension + existing environment
+============================================================
+! Package floatbytocbasic Error: extension `nn' already registered.
+See the floatbytocbasic package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...}
+Each file extension should be used only once.
+You, the class, or another package already uses `nn'.
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+============================================================

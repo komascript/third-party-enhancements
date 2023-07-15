@@ -1,0 +1,28 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: \deffloat for new extension + new environment
+============================================================
+Package tocbasic Info: omitting babel extension for `nn'
+(tocbasic)             because of missing \bbl@set@language on input line ....
+\@float@every@newnew=\toks...
+\c@newnew=\count...
+============================================================
+============================================================
+TEST 2: \deffloat for new extension + existing environment
+============================================================
+Package tocbasic Info: omitting babel extension for `no'
+(tocbasic)             because of missing \bbl@set@language on input line ....
+\@float@every@newold=\toks...
+\c@newold=\count...
+============================================================
+============================================================
+TEST 3: \deffloat for known extension + new environment
+============================================================
+\@float@every@oldnew=\toks...
+\c@oldnew=\count...
+============================================================
+============================================================
+TEST 4: \deffloat for known extension + existing environment
+============================================================
+============================================================

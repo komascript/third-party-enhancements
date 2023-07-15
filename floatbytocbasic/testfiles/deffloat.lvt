@@ -1,0 +1,27 @@
+# testfile `deffloat.sty'
+# to test:
+# - \deffloat for new extension + new environment
+# - \deffloat for new extension + existing environment
+# - \deffloat for known extension + new environment
+# - \deffloat for known extension + existing environment
+
+\input regression-test.tex
+\documentclass{article}
+\usepackage{floatbytocbasic}
+\START
+\TEST{\deffloat for new extension + new environment}{%
+  \deffloat{newnew}{tbp}{nn}%
+}
+\newenvironment{newold}{}{}
+\TEST{\deffloat for new extension + existing environment}{%
+  \deffloat{newold}{tbp}{no}%
+}
+\TEST{\deffloat for known extension + new environment}{%
+  \deffloat{oldnew}{tbp}{nn}%
+}
+\TEST{\deffloat for known extension + existing environment}{%
+  \deffloat{newnew}{tbp}{nn}%
+}
+\END
+\begin{document}
+\end{document}

@@ -1,0 +1,27 @@
+# testfile `newfloat.sty'
+# to test:
+# - \newfloat for new extension + new environment
+# - \newfloat for new extension + existing environment
+# - \newfloat for known extension + new environment
+# - \newfloat for known extension + existing environment
+
+\input regression-test.tex
+\documentclass{article}
+\usepackage{floatbytocbasic}
+\START
+\TEST{\newfloat for new extension + new environment}{%
+  \newfloat{newnew}{tbp}{nn}%
+}
+\newenvironment{newold}{}{}
+\TEST{\newfloat for new extension + existing environment}{%
+  \newfloat{newold}{tbp}{no}%
+}
+\TEST{\newfloat for known extension + new environment}{%
+  \newfloat{oldnew}{tbp}{nn}%
+}
+\TEST{\newfloat for known extension + existing environment}{%
+  \newfloat{newold}{tbp}{nn}%
+}
+\END
+\begin{document}
+\end{document}

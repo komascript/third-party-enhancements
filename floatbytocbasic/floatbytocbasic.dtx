@@ -1,0 +1,459 @@
+% \iffalse meta-comment
+% ======================================================================
+% floatbytocbasic.dtx
+% Copyright © 2008–2023 Markus Kohm
+%
+% This work is a KOMA-Script spin-off.  For the original sources of
+% KOMA-Script's `float.hak' see file `scrhack.dtx' in the KOMA-Script
+% sources at <https://sourceforge.net/p/koma-script/code/>.
+%
+% Development is taking place as part of `scrhack' at
+% <https://github.com/komascript/thirdpartyhacks>.  New issues should
+% be reported there as well as known issues can be found.
+%
+% This work may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, version 1.3c of the license.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.<3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later and of this work.
+%
+% This work has the LPPL maintenance status "author-maintained".
+%
+% The Current Maintainer and author of this work is Markus Kohm.
+%
+% This work consists of the file `floatbytocbasic.dtx' and `README.md'.
+%
+% The recommended way to install `floatbytocbasic' is to use
+% the package manager of your TeX distribution.
+% ======================================================================
+%
+%<*dtx>
+\ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
+\ProvidesFile{floatbytocbasic.dtx}
+%</dtx>
+%<*dtx|package>
+%<package>\ProvidesPackage{floatbytocbasic}
+             [2023-07-14 v0.1
+%<dtx>              sources and unpack driver of
+              improved float package using tocbasic]
+%</dtx|package>
+%<*dtx>
+\ifx\documentclass\undefined
+  \input docstrip.tex
+  \generate{%
+    \file{floatbytocbasic.sty}{%
+      \from{floatbytocbasic.dtx}{package}%
+    }%
+  }%
+\else
+  \let\endbatchfile\relax
+\fi
+\endbatchfile
+\documentclass[ngerman,USenglish]{koma-script-source-doc}
+\usepackage{babel}
+\usepackage{csquotes}
+\usepackage[style=alphabetic]{biblatex}
+\begin{filecontents}[force]{\jobname.bib}
+@online{pkg:float,
+  author={Anselm Lingnau},
+  title={\pkg*{float} --- Improved interface for floating objects},
+  version={1.3d},
+  date={2001-11-08},
+  url={https://ctan.org/pkg/float},
+  urldate={2023-07-14},
+  note={Improves the interface for defining floating objects such as figures
+        and tables. Introduces the boxed float, the ruled float and the
+        plaintop float. You can define your own floats and improve the
+        behaviour of the old ones.},
+}
+@manual{pkg:float:manual,
+  author={Anselm Lingnau},
+  date={2001-11-08},
+  title={An Improved Environment for Floats},
+  url={http://mirrors.ctan.org/macros/latex/contrib/float/float.pdf},
+  urldate={2023-07-14},
+  abstract={This style option improves the interface for defining floating
+            objects such as figures and tables in \LaTeX. It adds the notion
+            of a ‘float style’ that governs appearance of floats. New kinds of
+            floats may be defined using \cs{newfloat} command analogous to
+            \cs{newtheorem}. This style option also incorporates the
+            functionality of David Carlisle’s style option \pkg{here}, giving
+            floating environments a \texttt{[H]} option which means ‘PUT IT
+            HERE’ (as opposed to the standard \texttt{[h]} option which means
+            ‘You may put it here if you like’).},
+}
+@online{pkg:koma-script,
+  author={Markus Kohm},
+  version={3.41},
+  date={2023-07-07},
+  title={{\KOMAScript} --- A bundle of versatile classes and packages},
+  url={https://ctan.org/pkg/koma-script},
+  urldate={2023-07-14},
+  note={The \KOMAScript{} bundle provides replacements for the \pkg*{article},
+        \pkg*{report}, and \pkg*{book} classes with emphasis on typography and
+        versatility. There is also a letter class.},
+}
+@online{pkg:tocbasic,
+  author={Markus Kohm},
+  version={3.41},
+  date={2023-07-07},
+  title={\pkg*{tocbasic} --- Management of tables/lists of contents (and the
+         like)},
+  url={https://ctan.org/pkg/tocbasic},
+  urldate={2023-07-14},
+  note={The package provides means to create specialised ``table of
+        contents''-like lists of features of a document.},
+}
+@manual{pkg:koma-script:manual:de,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={Die Anleitung},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-de.pdf},
+  urldate={2023-07-04},
+}
+@manual{pkg:koma-script:manual:en,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={The Guide},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-en.pdf},
+  urldate={2023-07-14},
+}
+\end{filecontents}
+\addbibresource{\jobname.bib}
+\setcounter{StandardModuleDepth}{2}
+\begin{document}
+  \nocite{pkg:float,pkg:koma-script,pkg:tocbasic}
+  \DocInput{floatbytocbasic.dtx}
+\end{document}
+%</dtx>
+%\fi
+%
+% \changes{v0.1}{2023/06/01}{start of \KOMAScript{} spin-off}
+%
+% \GetFileInfo{floatbytocbasic.dtx}
+% \title{Improving ``\pkg{float}'' Using
+%  \href{https://komascript.de/}{\KOMAScript} Package ``\pkg{tocbasic}''}
+% \author{\href{mailto:komascript@gmx.info}{Markus Kohm}}
+% \date{Version \filedate{} \fileversion}
+% \maketitle
+% \begin{abstract}
+%   Package \pkg*{floatbytocbasic} has started as hack module of the
+%   \KOMAScript{} package \pkg*{scrhack} years ago to fix an issue when using
+%   package \pkg{float} with \KOMAScript~3.  This became necessary because
+%   package \pkg{float} still depends on an interface once proposed by the
+%   \KOMAScript{} author, but which has long since failed to meet
+%   requirements. Unfortunately, this problem could not be solved in dialog
+%   with the author of \pkg{float}. Although \pkg*{floatbytocbasic} still
+%   loads the \pkg{float} package, it then changes some internal commands to
+%   use and optimally support the \KOMAScript{} package \pkg{tocbasic}. On the
+%   one hand, the user interface of \pkg{float} remains usable unchanged, but
+%   at the same time the package benefits from many possibilities of
+%   \pkg{tocbasic}.
+% \end{abstract}
+%
+% \tableofcontents
+%
+%\iffalse
+%<*doc>
+%\fi
+\section{Why should I use this package instead of
+  \texorpdfstring{\pkg{float}}{float} only if I use a \KOMAScript{} class or
+  \KOMAScript{} package \texorpdfstring{\pkg{tocbasic}}{tocbasic}?}
+\label{sec:whywithkomascript}
+
+The main symptom of using a deprecated interface to \KOMAScript{} by package
+\pkg{float}, namely the use of \cs{float@listhead} and
+\cs{float@addtolists}, are corresponding warnings when using one of the
+\KOMAScript{} classes at the same time, for example:
+\begin{verbatim}
+  Class scrbook Warning: \float@addtolists detected!
+  (scrbook)              Implementation of \float@addtolist became
+  (scrbook)              deprecated in KOMA-Script v3.01 2008/11/14 and
+  (scrbook)              has been replaced by several more flexible
+  (scrbook)              features of package `tocbasic`.
+  (scrbook)              Since Version 3.12 support for deprecated
+  (scrbook)              \float@addtolist interface has been
+  (scrbook)              restricted to only some of the KOMA-Script
+  (scrbook)              features and been removed from others.
+  (scrbook)              Loading of package `scrhack' may help to
+  (scrbook)              avoid this warning, if you are using a
+  (scrbook)              a package that still implements the
+  (scrbook)              deprecated \float@addtolist interface.
+\end{verbatim}
+or
+\begin{verbatim}
+  Class scrbook Warning: \float@listhead detected!
+  (scrbook)              Implementation of \float@listhead became
+  (scrbook)              deprecated in KOMA-Script v3.01 2008/11/14 and
+  (scrbook)              has been replaced by several more flexible
+  (scrbook)              features of package `tocbasic`.
+  (scrbook)              Maybe implementation of \float@listhead will
+  (scrbook)              removed from KOMA-Script soon.
+  (scrbook)              Loading of package `scrhack' may help to
+  (scrbook)              avoid this warning, if you are using a
+  (scrbook)              a package that still implements the
+  (scrbook)              deprecated \float@listhead interface.
+\end{verbatim}
+
+If you know, that the issue is because of loading package \pkg{float} you can
+avoid it using \pkg{floatbytocbasic} as explained in \autoref{sec:howtouse}.
+
+\section{Why should I use this package instead of
+  \texorpdfstring{\pkg{float}}{float} only if I don't use a \KOMAScript{}
+  class or package?}
+\label{sec:whywithoutkomascript}
+
+Package \pkg{float} does not check if a file extension or environment already
+has been defined when using \cs{newfloat}. So several definitions of float
+environments either with the same name or the same file extension could happen
+by accident. Package \pkg*{floatbytocbasic} adds test to avoid such
+issues. But it also allows to redefine an environment or reuse a file
+extension, if you want. Alternatively you can force the definition or do the
+definition only if needed. See description of \cs{deffloat}, \cs{renewfloat}
+and \cs{providefloat} in \autoref{sec:howtouse} for more information.
+
+\textsc{To be continued \dots}
+
+\section{How to use \texorpdfstring{\pkg*{floatbytocbasic}}{floatbytocbasic}}
+\label{sec:howtouse}
+
+In the document preamble of your document you just can replace
+\begin{verbatim}
+  \usepackage{float}
+\end{verbatim}
+by
+\begin{verbatim}
+  \usepackage{floatbytocbasic}
+\end{verbatim}
+to load package \pkg*{floatbytocbasic}. This does still also load package
+\pkg{float} but additionally patches several commands of \pkg{float} to avoid
+the issues shown in \autoref{sec:whywithkomascript}.
+
+If you want you can alternatively also load both packages explicitly, either
+\pkg{float} before \pkg{floatbytocbasic} or---if you
+want---\pkg{floatbytocbasic} before \pkg{float}. This is also useful, if you
+use a package, that uses \pkg*{float} itself. In this case, you always should
+load \pkg{floatbytocbasic} \emph{before} the package, that uses
+\pkg{float}. Otherwise it is very likely that for some new float environments
+the enhancements of \pkg*{floatbytocbasic} will not be used. Only if
+\pkg*{floatbytocbasic} is loaded before the first use of \cs{newfloat} can it
+be ensured that the definition of the new sliding environments is really done
+with the help of \pkg{tocbasic} and thus its extended user interface is used.
+
+When using a class that uses \pkg{float}, the correct operation can be ensured
+with
+\begin{verbatim}
+  \AddToHook{package/float/after}{\RequirePackage{floatbytocbasic}}
+\end{verbatim}
+even before \cs{documentclass}. This requires at least \LaTeX{}
+2020/10/01. For older versions of \LaTeX{} you can use
+\begin{verbatim}
+  \RequirePackage{scrlfile}
+  \AfterPackage{float}{\RequirePackage{floatbytocbasic}}
+\end{verbatim}
+also before \cs{documentclass}. This would require the \KOMAScript{} package
+\pkg{scrlfile}\nocite{pkg:scrlfile}.
+
+The user interface of \pkg*{floatbytocbasic} is the same as of \pkg{float},
+see \autocite{pkg:float:manual}. Following we document only the differences.
+
+\DescribeCommand{\newfloat}
+\DescribeCommand{\providefloat}
+\DescribeCommand{\renewfloat}
+\DescribeCommand{\deffloat}
+See \autocite[section~2]{pkg:float:manual} for the basic usage of \cs{newfloat}.
+The command takes three mandatory arguments and an optional one; it is of
+the form:
+\begin{quote}
+  \cs{newfloat}\marg{type}\marg{placement}\marg{ext}\oarg{within}
+\end{quote}
+\pkg{floatbytocbasic} adds the registration of the file extension \meta{ext},
+which is the third argument. The main problem here is to decide what to do, if
+\meta{ext} already has been registered. Package \pkg{float} simply does not
+care for this case. It does neither report an error nor a warning, but just
+redefine the float \meta{type} and reuses the auxiliary file extension
+\meta{ext}. Because of the ``\texttt{new}'' in the name of the command, we
+have decided to report an error instead. But we also decided to define three
+new commands:
+\begin{quote}\raggedright
+  \cs{deffloat}\marg{type}\marg{placement}\marg{ext}\oarg{within}\\
+  \cs{providefloat}\marg{type}\marg{placement}\marg{ext}\oarg{within}\\
+  \cs{renewfloat}\marg{type}\marg{placement}\marg{ext}\oarg{within}
+\end{quote}
+\cs{deffloat} also does not care for already existing \meta{type}
+environment or already registered \meta{ext}. \cs{providefloat} does not
+overwrite existing \meta{type} environment or already registered
+\meta{ext}. \cs{renewfloat} does overwrite only already existing \meta{type}
+environment with registered \meta{ext}. There are also cases like defined
+\cs{\meta{type}} but not \cs{end\meta{type}} or not defined environment
+\meta{type} but registered \meta{ext}. But there are no special commands to
+handle these. If users need to take care for these cases, they can test for
+definition using the \LaTeX{} kernel macro \cs{@ifundefined} and the
+\pkg{tocbasic} command \cs{Ifattoclist}, described in the \KOMAScript{} user
+manuals \autocite{pkg:koma-script:manual:en}
+resp. \autocite{pkg:koma-script:manual:de}.
+%
+% \iffalse
+%</doc>
+% \fi
+%
+% \MaybeStop{\printbibliography[heading=bibintoc]\PrintIndex}
+%
+% \iffalse
+%<*package>
+% \fi
+% \section{Implementation}
+%
+% \pkg{floatbytocbasic} depend on \KOMAScript{} package \pkg{tocbasic}. So we
+% load it already before everything else. We use this package also to require
+% at least \KOMAScript{} 3.41, which is one version before the intended
+% spin-off.
+%    \begin{macrocode}
+\RequirePackage{tocbasic}[2023/07/07]
+%    \end{macrocode}
+%
+% We also load package \pkg{float}, because we reuse most of the code:
+%    \begin{macrocode}
+\RequirePackage{float}
+%    \end{macrocode}
+%
+% As often as possible, we do not redefine macors of \pkg{float}, but patch
+% them using \pkg{xpatch}\nocite{xpatch}:
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+%    \end{macrocode}
+%
+% We also use the new document command interface. So if the \LaTeX{} kernel is
+% too old, we require \pkg{xparse}\nocite{xparse}:
+%    \begin{macrocode}
+\@ifundefined{NewDocumentCommand}{%
+  \RequirePackage{xparse}%
+}{}
+%    \end{macrocode}
+%
+% \begin{command}{\deffloat}
+% Basicly \cs{deffloat} is \cs{newfloat} of \pkg{float}:
+%    \begin{macrocode}
+\@ifundefined{NewCommandCopy}{\let\deffloat\newfloat}{%
+  \NewCommandCopy\deffloat\newfloat
+}
+%    \end{macrocode}
+% But we also have to take care, that a not yet registered \meta{ext} has to
+% be registered.
+% \begin{description}
+% \item[Note:] We do not need to setup feature \texttt{chapteratlist}, because
+%   classes like the \KOMAScript{} classes should use
+%\begin{verbatim}
+%  \AtAddToTocList[float]{\setuptoc{\@currext}{chapteratlist}}
+%\end{verbatim}
+%   to implement such features.
+% \end{description}
+%    \begin{macrocode}
+\pretocmd\deffloat{%
+  \Ifattoclist{#3}{}{\addtotoclist[float]{#3}}%
+}{}{%
+  \PackageError{floatbytocbasic}{incompatible definition of
+    \string\newfloat}{%
+    Package `floatbytocbasic' depends on the original definition of package
+    `float'.\MessageBreak
+    Some changes to that definition are tolerated.\MessageBreak
+    \@ifundefined{deffloat}%
+    {But it seems the definition is completely missing!}%
+    {But the current definition is incompatible!}%
+    \MessageBreak
+    Make sure, you have installed the original package `float' as referred
+    by\Messagebreak
+    section ``References'' of the manual.%
+  }%
+}
+%    \end{macrocode}
+% \end{command}
+%
+% \begin{command}{\newfloat,\providefloat,\renewfloat}
+% \cs{newfloat} and \cs{renewfloat} similar to \cs{newcommand} and
+% \cs{renewcommand} do some tests and maybe report an error, before
+% (nevertheless) defining the float.
+%    \begin{macrocode}
+\RenewDocumentCommand{\newfloat}{mmmo}{%
+  \Ifattoclist{#3}{%
+    \PackageError{floatbytocbasic}{extension `#3' already registered}{%
+      Each file extension should be used only once.\MessageBreak
+      You, the class, or another package already uses `#3'.\MessageBreak
+      \@eha
+    }%
+  }{%
+    \expandafter\@ifdefinable\csname #1\endcsname{%
+      \IfValueTF{#4}{%
+        \deffloat{#1}{#2}{#3}[#4]%
+      }{%
+        \deffloat{#1}{#2}{#3}%
+      }%
+    }%
+  }%
+}
+\NewDocumentCommand{\providefloat}{mmmo}{%
+  \Ifattoclist{#3}{}{%
+    \@ifundefined{#1}{%
+      \newfloat{#1}{#2}{#3}[#4]%
+    }{}%
+  }%
+}
+\NewDocumentCommand{\renewfloat}{mmmo}{%
+  \@ifundefined{#1}{%
+    \@latex@error{Environment #1 undefined}\@ehc
+    \removefromtoclist{#3}%
+  }{%
+    \Ifattoclist{#3}{%
+      \removefromtoclist{#3}%
+    }{%
+      \PackageError{floatbytocbasic}{extension `#3' not yet registered}{%
+        I can only renew floats with already registered
+        extensions.\MessageBreak
+        \@ehc
+      }%
+    }%
+  }%
+  \expandafter\let\csname #1\endcsname\relax
+  \expandafter\let\csname end#1\endcsname\relax
+  \newfloat{#1}{#2}{#3}[#4]%
+}
+%    \end{macrocode}
+% \end{command}
+%
+% \begin{command}{\listof}
+% This command is redefined using a complete new definition using
+% \pkg{tocbasic}'s \cs{listoftoc}.
+%    \begin{macrocode}
+\renewcommand*\listof[2]{%
+  \@ifundefined{ext@#1}{%
+    \PackageError{floatbytocbasic}{unknown float type `#1'}\@eha
+  }{%
+    \@ifundefined{l@#1}{\expandafter\let\csname l@#1\endcsname\l@figure
+      \@ifundefined{l@#1}{%
+        \DeclareTOCStyleEntry[level=1,numwidth=2.3em,indent=1.5em]
+        {default}{#1}%
+      }{}%
+    }{}%
+    \listoftoc[{#2}]{\csname ext@#1\endcsname}%
+  }%
+}%
+%    \end{macrocode}
+% \end{command}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
+% \PrintChanges
+%  
+% \endinput
+% Local Variables:
+% mode: doctex
+% ispell-local-dictionary: "en_US"
+% eval: (flyspell-mode 1)
+% TeX-master: t
+% End:

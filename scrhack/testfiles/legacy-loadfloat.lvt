@@ -1,0 +1,18 @@
+% Testfile for the legacy version
+% Tests:
+% * does the automatic loading of floatbytocbasic work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}[=v3.41]
+\usepackage{float}
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\START
+\TEST{Has floatbytocbasic been loaded automatically (should be YES)?}{%
+  \typeout{\IfPackageLoadedTF{floatbytocbasic}{YES}{NO}}%
+}
+\END
+\begin{document}
+\end{document}
+

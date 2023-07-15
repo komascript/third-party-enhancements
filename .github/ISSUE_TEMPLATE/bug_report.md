@@ -34,9 +34,7 @@ A clear and concise description of what you expected to happen.
 **Used versions**
 Which TeX distribution are you using? Which versions of LaTeX and the used class and packages You can get version information for LaTeX from the lines
 
-```
-LaTeX2e <????-??-??> patch level ?
-L3 programming layer <????-??-??>
-```
+    LaTeX2e <????-??-??> patch level ?
+    L3 programming layer <????-??-??>
 
-from the beginning of the `log`-file (usually about line 8–15, the `?` should be numbers depending on the used version). To get the versions of class and packages, you can add `\listfiles` to the beginning of your minimal working example and copy the list from the end of the `log`-file.
+at the beginning of the `log`-file (usually about line 8–15, the `?` should be numbers depending on the used version). To get the versions of class and packages, you can add `\listfiles` to the beginning of your minimal working example and copy the list from the end of the `log`-file.

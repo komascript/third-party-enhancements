@@ -92,12 +92,12 @@ TeX distribution to install all the packages.
 # How to Contribute
 
 To become a contributor, clone the code and do heavy testing. If you find an
-issue, please report it using the [issue tracker](../../issues/). You can also,
-e.g., make new test files to the packages. See the
+issue, please report it using the [issue tracker](../../issues/). You can
+also, e.g., make new test files to the packages. See the
 [`l3build`](https://ctan.prg/pkg/l3build) manual for more information about
 tests. If you've created a new test and think that it would be useful. Please
-either do a pull request or [add a new issue](../../issues/new/choose) and include
-your test file.
+either do a pull request or [add a new issue](../../issues/new/choose) and
+include your test file.
 
 Another kind of contribution would be to contact an author of one of the
 third-party packages and convince her or him to integrate the code of the

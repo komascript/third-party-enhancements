@@ -1,0 +1,22 @@
+% Testfile
+% Tests:
+% * what happens, if the hyperref option is used?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}
+\START
+\TEST{Does using option hyperref without value result in a warning (should)?}{%
+  \SetKeys[scrhack]{hyperref}%
+}
+\TEST{Does using option hyperref with value true result in a warning (should)?}{%
+  \SetKeys[scrhack]{hyperref=true}%
+}
+\TEST{Does using option hyperref with value TRUE result in a warning (should)?}{%
+  \SetKeys[scrhack]{hyperref=TRUE}%
+}
+\TEST{Does using option hyperref with value false result in an info (should)?}{%
+  \SetKeys[scrhack]{hyperref=false}%
+}
+\END
+\begin{document}
+\end{document}

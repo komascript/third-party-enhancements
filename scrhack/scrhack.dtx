@@ -397,6 +397,30 @@ corresponding package.
 \ExplSyntaxOn 
 %    \end{macrocode}
 %
+% \subsection{Messages}
+%
+% We need some messages, that are not specific for only one use-case.
+% \begin{itemize}
+% \item If an option is ignored, because it cannot be handled after already
+%   loading the enhancement package. \#1 is the name option, \#2 is the
+%   enhancement package.
+% \end{itemize}
+%    \begin{macrocode}
+\msg_new:nnn { scrhack } { option-too-late }
+  {
+    option~`#1'~after~loading~package~`#2'~ignored.
+  }
+%    \end{macrocode}
+% \begin{itemize}
+% \item If an option is ignored, because it is deprecated.
+% \end{itemize}
+%    \begin{macrocode}
+\msg_new:nnn { scrhack } { deprecated-option }
+  {
+    deprecated~option~`#1'~ignored.
+  }
+%    \end{macrocode}
+%
 % \subsection{Emulating \file{float.hak}}
 % First we declare the options using the new key-value interface:
 %    \begin{macrocode}
@@ -420,14 +444,9 @@ corresponding package.
 %    \begin{macrocode}
 \bool_new:N \@@_float_bool
 
-\msg_new:nnn { scrhack } { option-too-late }
-  {
-    option~`#1'~after~loading~package~`#2'~ignored.
-  }
-
 \cs_new:Nn \@@_switch_float:n
   {
-    \str_case:nnF {#1}
+    \str_case_e:nnF { \str_foldcase:n { #1 } }
       {
         {true}  {
                   \@ifpackageloaded { floatbytocbasic }
@@ -470,6 +489,46 @@ corresponding package.
 % \end{macro}
 % \ExplSyntaxOff
 %
+% \subsection{Emulating \file{hyperref.hak}}
+%
+% First we declare the options using the new key-value interface:
+%    \begin{macrocode}
+\DeclareKeys{%
+  hyperref .code      = \@@_switch_hyperref:n { #1 },
+  hyperref .default:n = true,
+  hyperref .usage     = preamble,
+}
+%    \end{macrocode}
+%
+% \ExplSyntaxOn
+% \begin{macro}{\__scrhack_switch_hyperref:n}
+% \ExplSyntaxOff
+% This is somehow special, because the hack is deprecated. It only has been
+% needed for \pkg{hyperref} versions released before 2009-11-24, which would
+% not work with the \LaTeX{} kernel version needed by this version of
+% \pkg*{scrhack}. So emulating the hack does not make sense. Instead the
+% initial value of the option is changed to implicit \optvalue{false} and
+% switching it on explicitly does result in a warning.
+%    \begin{macrocode}
+\cs_new:Nn \@@_switch_hyperref:n
+  {
+    \str_case_e:nnF { \str_foldcase:n { #1 } }
+      {
+        {true}  {
+                  \msg_warning:nnn { scrhack } { deprecated-option } { hyperref=#1 }
+                }
+        {false} {
+                  \msg_info:nnn { scrhack } { deprecated-option } { hyperref=#1 }
+                }
+      }
+      {
+        \msg_warning:nnn { keys } { boolean-values-only } { hyperref }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \ExplSyntaxOff
+
 %
 % \subsection{Processing the options}
 % Last but not least, we set the defaults and process the options.

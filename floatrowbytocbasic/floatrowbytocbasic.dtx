@@ -341,11 +341,11 @@ resp. \autocite{pkg:koma-script:manual:de}.
 \RequirePackage{xpatch}
 %    \end{macrocode}
 %
-% We also use the new document command interface. So if the \LaTeX{} kernel is
-% too old, we require \pkg{xparse}\nocite{xparse}:
+% We also use some \LaTeX3 functions. So if the \LaTeX{} kernel is
+% too old, we require \pkg{expl3}\nocite{expl3}:
 %    \begin{macrocode}
-\@ifundefined{NewDocumentCommand}{%
-  \RequirePackage{xparse}%
+\@ifundefined{ExplSyntaxOn}{%
+  \RequirePackage{expl3}%
 }{}
 %    \end{macrocode}
 %

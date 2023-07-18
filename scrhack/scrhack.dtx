@@ -254,6 +254,11 @@ corresponding package.
   After package \pkg{float} is loaded, load also package \pkg{floatbytocbasic}
   to fix the issue explained in \autoref{sec:history}. This also provides the
   full functionality of \pkg{tocbasic} to \pkg{float}.
+\item[\opt{hyperref=\meta{boolean}}:] \marginpar{\Huge\textcolor{red}{!}}\hfill
+  initial: \optvalue{false}, default: \optvalue{true}\\
+  Option \opt{hyperref} is deprecated. It is implemented for compatibility
+  reasons only. Using \opt{hyperref} without value or \opt{hyperref=true}
+  results in an error message. Using \opt{hyperref=false} is just ignored.
 \end{description}
 
 \paragraph{Available options with the legacy version:}
@@ -389,14 +394,16 @@ corresponding package.
   }%
   \endinput
 \fi
+\ExplSyntaxOn 
 %    \end{macrocode}
 %
-% Now we can declare the options using the new key-value interface:
+% \subsection{Emulating \file{float.hak}}
+% First we declare the options using the new key-value interface:
 %    \begin{macrocode}
-\ExplSyntaxOn
 \DeclareKeys{%
-  float.code  = \@@_switch_float:n { #1 },
-  float.usage = preamble,
+  float .code      = \@@_switch_float:n { #1 },
+  float .default:n = true,
+  float .usage     = preamble,
 }
 %    \end{macrocode}
 %
@@ -458,13 +465,16 @@ corresponding package.
         \msg_warning:nnn { keys } { boolean-values-only } { float }
       }
   }
+\SetKeys{float=true}
 %    \end{macrocode}
 % \end{macro}
 % \ExplSyntaxOff
+%
+%
+% \subsection{Processing the options}
 % Last but not least, we set the defaults and process the options.
 %    \begin{macrocode}
 \ExplSyntaxOff
-\SetKeys{float=true}
 \ProcessKeyOptions\relax
 %    \end{macrocode}
 %

@@ -4,11 +4,19 @@
 \input regression-test.tex
 \documentclass{article}
 \usepackage{scrhack}
+\START
+\TEST{Does setting true again work without error (should be empty?}{%
+  \SetKeys[scrhack]{float=true}%
+}
+\TEST{Does setting without value work without error (should be empty)?}{%
+  \SetKeys[scrhack]{float}%
+}
+\OMIT
 \usepackage{float}
 \makeatletter
 \let\IfPackageLoadedTF\@ifpackageloaded
 \makeatother
-\START
+\TIMO
 \TEST{Has floatbytocbasic been loaded automatically (should be YES)?}{%
   \typeout{\IfPackageLoadedTF{floatbytocbasic}{YES}{NO}}%
 }

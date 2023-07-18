@@ -352,7 +352,7 @@ resp. \autocite{pkg:koma-script:manual:de}.
 %   to implement such features.
 % \end{description}
 %    \begin{macrocode}
-\pretocmd\deffloat{%
+\xpretocmd\deffloat{%
   \Ifattoclist{#3}{}{\addtotoclist[float]{#3}}%
 }{}{%
   \PackageError{floatbytocbasic}{incompatible definition of

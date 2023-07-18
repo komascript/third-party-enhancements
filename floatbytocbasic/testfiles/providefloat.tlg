@@ -15,6 +15,10 @@ TEST 2: \providefloat for new extension + existing environment
 ============================================================
 TEST 3: \providefloat for known extension + new environment
 ============================================================
+Package floatbytocbasic Info: reusing file extension `nn' for
+(floatbytocbasic)             float type `oldnew' on input line ....
+\@float@every@oldnew=\toks...
+\c@oldnew=\count...
 ============================================================
 ============================================================
 TEST 4: \providefloat for known extension + existing environment

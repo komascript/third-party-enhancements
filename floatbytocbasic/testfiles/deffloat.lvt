@@ -1,9 +1,9 @@
-# testfile `deffloat.sty'
-# to test:
-# - \deffloat for new extension + new environment
-# - \deffloat for new extension + existing environment
-# - \deffloat for known extension + new environment
-# - \deffloat for known extension + existing environment
+% testfile `deffloat.sty'
+% to test:
+% - \deffloat for new extension + new environment
+% - \deffloat for new extension + existing environment
+% - \deffloat for known extension + new environment
+% - \deffloat for known extension + existing environment
 
 \input regression-test.tex
 \documentclass{article}

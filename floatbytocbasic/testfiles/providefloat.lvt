@@ -1,9 +1,9 @@
-# testfile `providefloat.sty'
-# to test:
-# - \providefloat for new extension + new environment
-# - \providefloat for new extension + existing environment
-# - \providefloat for known extension + new environment
-# - \providefloat for known extension + existing environment
+% testfile `providefloat.sty'
+% to test:
+% - \providefloat for new extension + new environment
+% - \providefloat for new extension + existing environment
+% - \providefloat for known extension + new environment
+% - \providefloat for known extension + existing environment
 
 \input regression-test.tex
 \documentclass{article}

@@ -1,9 +1,9 @@
-# testfile `renewfloat.sty'
-# to test:
-# - \renewfloat for new extension + new environment
-# - \renewfloat for new extension + existing environment
-# - \renewfloat for known extension + new environment
-# - \renewfloat for known extension + existing environment
+% testfile `renewfloat.sty'
+% to test:
+% - \renewfloat for new extension + new environment
+% - \renewfloat for new extension + existing environment
+% - \renewfloat for known extension + new environment
+% - \renewfloat for known extension + existing environment
 
 \input regression-test.tex
 \documentclass{article}

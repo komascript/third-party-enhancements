@@ -210,12 +210,21 @@ Package \pkg{float} does not check if a file extension or environment already
 has been defined when using \cs{newfloat}. So several definitions of float
 environments either with the same name or the same file extension could happen
 by accident. Package \pkg*{floatbytocbasic} adds test to avoid such
-issues. But it also allows to redefine an environment or reuse a file
-extension, if you want. Alternatively you can force the definition or do the
-definition only if needed. See description of \cs{deffloat}, \cs{renewfloat}
-and \cs{providefloat} in \autoref{sec:howtouse} for more information.
+issues. Alternatively you can force the definition or do the definition only
+if needed. See description of \cs{deffloat}, \cs{renewfloat} and
+\cs{providefloat} in \autoref{sec:howtouse} for more information.
 
-\textsc{To be continued \dots}
+Package \pkg{tocbasic} provides several additional features, e.g.:
+\begin{itemize}
+\item automatic handling of language switching using \pkg{babel},
+\item optional numbered heading for a list/table of contents,
+\item optional adding an entry to the table of contents for a list/table of
+  contents even if the heading is not numbered,
+\item easy configuration of entries to a list/table of contents.
+\end{itemize}
+Several more features can be added by the class or other packages. See section
+about \pkg*{tocbasic} in the \KOMAScript{} manual, either
+\cite{pkg:koma-script:manual:en} or \cite{pkg:koma-script:manual:de}.
 
 \section{How to use \texorpdfstring{\pkg*{floatbytocbasic}}{floatbytocbasic}}
 \label{sec:howtouse}
@@ -276,22 +285,24 @@ which is the third argument. The main problem here is to decide what to do, if
 care for this case. It does neither report an error nor a warning, but just
 redefine the float \meta{type} and reuses the auxiliary file extension
 \meta{ext}. Because of the ``\texttt{new}'' in the name of the command, we
-have decided to report an error instead. But we also decided to define three
-new commands:
+have decided to do it a little bit different. If the owner of the \meta{ext}
+is \texttt{float}, it is assumed, that using the same auxiliary file is
+intended and only an info is written to the \file{log}-file. Otherwise an
+error is reported. But we also decided to define three new commands:
 \begin{quote}\raggedright
   \cs{deffloat}\marg{type}\marg{placement}\marg{ext}\oarg{within}\\
   \cs{providefloat}\marg{type}\marg{placement}\marg{ext}\oarg{within}\\
   \cs{renewfloat}\marg{type}\marg{placement}\marg{ext}\oarg{within}
 \end{quote}
-\cs{deffloat} also does not care for already existing \meta{type}
-environment or already registered \meta{ext}. \cs{providefloat} does not
-overwrite existing \meta{type} environment or already registered
-\meta{ext}. \cs{renewfloat} does overwrite only already existing \meta{type}
-environment with registered \meta{ext}. There are also cases like defined
-\cs{\meta{type}} but not \cs{end\meta{type}} or not defined environment
-\meta{type} but registered \meta{ext}. But there are no special commands to
-handle these. If users need to take care for these cases, they can test for
-definition using the \LaTeX{} kernel macro \cs{@ifundefined} and the
+\cs{deffloat} also does not care for already existing \meta{type} environment
+or already registered \meta{ext}. \cs{providefloat} does not overwrite
+existing \meta{type} environment or already registered \meta{ext} for other
+owners but \texttt{float}. \cs{renewfloat} does overwrite only already
+existing \meta{type} environment with registered \meta{ext}. There are also
+cases like defined \cs{\meta{type}} but not \cs{end\meta{type}} or not defined
+environment \meta{type} but registered \meta{ext}. But there are no special
+commands to handle these. If users need to take care for these cases, they can
+test for definition using the \LaTeX{} kernel macro \cs{@ifundefined} and the
 \pkg{tocbasic} command \cs{Ifattoclist}, described in the \KOMAScript{} user
 manuals \autocite{pkg:koma-script:manual:en}
 resp. \autocite{pkg:koma-script:manual:de}.
@@ -353,7 +364,24 @@ resp. \autocite{pkg:koma-script:manual:de}.
 % \end{description}
 %    \begin{macrocode}
 \xpretocmd\deffloat{%
-  \Ifattoclist{#3}{}{\addtotoclist[float]{#3}}%
+  \Ifattoclist{#3}{%
+    \let\reserved@a\relax
+    \owneroftoc[\def\reserved@a]{#3}\relax
+    \@ifundefined{reserved@a}{}{%
+      \Ifstr{\reserved@a}{float}{%
+        \PackageInfo{floatbytocbasic}{%
+          reusing file extension `#3' for\MessageBreak
+          float type `#1'%
+        }%
+      }{%
+        \PackageWarning{floatbytocbasic}{%
+          reusing file extension `#3' of owner\MessageBreak
+          `\reserved@a' for float `#1'\MessageBreak
+          not recommended%
+        }%
+      }%
+    }%
+  }{\addtotoclist[float]{#3}}%
 }{}{%
   \PackageError{floatbytocbasic}{incompatible definition of
     \string\newfloat}{%
@@ -378,13 +406,25 @@ resp. \autocite{pkg:koma-script:manual:de}.
 % (nevertheless) defining the float.
 %    \begin{macrocode}
 \RenewDocumentCommand{\newfloat}{mmmo}{%
+  \@tempswatrue
   \Ifattoclist{#3}{%
-    \PackageError{floatbytocbasic}{extension `#3' already registered}{%
-      Each file extension should be used only once.\MessageBreak
-      You, the class, or another package already uses `#3'.\MessageBreak
-      \@eha
+    \let\reserved@a\relax
+    \owneroftoc[\def\reserved@a]{#3}\relax
+    \@ifundefined{reserved@a}{}{%
+      \Ifstr{\reserved@a}{float}{}{%
+        \PackageError{floatbytocbasic}{%
+          reusing `#3' of owner `\reserved@a' not allowed%
+        }{%
+          Each file extension should be used only once.\MessageBreak
+          Reusing is only allowed with the same owner/category.\MessageBreak
+          You, the class, or another package already uses `#3'.\MessageBreak
+          \@eha
+        }%
+        \@tempswafalse
+      }%
     }%
-  }{%
+  }{}%
+  \if@tempswa
     \expandafter\@ifdefinable\csname #1\endcsname{%
       \IfValueTF{#4}{%
         \deffloat{#1}{#2}{#3}[#4]%
@@ -392,14 +432,12 @@ resp. \autocite{pkg:koma-script:manual:de}.
         \deffloat{#1}{#2}{#3}%
       }%
     }%
-  }%
+  \fi
 }
 \NewDocumentCommand{\providefloat}{mmmo}{%
-  \Ifattoclist{#3}{}{%
-    \@ifundefined{#1}{%
-      \newfloat{#1}{#2}{#3}[#4]%
-    }{}%
-  }%
+  \@ifundefined{#1}{%
+    \newfloat{#1}{#2}{#3}[#4]%
+  }{}%
 }
 \NewDocumentCommand{\renewfloat}{mmmo}{%
   \@ifundefined{#1}{%

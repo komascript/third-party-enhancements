@@ -24,27 +24,20 @@ or  <return>  to continue without it.
 ============================================================
 TEST 3: \newfloat for known extension + new environment
 ============================================================
-! Package floatbytocbasic Error: extension `nn' already registered.
-See the floatbytocbasic package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-l. ...}
-Each file extension should be used only once.
-You, the class, or another package already uses `nn'.
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+Package floatbytocbasic Info: reusing file extension `nn' for
+(floatbytocbasic)             float type `oldnew' on input line ....
+\@float@every@oldnew=\toks...
+\c@oldnew=\count...
 ============================================================
 ============================================================
 TEST 4: \newfloat for known extension + existing environment
 ============================================================
-! Package floatbytocbasic Error: extension `nn' already registered.
-See the floatbytocbasic package documentation for explanation.
+! LaTeX Error: Command \newold already defined.
+               Or name \end... illegal, see p.192 of the manual.
+See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
 l. ...}
-Each file extension should be used only once.
-You, the class, or another package already uses `nn'.
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.

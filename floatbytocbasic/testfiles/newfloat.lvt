@@ -1,9 +1,9 @@
-# testfile `newfloat.sty'
-# to test:
-# - \newfloat for new extension + new environment
-# - \newfloat for new extension + existing environment
-# - \newfloat for known extension + new environment
-# - \newfloat for known extension + existing environment
+% testfile `newfloat.sty'
+% to test:
+% - \newfloat for new extension + new environment
+% - \newfloat for new extension + existing environment
+% - \newfloat for known extension + new environment
+% - \newfloat for known extension + existing environment
 
 \input regression-test.tex
 \documentclass{article}

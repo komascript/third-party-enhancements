@@ -1,0 +1,24 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: \ProvideFloatType for new extension + new environment
+============================================================
+\c@newnew=\count...
+Package tocbasic Info: omitting babel extension for `nn'
+(tocbasic)             because of missing \bbl@set@language on input line ....
+============================================================
+============================================================
+TEST 2: \ProvideFloatType for new extension + existing environment
+============================================================
+============================================================
+============================================================
+TEST 3: \ProvideFloatType for known extension + new environment
+============================================================
+\c@oldnew=\count...
+Package floarowtbytocbasic Info: reusing file extension `nn' for
+(floarowtbytocbasic)             float type `oldnew' on input line ....
+============================================================
+============================================================
+TEST 4: \ProvideFloatType for known extension + existing environment
+============================================================
+============================================================

@@ -1,0 +1,42 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: \DeclareNewFloatType for new extension + new environment
+============================================================
+\c@newnew=\count...
+Package tocbasic Info: omitting babel extension for `nn'
+(tocbasic)             because of missing \bbl@set@language on input line ....
+============================================================
+============================================================
+TEST 2: \DeclareNewFloatType for new extension + existing environment
+============================================================
+! LaTeX Error: Command \newold already defined.
+               Or name \end... illegal, see p.192 of the manual.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+============================================================
+============================================================
+TEST 3: \DeclareNewFloatType for known extension + new environment
+============================================================
+\c@oldnew=\count...
+Package floarowtbytocbasic Info: reusing file extension `nn' for
+(floarowtbytocbasic)             float type `oldnew' on input line ....
+============================================================
+============================================================
+TEST 4: \DeclareNewFloatType for known extension + existing environment
+============================================================
+! LaTeX Error: Command \newold already defined.
+               Or name \end... illegal, see p.192 of the manual.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+============================================================

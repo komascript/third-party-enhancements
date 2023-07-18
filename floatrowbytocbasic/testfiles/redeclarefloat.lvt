@@ -1,0 +1,28 @@
+% testfile `redeclarefloat.sty'
+% to test:
+% - \RedeclareFloatType for new extension + new environment
+% - \RedeclareFloatType for new extension + existing environment
+% - \RedeclareFloatType for known extension + new environment
+% - \RedeclareFloatType for known extension + existing environment
+
+\input regression-test.tex
+\documentclass{article}
+\usepackage{floatrowbytocbasic}
+\START
+\makeatletter
+\TEST{\RedeclareFloatType for new extension + new environment}{%
+  \RedeclareFloatType{newnew}{fileext=nn}%
+}
+\newenvironment{newold}{}{}
+\TEST{\RedeclareFloatType for new extension + existing environment}{%
+  \RedeclareFloatType{newold}{fileext=no}%
+}
+\TEST{\RedeclareFloatType for known extension + new environment}{%
+  \RedeclareFloatType{oldnew}{fileext=nn}%
+}
+\TEST{\RedeclareFloatType for known extension + existing environment}{%
+  \RedeclareFloatType{newold}{fileext=nn}%
+}
+\END
+\begin{document}
+\end{document}

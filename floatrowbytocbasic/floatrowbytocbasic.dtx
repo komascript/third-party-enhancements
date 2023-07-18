@@ -1,0 +1,568 @@
+% \iffalse meta-comment
+% ======================================================================
+% floatrowbytocbasic.dtx
+% Copyright © 2008–2023 Markus Kohm
+%
+% This work is a KOMA-Script spin-off.  For the original sources of
+% KOMA-Script's `floatrow.hak' see file `scrhack.dtx' in the KOMA-Script
+% sources at <https://sourceforge.net/p/koma-script/code/>.
+%
+% Development is taking place as part of `third-party-hacks' at
+% <https://github.com/komascript/third-party-hacks>.  New issues should
+% be reported there as well as known issues can be found.
+%
+% This work may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, version 1.3c of the license.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.<3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later and of this work.
+%
+% This work has the LPPL maintenance status "author-maintained".
+%
+% The Current Maintainer and author of this work is Markus Kohm.
+%
+% This work consists of the file `floatrowbytocbasic.dtx' and
+% `README.md'.
+%
+% The recommended way to install `floatrowbytocbasic' is to use
+% the package manager of your TeX distribution.
+% ======================================================================
+%
+%<*dtx>
+\ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
+\ProvidesFile{floatrowbytocbasic.dtx}
+%</dtx>
+%<*dtx|package>
+%<package>\ProvidesPackage{floatrowbytocbasic}
+             [2023-07-14 v0.1
+%<dtx>              sources and unpack driver of
+              improved float package using tocbasic]
+%</dtx|package>
+%<*dtx>
+\ifx\documentclass\undefined
+  \input docstrip.tex
+  \generate{%
+    \file{floatrowbytocbasic.sty}{%
+      \from{floatrowbytocbasic.dtx}{package}%
+    }%
+  }%
+\else
+  \let\endbatchfile\relax
+\fi
+\endbatchfile
+\documentclass[ngerman,USenglish]{koma-script-source-doc}
+\usepackage{babel}
+\usepackage{csquotes}
+\usepackage[style=alphabetic]{biblatex}
+\begin{filecontents}[force]{\jobname.bib}
+@online{pkg:floatrow,
+  author={Olga Kapko},
+  title={\pkg*{floatrow} --- Modifying the layout of floats},
+  version={0.3b},
+  date={2008-08-02},
+  url={https://ctan.org/pkg/floatrow},
+  urldate={2023-07-18},
+  note={The \pkg*{floatrow} package provides many ways to customize layouts of
+        floating environments and has code to cooperate with the \pkg{caption}
+        3.x package. The package offers mechanisms to put floats side by side,
+        and to put the caption beside its float. The \pkg*{floatrow} settings
+        could be expanded to the floats created by packages \pkg{rotating},
+        \pkg{wrapfig}, \pkg{subfig} (in the case of rows of subfloats), and
+        \pkg{longtable}.},
+}
+@manual{pkg:floatrow:manual,
+  author={Olga Lapko},
+  date={2009-08-02},
+  title={The \pkg*{floatrow} package},
+  url={http://mirrors.ctan.org/macros/latex/contrib/floatrow/floatrow.pdf},
+  urldate={2023-07-18},
+  abstract={This package was created as extension of the \pkg{float} package.
+            The \pkg*{floatrow} package borrows core code from the \pkg{float}
+            and \pkg{rotfloat} packages, so you must not load these packages.},
+}
+@online{pkg:koma-script,
+  author={Markus Kohm},
+  version={3.41},
+  date={2023-07-07},
+  title={{\KOMAScript} --- A bundle of versatile classes and packages},
+  url={https://ctan.org/pkg/koma-script},
+  urldate={2023-07-14},
+  note={The \KOMAScript{} bundle provides replacements for the \pkg*{article},
+        \pkg*{report}, and \pkg*{book} classes with emphasis on typography and
+        versatility. There is also a letter class.},
+}
+@online{pkg:tocbasic,
+  author={Markus Kohm},
+  version={3.41},
+  date={2023-07-07},
+  title={\pkg*{tocbasic} --- Management of tables/lists of contents (and the
+         like)},
+  url={https://ctan.org/pkg/tocbasic},
+  urldate={2023-07-14},
+  note={The package provides means to create specialised ``table of
+        contents''-like lists of features of a document.},
+}
+@manual{pkg:koma-script:manual:de,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={Die Anleitung},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-de.pdf},
+  urldate={2023-07-04},
+}
+@manual{pkg:koma-script:manual:en,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={The Guide},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-en.pdf},
+  urldate={2023-07-14},
+}
+\end{filecontents}
+\addbibresource{\jobname.bib}
+\setcounter{StandardModuleDepth}{2}
+\begin{document}
+  \nocite{pkg:float,pkg:koma-script,pkg:tocbasic}
+  \DocInput{floatrowbytocbasic.dtx}
+\end{document}
+%</dtx>
+%\fi
+%
+% \changes{v0.1}{2023/06/01}{start of \KOMAScript{} spin-off}
+%
+% \GetFileInfo{floatrowbytocbasic.dtx}
+% \title{Improving ``\pkg{floatrow}'' Using
+%  \href{https://komascript.de/}{\KOMAScript} Package ``\pkg{tocbasic}''}
+% \author{\href{mailto:komascript@gmx.info}{Markus Kohm}}
+% \date{Version \filedate{} \fileversion}
+% \maketitle
+% \begin{abstract}
+%   Package \pkg*{floatrowbytocbasic} has started as hack module of the
+%   \KOMAScript{} package \pkg*{scrhack} years ago to fix an issue when using
+%   package \pkg{floatrow} with \KOMAScript~3.  This became necessary because
+%   package \pkg{floatrow} still depends on an interface once proposed by the
+%   \KOMAScript{} author, but which has long since failed to meet
+%   requirements. Unfortunately, this problem could not be solved in dialog
+%   with the author of \pkg{floatrow}. Although \pkg*{floatrowbytocbasic} still
+%   loads the \pkg{floatrow} package, it then changes some internal commands to
+%   use and optimally support the \KOMAScript{} package \pkg{tocbasic}. On the
+%   one hand, the user interface of \pkg{floatrow} remains usable unchanged,
+%   but at the same time the package benefits from many possibilities of
+%   \pkg{tocbasic}.
+% \end{abstract}
+%
+% \tableofcontents
+%
+%\iffalse
+%<*doc>
+%\fi
+\section{Why should I use this package instead of
+  \texorpdfstring{\pkg{floatrow}}{floatrow} only if I use a \KOMAScript{}
+  class or \KOMAScript{} package \texorpdfstring{\pkg{tocbasic}}{tocbasic}?}
+\label{sec:whywithkomascript}
+
+The main symptom of using a deprecated interface to \KOMAScript{} by package
+\pkg{floatrow}, namely the use of \cs{float@listhead} and
+\cs{float@addtolists}, are corresponding warnings when using one of the
+\KOMAScript{} classes at the same time, for example:
+\begin{verbatim}
+  Class scrbook Warning: \float@addtolists detected!
+  (scrbook)              Implementation of \float@addtolist became
+  (scrbook)              deprecated in KOMA-Script v3.01 2008/11/14 and
+  (scrbook)              has been replaced by several more flexible
+  (scrbook)              features of package `tocbasic`.
+  (scrbook)              Since Version 3.12 support for deprecated
+  (scrbook)              \float@addtolist interface has been
+  (scrbook)              restricted to only some of the KOMA-Script
+  (scrbook)              features and been removed from others.
+  (scrbook)              Loading of package `scrhack' may help to
+  (scrbook)              avoid this warning, if you are using a
+  (scrbook)              a package that still implements the
+  (scrbook)              deprecated \float@addtolist interface.
+\end{verbatim}
+or
+\begin{verbatim}
+  Class scrbook Warning: \float@listhead detected!
+  (scrbook)              Implementation of \float@listhead became
+  (scrbook)              deprecated in KOMA-Script v3.01 2008/11/14 and
+  (scrbook)              has been replaced by several more flexible
+  (scrbook)              features of package `tocbasic`.
+  (scrbook)              Maybe implementation of \float@listhead will
+  (scrbook)              removed from KOMA-Script soon.
+  (scrbook)              Loading of package `scrhack' may help to
+  (scrbook)              avoid this warning, if you are using a
+  (scrbook)              a package that still implements the
+  (scrbook)              deprecated \float@listhead interface.
+\end{verbatim}
+
+If you know, that the issue is because of loading package \pkg{floatrow} you
+can avoid it using \pkg{floatrowbytocbasic} as explained in
+\autoref{sec:howtouse}.
+
+\section{Why should I use this package instead of
+  \texorpdfstring{\pkg{floatrow}}{floatrow} only if I don't use a
+  \KOMAScript{} class or package?}
+\label{sec:whywithoutkomascript}
+
+Package \pkg{floatrow} does not check if a file extension or environment
+already has been defined when using \cs{DeclareNewFloatTape}. So several
+definitions of float environments either with the same name or the same file
+extension could happen by accident. Package \pkg*{floatrowbytocbasic} adds
+test to avoid such issues. But it also allows to redefine an environment or
+reuse a file extension, if you want. Alternatively you can force the
+definition or do the definition only if needed. See description of
+\cs{DeclareFloatType}, \cs{RedeclareFloatType} and \cs{ProvideFloatType} in
+\autoref{sec:howtouse} for more information.
+
+Package \pkg{tocbasic} provides several additional features, e.g.:
+\begin{itemize}
+\item automatic handling of language switching using \pkg{babel},
+\item optional numbered heading for a list/table of contents,
+\item optional adding an entry to the table of contents for a list/table of
+  contents even if the heading is not numbered,
+\item easy configuration of entries to a list/table of contents.
+\end{itemize}
+Several more features can be added by the class or other packages. See section
+about \pkg*{tocbasic} in the \KOMAScript{} manual, either
+\cite{pkg:koma-script:manual:en} or \cite{pkg:koma-script:manual:de}.
+
+\section{How to use
+  \texorpdfstring{\pkg*{floatrowbytocbasic}}{floatrowbytocbasic}}
+\label{sec:howtouse}
+
+In the document preamble of your document you just can replace
+\begin{verbatim}
+  \usepackage{floatrow}
+\end{verbatim}
+by
+\begin{verbatim}
+  \usepackage{floatrowbytocbasic}
+\end{verbatim}
+to load package \pkg*{floatrowbytocbasic}. This does still also load package
+\pkg{floatrow} but additionally patches several commands of \pkg{floatrow} to
+avoid the issues shown in \autoref{sec:whywithkomascript}.
+
+If you want you can alternatively also load both packages explicitly, either
+\pkg{floatrow} before \pkg{floatrowbytocbasic} or---if you
+want---\pkg{floatrowbytocbasic} before \pkg{floatrow}. This is also useful, if
+you use a package, that uses \pkg{floatrow} itself. In this case, you always
+should load \pkg{floatrowbytocbasic} \emph{before} the package, that uses
+\pkg{floatrow}. Otherwise it is very likely that for some new float
+environments the enhancements of \pkg*{floatrowbytocbasic} will not be
+used. Only if \pkg*{floatrowbytocbasic} is loaded before the first use of
+\cs{DeclareNewFloatType} can it be ensured that the definition of the new
+sliding environments is really done with the help of \pkg{tocbasic} and thus
+its extended user interface is used.
+
+When using a class that uses \pkg{floatrow}, the correct operation can be
+ensured with
+\begin{verbatim}
+  \AddToHook{package/floatrow/after}{\RequirePackage{floatrowbytocbasic}}
+\end{verbatim}
+even before \cs{documentclass}. This requires at least \LaTeX{}
+2020/10/01. For older versions of \LaTeX{} you can use
+\begin{verbatim}
+  \RequirePackage{scrlfile}
+  \AfterPackage{floatrow}{\RequirePackage{floatrowbytocbasic}}
+\end{verbatim}
+also before \cs{documentclass}. This would require the \KOMAScript{} package
+\pkg{scrlfile}\nocite{pkg:scrlfile}.
+
+The user interface of \pkg*{floatrowbytocbasic} is the same as of
+\pkg{floatrow}, see \autocite{pkg:floatrow:manual}. Following we document only
+the differences.
+
+\DescribeCommand{\DeclareNewFloatType}
+\DescribeCommand{\ProvideFloatType}
+\DescribeCommand{\RedeclareFloatType}
+\DescribeCommand{\DeclareFloatType}
+See \autocite[section~2]{pkg:floatrow:manual} for the basic usage of
+\cs{DeclareNewFloatType}. The command takes two mandatory arguments. It is of
+the form:
+\begin{quote}
+  \cs{DeclareNewFloatType}\marg{type}\marg{options}
+\end{quote}
+\pkg{floatrowbytocbasic} adds the registration of the file extension of the
+new \meta{type} given either by option \opt{fileext} in the \meta{options} or
+implicitly (see \autocite[section~4]{pkg:floatrow:manual}). The main problem
+here is to decide what to do, if \meta{ext} already has been
+registered. Package \pkg{floatrow} simply does not care for this case. It does
+neither report an error nor a warning, but just redefine the float \meta{type}
+and reuses the auxiliary file extension. Because of the ``\texttt{New}'' in
+the name of the command, we have decided to report an error instead. But we
+also decided to define three new commands:
+\begin{quote}\raggedright
+  \cs{DeclareFloatType}\marg{type}\marg{options}\\
+  \cs{ProvideFloatType}\marg{type}\marg{options}\\
+  \cs{RedeclareFloatType}\marg{type}\marg{options}
+\end{quote}
+\cs{DeclareFloatTpye} also does not care for already existing \meta{type}
+environment or already registered file extension. \cs{ProvideFloatType} does
+not overwrite existing \meta{type} environment or already registered file
+extensions for other owners. \cs{RedeclareFloatType} does overwrite only
+already existing \meta{type} environment with registered file extension. There
+are also cases like defined \cs{\meta{type}} but not \cs{end\meta{type}} or
+not defined environment \meta{type} but registered file extension. But there
+are no special commands to handle these. If users need to take care for these
+cases, they can test for definition using the \LaTeX{} kernel macro
+\cs{@ifundefined} and the \pkg{tocbasic} command \cs{Ifattoclist}, described
+in the \KOMAScript{} user manuals \autocite{pkg:koma-script:manual:en}
+resp. \autocite{pkg:koma-script:manual:de}.
+%
+% \iffalse
+%</doc>
+% \fi
+%
+% \MaybeStop{\printbibliography[heading=bibintoc]\PrintIndex}
+%
+% \iffalse
+%<*package>
+%<@@=floatrowbytocbasic>
+% \fi
+% \section{Implementation}
+%
+% \pkg{floatrowbytocbasic} depend on \KOMAScript{} package \pkg{tocbasic}. So
+% we load it already before everything else. We use this package also to
+% require at least \KOMAScript{} 3.41, which is one version before the
+% intended spin-off.
+%    \begin{macrocode}
+\RequirePackage{tocbasic}[2023/07/07]
+%    \end{macrocode}
+%
+% We also load package \pkg{floatrow}, because we reuse most of the code:
+%    \begin{macrocode}
+\RequirePackage{floatrow}
+%    \end{macrocode}
+%
+% As often as possible, we do not redefine macors of \pkg{floatrow}, but patch
+% them using \pkg{xpatch}\nocite{xpatch}:
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+%    \end{macrocode}
+%
+% We also use the new document command interface. So if the \LaTeX{} kernel is
+% too old, we require \pkg{xparse}\nocite{xparse}:
+%    \begin{macrocode}
+\@ifundefined{NewDocumentCommand}{%
+  \RequirePackage{xparse}%
+}{}
+%    \end{macrocode}
+%
+% \begin{command}{\DeclareFloatType}
+%   Basicly \cs{DeclareFloatType} is \cs{DeclareNewFloatType} of
+%   \pkg{floatrow}:
+%    \begin{macrocode}
+\@ifundefined{NewCommandCopy}{\let\DeclareFloatType\DeclareNewFloatType}{%
+  \NewCommandCopy\DeclareFloatType\DeclareNewFloatType
+}
+%    \end{macrocode}
+% But we also have to take care, that a not yet registered file extension has
+% to be registered.
+% \begin{description}
+% \item[Note:] We do not need to setup feature \texttt{chapteratlist}, because
+%   classes like the \KOMAScript{} classes should use
+%\begin{verbatim}
+%  \AtAddToTocList[float]{\setuptoc{\@currext}{chapteratlist}}
+%\end{verbatim}
+%   to implement such features.
+% \end{description}
+%    \begin{macrocode}
+\newcommand*{\floatrowbytocbasic@incompatibility@error}[1]{%
+  \PackageError{floatrowbytocbasic}{incompatible definition of
+    \expandafter\string\csname #1\endcsname}{%
+    Package `floatrowbytocbasic' depends on the original definition of
+    package\MessageBreal
+    `floatrow'.\MessageBreak
+    Some changes to that definition are tolerated.\MessageBreak
+    \@ifundefined{#1}%
+    {But it seems the definition is completely missing!}%
+    {But the current definition is incompatible!}%
+    \MessageBreak
+    Make sure, you have installed the original package `floatrow' as
+    referred\MessageBreak
+    by section ``References'' of the manual.%
+  }%
+}  
+\xpatchcmd{\DeclareFloatType}{%
+  \xdef\@tempa{\noexpand\flrow@types{\the\flrow@types \FR@tmp{#1}}}%
+  \@tempa
+}{%
+  \Ifattoclist{\@nameuse{ext@\FB@captype}}{%
+    \let\reserved@a\relax
+    \owneroftoc[\def\reserved@a]{\@nameuse{ext@\FB@captype}}\relax
+    \@ifundefined{reserved@a}{}{%
+      \Ifstr{\reserved@a}{float}{%
+        \PackageInfo{floarowtbytocbasic}{%
+          reusing file extension `\@nameuse{ext@\FB@captype}' for\MessageBreak
+          float type `#1'%
+        }%
+      }{%
+        \PackageWarning{floatrowbytocbasic}{%
+          reusing file extension `\@nameuse{ext@\FB@captype}' of owner\MessageBreak
+          `\reserved@a' for float `#1'\MessageBreak
+          not recommended%
+        }%
+      }%
+    }%
+  }{%
+    \addtotoclist[float]{\@nameuse{ext@\FB@captype}}%
+  }%
+}{}{%
+  \floatrowbytocbasic@incompatibility@error{DeclareNewFloatType}%
+}
+%    \end{macrocode}
+% \begin{description}
+% \item[Note:] In difference to \pkg{floatrow} we think, reusing a counter is
+%   not a big problem, so we don't report an error.
+% \end{description}
+%    \begin{macrocode}
+\xpatchcmd{\DeclareFloatType}{%
+  \newcounter{#1}%
+}{%
+  \@ifundefined{c@#1}{\newcounter{#1}}{%
+    \PackageInfo{floatrowbytocbasic}{%
+      reusing existing counter for float type `#1'%
+    }%
+  }%
+}{}{%
+  \floatrowbytocbasic@incompatibility@error{DeclareNewFloatType}%
+}  
+\xpatchcmd{\DeclareNewFloatType}{%
+  \@namedef{l@#1}{\@dottedtocline{1}{1.5em}{2.3em}}%
+}{%
+  \@ifundefined{l@#1}{\expandafter\let\csname l@#1\endcsname\l@figure
+    \@ifundefined{l@#1}{%
+      \DeclareTOCStyleEntry[level=1,numwith=2.3em,indent=1.5em]{default}{#1}%
+    }{}%
+  }{}%
+}{}{%
+  \floatrowbytocbasic@incompatibility@error{DeclareNewFloatType}%
+}
+%    \end{macrocode}
+% \end{command}
+%
+% \begin{command}{\DeclareNewFloatType,\ProvideFloatType,\RedeclareFloatType}
+% \cs{DeclareNewFloatType} and \cs{RedeclareFloatType} similar to
+% \cs{newcommand} and \cs{renewcommand} do some tests and maybe report an
+% error, before (nevertheless) defining the float.
+%    \begin{macrocode}
+\renewcommand{\DeclareNewFloatType}[2]{%
+  \floatrowbytocbasic@get@currext{#1}{#2}%
+  \@tempswatrue
+  \Ifattoclist{\floatrowbytocbasic@currext}{%
+    \let\reserved@a\relax
+    \owneroftoc[\def\reserved@a]{\floatrowbytocbasic@currext}\relax
+    \@ifundefined{reserved@a}{}{%
+      \Ifstr{\reserved@a}{float}{}{%
+        \PackageError{floatrowbytocbasic}{%
+          reusing `\floatrowbytocbasic@currext' of owner `\reserved@a' not allowed%
+        }{%
+          Each file extension should be used only once.\MessageBreak
+          Reusing is only allowed with the same owner/category.\MessageBreak
+          You, the class, or another package already uses
+          `\floatrowbytocbasic@currext'.\MessageBreak
+          \@eha
+        }%
+        \@tempswafalse
+      }%
+    }%
+  }{}%
+  \if@tempswa
+    \expandafter\@ifdefinable\csname #1\endcsname{%
+      \DeclareFloatType{#1}{#2}%
+    }%
+  \fi
+}
+\newcommand{\ProvideFloatType}[2]{%
+  \@ifundefined{#1}{%
+    \DeclareNewFloatType{#1}{#2}%
+  }{}%
+}
+\newcommand{\RedeclareFloatType}[2]{%
+  \floatrowbytocbasic@get@currext{#1}{#2}%
+  \@ifundefined{#1}{%
+    \@latex@error{Environment #1 undefined}\@ehc
+    \removefromtoclist{\floatrowbytocbasic@currext}%
+  }{%
+    \Ifattoclist{\floatrowbytocbasic@currext}{%
+      \removefromtoclist{\floatrowbytocbasic@currext}%
+    }{%
+      \PackageError{floatrowbytocbasic}{%
+        extension `\floatrowbytocbasic@currext' not yet registered%
+      }{%
+        I can only renew floats with already registered
+        extensions.\MessageBreak
+        \@ehc
+      }%
+    }%
+  }%
+  \expandafter\let\csname #1\endcsname\relax
+  \expandafter\let\csname end#1\endcsname\relax
+  \DeclareNewFloatType{#1}{#2}%
+}
+%    \end{macrocode}
+% \end{command}
+%
+% \ExplSyntaxOn
+% \begin{macro}{\__floatrowbytocbasic_get_ext_from_prop:nn,
+%               \floatrowbytocbasic@get@currext}
+% \ExplSyntaxOff
+% Helper macros to set \cs{floatrowbytocbasic@currext} to the extension set by
+% the options (=\#2). \#1 is the name of the new float type. We are not really
+% interested in handling of all the options. So we just use the options to
+% setup a property list and then get the one interesting property.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\prop_new:N \@@_DeclareNewFloatType_prop
+\tl_new:N \@@_ext_tl
+\cs_new:Nn \@@_get_ext_from_prop:nn
+  {
+    \prop_set_from_keyval:Nn \@@_DeclareNewFloatType_prop { #2 }
+    \prop_get:NnN \@@_DeclareNewFloatType_prop { fileext } \@@_ext_tl
+    \quark_if_no_value:NT \@@_ext_tl
+      {
+        \tl_set:Nn \@@_ext_tl { lo#1 }
+      }
+  }
+\newcommand*{\floatrowbytocbasic@get@currext}[2]{%
+  \@@_get_ext_from_prop:nn { #1 } { #2 }
+  \let\floatrowbytocbasic@currext\@@_ext_tl
+}
+\ExplSyntaxOff 
+%    \end{macrocode}
+% \end{macro}
+% \ExplSyntaxOff
+%
+% \begin{command}{\listof}
+% This command is redefined using a complete new definition using
+% \pkg{tocbasic}'s \cs{listoftoc}.
+%    \begin{macrocode}
+\renewcommand*{\listof}[2]{%
+  \@ifundefined{ext@#1}{\flrow@error{Unknown float style `#1'}}{%
+    \@ifundefined{l@#1}{\expandafter\let\csname l@#1\endcsname\l@figure
+      \@ifundefined{l@#1}{%
+        \DeclareTOCStyleEntry[level=1,numwidth=2.3em,indent=1.5em]
+        {default}{#1}%
+      }{}%
+    }{}%
+    \listoftoc[{#2}]{\csname ext@#1\endcsname}%
+  }%
+}%
+%    \end{macrocode}
+% \end{command}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
+% \PrintChanges
+%  
+% \endinput
+% Local Variables:
+% mode: doctex
+% ispell-local-dictionary: "en_US"
+% eval: (flyspell-mode 1)
+% TeX-master: t
+% End:

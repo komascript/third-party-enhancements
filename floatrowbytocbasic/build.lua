@@ -1,38 +1,30 @@
 #!/usr/bin/env texlua
 
 --[[
-   Build script for scrhack (KOMA-Script spin-off)
+   Build script for floatrowbytocbasic (KOMA-Script spin-off)
    Copyright © 2023 Markus Kohm
-   
-   This file is part of the build system of scrhack.
-   scrhack is a KOMA-Script spin-off.
-   
+
+   This file is part of the build system of floatrowbytocbasic.
+
    It may be distributed and/or modified under the conditions of
    the LaTeX Project Public License (LPPL), either version 1.3c of
    this license of (at your option) any later version.  The latest
    version of this license is in the file:
    
       https://www.latex-project.org/lppl.txt
-   
-   Note: You should not copy this file to the distribution of scrhack.
+
+   Note: You should not copy this file to the distribution of
+         floatrowbytocbasic.
 ]]
 
-release_info = "2023-07-15 v3.42"
--- Bundle and modules ------------------------------------------------------
--- Note: It is intended to release the previous hacks as standalone
---       packages. Therefore, there is no bundle, although changes to
---       the individual packages may also result in changes to
---       the scrhack package and may therefore require a new release
---       of scrhack.
+release_info = "2023-07-18 v0.1"
 
-module  = "scrhack"
+-- Bundle and modules
+
+module  = "floatrowbytocbasic"
 maindir = ".."
-checkdeps = {
-   maindir .. "/floatbytocbasic",
-   maindir .. "/floatrowbytocbasic",
-}
 
--- Unpacking and creating documentation ------------------------------------
+-- Unpacking and creating documentation
 
 unpackfiles = { "*.dtx" }
 sourcefiles = { "*.dtx" }
@@ -44,15 +36,15 @@ typesetruns = 4
 ctanpkg = module
 
 uploadconfig = {
-   pkg         = module,
-   author      = "Markus Kohm",
-   license     = "lppl1.3c",
-   summary     = "compatibility package to emulate the former KOMA-Script package scrhack",
-   topic       = { "bugfix" },
-   ctanPath    = "/macros/latex/contrib/"..module,
+   pkg      = module,
+   author   = "Markus Kohm",
+   license  = "lppl1.3c",
+   summary  = "an enhancement to package floatrow using package tocbasic",
+   topic    = { "float" },
+   ctanPath = "/macros/latex/contrib/"..module,
    home        = "https://github.com/komascript/thirdpartyhacks",
    bugtracker  = "https://github.com/komascript/thirdpartyhacks/issues",
-   description = "Up to version 3.41, the `scrhack' package was part of KOMA-Script. It was originally intended to improve the compatibility of third party packages with KOMA-Script. However, most of the so-called hacks also added additional functionality to the corresponding third-party package. On the other hand, it was sometimes urgent to react to a change in such a third-party package, which was difficult to do from within a large collection like KOMA-Script. Therefore, the `scrhack' part of KOMA-Script was split into several independent packages. And the `scrhack' spin-off was made to emulate the former KOMA-Script package of the same name.",
+   description = "This package adds usage of package `tocbasic' to package `floatrow'. This not only improves compatibility with KOMA-Script but also adds several new features to `floatrow' like optional automatic entries to the table of contents for the lists of new floats, optional numbering of the lists of new floats etc.",
    version     = release_info,
    announcement_file = "announcement-" .. release_info .. ".txt",
    note_file         = "upload-note-" .. release_info .. ".txt",
@@ -74,10 +66,7 @@ function update_tag (file,content,tagname,tagdate)
 			  "(©%s*%d%d%d%d)%s+",
 			  "%1–" .. tagyear .. " ")
    content = string.gsub (content, tagyear .. "–" .. tagyear, tagyear)
-   if string.match (file, "%.dtx$") then
-      content = string.gsub (content,
-			     "(\\DeclareCurrentRelease{}{)%d%d%d%d%-%d%d%-%d%d}",
-			     "%1" .. tagdate .. "}")
+  if string.match (file, "%.dtx$") then
       return string.gsub (content,
                           "%[%d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+",
                           "[" .. tagdate .. " v" .. tagname)
@@ -99,3 +88,4 @@ kpse.set_program_name("kpsewhich")
 if not release_date then
   dofile(kpse.lookup("l3build.lua"))
 end
+

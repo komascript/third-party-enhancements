@@ -254,11 +254,12 @@ corresponding package.
   After package \pkg{float} is loaded, load also package \pkg{floatbytocbasic}
   to fix the issue explained in \autoref{sec:history}. This also provides the
   full functionality of \pkg{tocbasic} to \pkg{float}.
-\item[\opt{hyperref=\meta{boolean}}:] \marginpar{\Huge\textcolor{red}{!}}\hfill
+\item[\opt{hyperref=\meta{boolean}}:]\hfill
+  \marginline{\raisebox{\dimexpr\ht\strutbox-\height\relax}{\Huge\textcolor{red}{!}}}%
   initial: \optvalue{false}, default: \optvalue{true}\\
   Option \opt{hyperref} is deprecated. It is implemented for compatibility
   reasons only. Using \opt{hyperref} without value or \opt{hyperref=true}
-  results in an error message. Using \opt{hyperref=false} is just ignored.
+  results in a warning. Using \opt{hyperref=false} results in an info only.
 \end{description}
 
 \paragraph{Available options with the legacy version:}

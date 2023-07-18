@@ -490,6 +490,76 @@ corresponding package.
 % \end{macro}
 % \ExplSyntaxOff
 %
+% \subsection{Emulating \file{floatrow.hak}}
+% First we declare the options using the new key-value interface:
+%    \begin{macrocode}
+\DeclareKeys{%
+  floatrow .code      = \@@_switch_floatrow:n { #1 },
+  floatrow .default:n = true,
+  floatrow .usage     = preamble,
+}
+%    \end{macrocode}
+%
+% \ExplSyntaxOn
+% \begin{macro}{\__scrhack_switch_floatrow:n}
+% \ExplSyntaxOff
+% This is used to switch the state and add or remove the hook if needed. A new
+% boolean is used to know, whether the hook has been put. Using
+% \opt{floatrow=true}, if package \pkg{floatrowbytocbasic} already has been
+% loaded isn't a foul. So we just write an information to the \file{log}. But
+% using \opt{floatrow=false}, if package \pkg{floatrowbytocbasic} already has
+% been loaded may be wrong. So we use a warning message. We also warn if a not
+% allowed value is used.
+%    \begin{macrocode}
+\bool_new:N \@@_floatrow_bool
+
+\cs_new:Nn \@@_switch_floatrow:n
+  {
+    \str_case_e:nnF { \str_foldcase:n { #1 } }
+      {
+        {true}  {
+                  \@ifpackageloaded { floatrowbytocbasic }
+                    {
+                      \msg_info:nnnn { scrhack } { option-too-late }
+                        { floatrow = true } { floatrowbytocbasic }
+                    }
+                    {
+                      \bool_if:NF \@@_floatrow_bool
+                        {
+                          \hook_gput_code:nnn { package/floatrow/after }
+                                              { scrhack }
+                            {
+                              \RequirePackage { floatrowbytocbasic }
+                            }
+                          \bool_gset_true:N \@@_floatrow_bool
+                        }  
+                    }
+                }
+        {false} {
+                  \@ifpackageloaded { floatrowbytocbasic }
+                    {
+                      \msg_warning:nnnn { scrhack } { option-too-late }
+                        { floatrow=false } { floatrowbytocbasic }
+                    }
+                    {
+                      \bool_if:NT \@@_floatrow_bool
+                        {
+                          \hook_gremove_code:nn { package/floatrow/after }
+                                                { scrhack }
+                        }
+                      \bool_gset_false:N \@s@_floatrow_bool
+                    }
+                }
+      }
+      {
+        \msg_warning:nnn { keys } { boolean-values-only } { floatrow }
+      }
+  }
+\SetKeys{floatrow=true}
+%    \end{macrocode}
+% \end{macro}
+% \ExplSyntaxOff
+%
 % \subsection{Emulating \file{hyperref.hak}}
 %
 % First we declare the options using the new key-value interface:
@@ -516,10 +586,12 @@ corresponding package.
     \str_case_e:nnF { \str_foldcase:n { #1 } }
       {
         {true}  {
-                  \msg_warning:nnn { scrhack } { deprecated-option } { hyperref=#1 }
+                  \msg_warning:nnn { scrhack } { deprecated-option }
+                                   { hyperref=#1 }
                 }
         {false} {
-                  \msg_info:nnn { scrhack } { deprecated-option } { hyperref=#1 }
+                  \msg_info:nnn { scrhack } { deprecated-option }
+                                { hyperref=#1 }
                 }
       }
       {

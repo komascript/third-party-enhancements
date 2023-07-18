@@ -1,0 +1,26 @@
+% Testfile
+% Tests:
+% * does the automatic loading of floatrowbytocbasic work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}
+\START
+\TEST{Does setting true again work without error (should be empty?}{%
+  \SetKeys[scrhack]{floatrow=true}%
+}
+\TEST{Does setting without value work without error (should be empty)?}{%
+  \SetKeys[scrhack]{floatrow}%
+}
+\OMIT
+\usepackage{floatrow}
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\TIMO
+\TEST{Has floatrowbytocbasic been loaded automatically (should be YES)?}{%
+  \typeout{\IfPackageLoadedTF{floatrowbytocbasic}{YES}{NO}}%
+}
+\END
+\begin{document}
+\end{document}
+

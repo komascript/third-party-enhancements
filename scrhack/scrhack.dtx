@@ -256,15 +256,22 @@ corresponding package.
   full functionality of \pkg{tocbasic} to \pkg{float}.
 \item[\opt{floatrow=\meta{boolean}}:] \hfill
   initial: \optvalue{true}, default: \optvalue{true}\\
-  After package \pkg{floatrow} is loaded, load also package \pkg{floatbytocbasic}
-  to fix the issue explained in \autoref{sec:history}. This also provides the
-  full functionality of \pkg{tocbasic} to \pkg{floatrow}.
+  After package \pkg{floatrow} is loaded, load also package
+  \pkg{floatbytocbasic} to fix the issue explained in
+  \autoref{sec:history}. This also provides the full functionality of
+  \pkg{tocbasic} to \pkg{floatrow}.
 \item[\opt{hyperref=\meta{boolean}}:]\hfill
   \marginline{\raisebox{\dimexpr\ht\strutbox-\height\relax}{\Huge\textcolor{red}{!}}}%
   initial: \optvalue{false}, default: \optvalue{true}\\
   Option \opt{hyperref} is deprecated. It is implemented for compatibility
   reasons only. Using \opt{hyperref} without value or \opt{hyperref=true}
   results in a warning. Using \opt{hyperref=false} results in an info only.
+\item[\opt{listings=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  After package \pkg{listings} is loaded, load also package
+  \pkg{listingsbytocbasic} to fix the issue explained in
+  \autoref{sec:history}. This also provides the full functionality of
+  \pkg{tocbasic} to \pkg{listings}.
 \end{description}
 
 \paragraph{Available options with the legacy version:}

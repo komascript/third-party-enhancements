@@ -1,0 +1,18 @@
+% Testfile for the legacy version
+% Tests:
+% * does preventing the automatic loading of lscape.hak work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage[lscape=false]{scrhack}[=v3.41]
+\usepackage{lscape}
+\makeatletter
+\newcommand*{\IfHackLoadedTF}{\@ifl@aded{hak}}
+\makeatother
+\START
+\TEST{Has lscape.hak been loaded automatically (should be NO)?}{%
+  \typeout{\IfHackLoadedTF{lscape}{YES}{NO}}%
+}
+\END
+\makeatletter
+\begin{document}
+\end{document}

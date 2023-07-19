@@ -58,7 +58,10 @@ standalone packages. Currently these are:
 * `listingsbytocbasic` — an enhancement to package
   [`listings`](https://ctan.org/pkg/listings) using package
   [`tocbasic`](https://ctan.org/pkg/tocbasic).
-  
+* `lscapeenhanced` — an enhancement to package
+  [`lscape`](https://ctan.org/pkg/lscape) resp. package
+  [`pdflscape`](https://ctan.org/pkg/pdflscape).
+
 There is also a `build.lua` for `l3build` in the main folder. However, this
 can be used only to do all the checks using:
 

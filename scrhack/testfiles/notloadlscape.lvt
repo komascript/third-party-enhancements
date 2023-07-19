@@ -1,0 +1,18 @@
+% Testfile
+% Tests:
+% * does preventing the automatic loading of lscapeenhanced work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage[lscape=false]{scrhack}
+\usepackage{lscape}
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\START
+\TEST{Has lscapeenhanced been loaded automatically (should be NO)?}{%
+  \typeout{\IfPackageLoadedTF{lscapeenhanced}{YES}{NO}}%
+}
+\END
+\makeatletter
+\begin{document}
+\end{document}

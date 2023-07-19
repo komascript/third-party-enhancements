@@ -1,0 +1,415 @@
+% \iffalse meta-comment
+% ======================================================================
+% lscapeenhanced.dtx
+% Copyright © 2008–2023 Markus Kohm
+%
+% This work is a KOMA-Script spin-off.  For the original sources of
+% KOMA-Script's `float.hak' see file `scrhack.dtx' in the KOMA-Script
+% sources at <https://sourceforge.net/p/koma-script/code/>.
+%
+% Development is taking place as part of `scrhack' at
+% <https://github.com/komascript/third-party-enhancements>.  New issues
+% should be reported there as well as known issues can be found.
+%
+% This work may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, version 1.3c of the license.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.<3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later and of this work.
+%
+% This work has the LPPL maintenance status "author-maintained".
+%
+% The Current Maintainer and author of this work is Markus Kohm.
+%
+% This work consists of the file `lscapeenhanced.dtx' and `README.md'.
+%
+% The recommended way to install `lscapeenhanced' is to use
+% the package manager of your TeX distribution.
+% ======================================================================
+%
+%<*dtx>
+\ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
+\ProvidesFile{lscapeenhanced.dtx}
+%</dtx>
+%<*dtx|package>
+%<package>\ProvidesPackage{lscapeenhanced}
+             [2023-07-14 v0.1
+%<dtx>              sources and unpack driver of
+              improved lscape package]
+%</dtx|package>
+%<*dtx>
+\ifx\documentclass\undefined
+  \input docstrip.tex
+  \generate{%
+    \file{lscapeenhanced.sty}{%
+      \from{lscapeenhanced.dtx}{package}%
+    }%
+  }%
+\else
+  \let\endbatchfile\relax
+\fi
+\endbatchfile
+\documentclass[ngerman,USenglish]{koma-script-source-doc}
+\usepackage{babel}
+\usepackage{csquotes}
+\usepackage[style=alphabetic]{biblatex}
+\begin{filecontents}[force]{\jobname.bib}
+@article{latexnews35,
+  author={{The {\LaTeX} Project Team}},
+  shortauthor={TLT},
+  year={2022},
+  month={6},
+  title={Issue 35},
+  journal={{\LaTeX} News},
+  url={http://mirrors.ctan.org/macros/latex/base/ltnews35.pdf},
+  urldate={2023-07-14},
+}
+@online{pkg:lscape,
+  author  = {David Carlisle and {The \LaTeX{} Project Team}},
+  version = {3.02},
+  date    = {2020-05-28},
+  title   = {\pkg*{lscape} – Place selected parts of a document in landscape},
+  url     = {https://ctan.org/pkg/lscape},
+  urldate = {2023-07-19},
+  note    = {Modifies the margins and rotates the page contents but not the
+             page number. Useful, for example, with large multipage tables, as
+             it is compatible with \pkg{longtable} and \pkg{supertabular}.},
+}
+@manual{pkg:lscape:manual,
+  author   = {David Carlisle},
+  version  = {3.02},
+  date     = {2020-05-08},
+  title    = {The \pkg*{lscape} package},
+  url      = {http://mirrors.ctan.org/macros/latex/required/graphics/lscape.pdf},
+  urldate  = {2023-07-19},
+  abstract = {All text, within the \env{landscape} environment is rotate
+              through 90 degrees. The environment may span several pages. It
+              works well with, and was originally created for, use with
+              \pkg{longtable} to produce long wide tables.},
+}
+@online{pkg:pdflscape,
+  author  = {Heiko Oberdiek},
+  version = {0.13},
+  date    = {2022-10-28},
+  title   = {\pkg*{pdflscape} – Make landscape pages display as landscape},
+  url     = {https://ctan.org/pkg/pdflscape},
+  urldate = {2023-07-19},
+  note    = {The package adds PDF support to the \env{landscape} environment
+             of package \pkg{lscape}, by setting the PDF \texttt{/Rotate} page
+             attribute. Pages with this attribute will be displayed in
+             landscape orientation by conforming PDF viewers.},
+}
+@manual{pkg:pdflscape:manual,
+  author   = {Heiko Oberdiek},
+  version  = {0.13},
+  date     = {2022-10-28},
+  title    = {The \pkg*{pdflscape} package},
+  url      = {http://mirrors.ctan.org/macros/latex/contrib/pdflscape/pdflscape.pdf},
+  urldate  = {2023-07-19},
+  abstract = {Package \pkg*{pdflscape} adds PDF support to the environment
+              \env{landscape} of package \pkg{lscape} by setting the PDF
+              page attribute \texttt{/Rotate}.},
+}
+@online{pkg:xpatch,
+  author   = {Enrico Gregorio},
+  version  = {0.3},
+  date     = {2020-03-25},
+  title    = {\pkg*{xpatch} – Extending \pkg{etoolbox} patching commands},
+  url      = {https://ctan.org/pkg/xpatch},
+  urldate  = {2023-07-19},
+  note     = {The package generalises the macro patching commands provided
+              by Philipp Lehmann's \pkg{etoolbox}.},
+}
+@manual{pkg:xpatch:manual,
+  author   = {Enrico Gregorio},
+  version  = {0.3},
+  date     = {2020-03-25},
+  title    = {The \pkg*{xpatch} package
+              extending \pkg{etoolbox} patching commands},
+  url      = {http://mirrors.ctan.org/macros/latex/contrib/xpatch/xpatch.pdf},
+  urldate  = {2023-07-19},
+  abstract = {},
+}
+@online{pkg:scrlfile,
+  author   = {Markus Kohm},
+  version  = {3.41},
+  date     = {2023-07-07},
+  title    = {\pkg*{scrlfile} – Installation control (not only) for
+              \KOMAScript{} packages},
+  url      = {https://ctan.org/pkg/scrlfile},
+  urldate  = {2023-07-19},
+  note     = {The package provides hooks for the execution of commands before
+              or after loading files, classes or packages independent from the
+              \LaTeX{} kernel version.},
+}
+@online{pkg:koma-script,
+  author={Markus Kohm},
+  version={3.41},
+  date={2023-07-07},
+  title={{\KOMAScript} --- A bundle of versatile classes and packages},
+  url={https://ctan.org/pkg/koma-script},
+  urldate={2023-07-14},
+  note={The \KOMAScript{} bundle provides replacements for the \pkg*{article},
+        \pkg*{report}, and \pkg*{book} classes with emphasis on typography and
+        versatility. There is also a letter class.},
+}
+@manual{pkg:koma-script:manual:de,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={Die Anleitung},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-de.pdf},
+  urldate={2023-07-04},
+}
+@manual{pkg:koma-script:manual:en,
+  author={Markus Kohm},
+  date={2023-06-16},
+  title={{\KOMAScript}},
+  subtitle={The Guide},
+  url={http://mirrors.ctan.org/macros/latex/contrib/koma-script/scrguide-en.pdf},
+  urldate={2023-07-14},
+}
+\end{filecontents}
+\addbibresource{\jobname.bib}
+\setcounter{StandardModuleDepth}{2}
+\begin{document}
+  \nocite{pkg:lscape,pkg:pdflscape,pkg:koma-script}
+  \DocInput{lscapeenhanced.dtx}
+\end{document}
+%</dtx>
+%\fi
+%
+% \changes{v0.1}{2023/06/01}{start of \KOMAScript{} spin-off}
+%
+% \GetFileInfo{lscapeenhanced.dtx}
+% \title{Improving ``\pkg{lscape}'' and ``\pkg{pdflscape}''}
+% \author{\href{mailto:komascript@gmx.info}{Markus Kohm}}
+% \date{Version \filedate{} \fileversion}
+% \maketitle
+% \begin{abstract}
+%   Package \pkg*{lscapeenhanced} has started as hack module of the
+%   \KOMAScript{} package \pkg*{scrhack} years ago to fix an issue when using
+%   package \pkg{lscape} with \KOMAScript{} packages \pkg{scrlayer} or
+%   \pkg{scrlayer-scrpage}.  This became necessary because package
+%   \pkg{lscape} has a somehow strange handling of \len{textheight}
+%   resp. \len{textwidth} at landscape pages. This is not only an issue with
+%   \KOMAScript{} but also other packages, e.g., \pkg{showframe}. Package
+%   \pkg*{lscapeenhanced} solved this issue. This is a really small change and
+%   best would be, if the \pkg*{lscape} author would at least include this
+%   change optionally.
+% \end{abstract}
+%
+% \tableofcontents
+%
+%\iffalse
+%<*doc>
+%\fi
+\section{What is the Potential Issue With
+  \texorpdfstring{\pkg{lscape}}{lscape}?}
+\label{sec:why}
+
+The \pkg{lscape} package defines a \env{landscape} environment to set the page
+contents, but not the header or footer in landscape mode. Inside this
+environment, \len{textheight} is set to the value of \len{textwidth}, but
+\len{textwidth} is not set to the former value of \len{textheight}. This is
+inconsistent. As far as I know, \len{textwidth} is left unchanged because
+setting it to \len{textheight} could interfere with other packages or user
+commands. But changing \len{textheight} also has this potential, and indeed it
+breaks, for example, \pkg{showframe} and \pkg{scrlayer} and in consequence
+also \pkg{scrlayer-scrpage}. Thus it would be best if \len{textheight} too
+remained unchanged. \pkg*{lscapeenhanced} uses the \pkg{xpatch} package (see
+\autocite{pkg:xpatch}) to modify the \env{landscape} environment's start macro
+\cs{landscape} appropriately.
+
+Incidentally, the \pkg{pdflscape} package also uses \pkg{lscape}, so
+\pkg*{lscapeenhanced} affects the functioning of this package too.
+
+\section{How to use \texorpdfstring{\pkg*{lscapeenhanced}}{lscapeenhanced}}
+\label{sec:howtouse}
+
+In the document preamble of your document you just can replace
+\begin{verbatim}
+  \usepackage{lscape}
+\end{verbatim}
+by
+\begin{verbatim}
+  \usepackage{lscapeenhanced}
+\end{verbatim}
+to load package \pkg*{lscapeenhanced}. This does still also load package
+\pkg{lscape} but additionally patches one command of \pkg{lscape} to avoid
+the issues shown in \autoref{sec:why}.
+
+If you want you can alternatively also load both packages explicitly, either
+\pkg{lscape} before \pkg*{lscapeenhanced} or---if you
+want---\pkg*{lscapeenhanced} before \pkg{lscape}. This is also useful, if you
+use a package, that uses \pkg{lscape} itself, i.e., \pkg{pdflscape}.
+
+\DescribeOption{pdflscape}%
+In case of \pkg{pdflscape} you can alternatively replace
+\begin{verbatim}
+  \usepackage{pdflscape}
+\end{verbatim}
+by
+\begin{verbatim}
+  \usepackage[pdflscape]{lscapeenhanced}
+\end{verbatim}
+in which case \pkg*{lscapeenhanced} would load \pkg{pdflscape}.
+
+When using a class that uses \pkg{lscape}, the correct operation can be
+ensured with
+\begin{verbatim}
+  \AddToHook{package/lscape/after}{\RequirePackage{lscapeenhanced}}
+\end{verbatim}
+even before \cs{documentclass}. This requires at least \LaTeX{}
+2020/10/01. For older versions of \LaTeX{} you can use
+\begin{verbatim}
+  \RequirePackage{scrlfile}
+  \AfterPackage{lscape}{\RequirePackage{lscapeenhanced}}
+\end{verbatim}
+also before \cs{documentclass}. This would require the \KOMAScript{} package
+\pkg{scrlfile}\nocite{pkg:scrlfile}.
+
+The user interface of \pkg*{lscapeenhanced} is the same as of \pkg{lscape}
+resp. \pkg{pdflscape}, see \autocite{pkg:lscape:manual}. The only difference
+is, that the issue explained in \autoref{sec:why} has been fixed.
+
+\DescribeOption{lscape}
+To deactivate the changes of \pkg*{lscapeenhanced} you can use option
+\opt{lscape=false}. This option can also be changed using
+\begin{verbatim}
+  \SetKeys[lscapeenhanced]{lscape=false}
+\end{verbatim}
+or
+\begin{verbatim}
+  \SetKeys[lscapeenhanced]{lscape=true}
+\end{verbatim}
+after loading the package.
+%
+% \iffalse
+%</doc>
+% \fi
+%
+% \MaybeStop{\printbibliography[heading=bibintoc]\PrintIndex}
+%
+% \iffalse
+%<*package>
+% \fi
+% \section{Implementation}
+%
+% \pkg*{lscapeenhanced} uses the new \LaTeX{} kernel feature of
+% key-value-options introduced in \autocite{latexnews35}. So we need at least
+% \LaTeX{} 2022-06-01:
+%    \begin{macrocode}
+\ifnum 0=\ifcsname IfFormatAtLeastTF\endcsname
+    \IfFormatAtLeastTF{2022-06-01}{1}{0}%
+  \else
+    0%
+  \fi\relax
+  \PackageError{lscapeenhanced}{LaTeX kernel too old}{%
+    The package needs at least LaTeX 2022-06-01.\MessageBreak
+    This error is fatal. Loading will be aborted.%
+  }%
+  \endinput
+\fi
+\ExplSyntaxOn
+%    \end{macrocode}
+%
+% \begin{option}{pdflscape}
+% \begin{macro}{\@lscapeenhanced@req@packages}
+% If the option is used (without value!) is just changed the macro
+% indicating the package that should also be loaded. Package authors also
+% could also define the internal macro \cs{@lscapeenhanced@req@packages}.
+%    \begin{macrocode}
+\providecommand*{\@lscapeenhanced@req@packages}{lscape}
+\DeclareKeys{%
+  pdflscape .code              = {
+    \renewcommand*{\@lscapeenhanced@req@packages}{lscape,pdflscape}
+                                 },
+  pdflscape .usage             = load,
+  pdflscape .value_forbidden:n = true
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{option}
+%
+% \begin{option}{lscape}
+% \begin{macro}{\if@lscapeenhanced@lscape}
+% A switch to allow to activate and deactivate usage of the change.
+%    \begin{macrocode}
+\newif\if@lscapeenhanced@lscape \@lscapeenhanced@lscapetrue
+\DeclareKeys{%
+  lscape .if    = @lscapeenhanced@lscape,
+  lscape.usage  = general,
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{option}
+%
+% Processing the options:
+%    \begin{macrocode}
+\ExplSyntaxOff
+\ProcessKeyOptions\relax
+%    \end{macrocode}
+%
+% Now we can request the base package(s):
+%    \begin{macrocode}
+\expandafter\RequirePackage\expandafter{\@lscapeenhanced@req@packages}
+%    \end{macrocode}
+%
+% As often as possible, we do not redefine macros of \pkg{lscape}, but patch
+% them using \pkg{xpatch}:
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+%    \end{macrocode}
+%
+% \begin{command}{\landscape}
+% This command is the beginning of environment \env{landscape}. This has to be
+% patched using \pkg{xpatch}.
+%    \begin{macrocode}
+\xpatchcmd{\landscape}{\textheight=\vsize}{%
+  \if@lscapeenhanced@lscape
+%    \end{macrocode}
+% \begin{macro}{\@outputpage,\@lscapeenhanced@outputpage}
+% \begin{ilength}{\@lscapeenhanced@textheight}
+% Here the changed value of \len{textheight} is needed for initialization of
+% \cs{@colht}. So we patch it to use the new internal
+% \len{@lscapeenhanced@textheight} instead of \len{textheight}.
+%    \begin{macrocode}
+    \@lscapeenhanced@textheight=\vsize
+    \let\@lscapeenhanced@outputpage\@outputpage
+    \def\@outputpage{%
+      \@lscapeenhanced@outputpage\global\@colht\@lscapeenhanced@textheight
+    }% 
+  \else
+    \textheight=\vsize
+  \fi
+}{%
+  \PackageInfo{lscapeenhanced}{\string\landscape\space patched to make
+    \string\textheight\space change optional}%
+}{%
+  \PackageWarning{lscapeenhanced}{Cannot patch \string\landscape!\MessageBreak
+    Maybe you are using a unsupported lscape version}%
+  \@lscapeenhanced@lscapefalse
+}
+\newlength{\@lscapeenhanced@textheight}
+%    \end{macrocode}
+% \end{ilength}
+% \end{macro}
+% \end{command}
+%
+% \iffalse
+%</package>
+% \fi
+%
+% \Finale
+% \PrintChanges
+%  
+% \endinput
+% Local Variables:
+% mode: doctex
+% ispell-local-dictionary: "en_US"
+% eval: (flyspell-mode 1)
+% TeX-master: t
+% eval: (setcar (or (cl-member "Index" (setq-local TeX-command-list (copy-alist TeX-command-list)) :key #'car :test #'string-equal) (setq-local TeX-command-list (cons nil TeX-command-list))) '("Index" "mkindex %s" TeX-run-index nil t :help "makeindex for dtx"))
+% End:

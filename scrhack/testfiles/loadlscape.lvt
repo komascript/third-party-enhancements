@@ -1,0 +1,26 @@
+% Testfile
+% Tests:
+% * does the automatic loading of lscapeenhanced work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}
+\START
+\TEST{Does setting true again work without error (should be empty?}{%
+  \SetKeys[scrhack]{lscape=true}%
+}
+\TEST{Does setting without value work without error (should be empty)?}{%
+  \SetKeys[scrhack]{lscape}%
+}
+\OMIT
+\usepackage{lscape}
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\TIMO
+\TEST{Has lscapeenhanced been loaded automatically (should be YES)?}{%
+  \typeout{\IfPackageLoadedTF{lscapeenhanced}{YES}{NO}}%
+}
+\END
+\begin{document}
+\end{document}
+

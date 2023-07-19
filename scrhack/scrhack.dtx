@@ -272,6 +272,11 @@ corresponding package.
   \pkg{listingsbytocbasic} to fix the issue explained in
   \autoref{sec:history}. This also provides the full functionality of
   \pkg{tocbasic} to \pkg{listings}.
+\item[\opt{lscape=\meta{boolean}}:] \hfill
+  initial: \optvalue{true}, default: \optvalue{true}\\
+  After package \pkg{lscape} is loaded, load also package
+  \pkg{lscapeenhanced} to fix an issue with detection of text height for
+  some packages like \pkg{scrlayer} and \pkg{showframe}.
 \end{description}
 
 \paragraph{Available options with the legacy version:}
@@ -680,6 +685,76 @@ corresponding package.
       }
   }
 \SetKeys{listings=true}
+%    \end{macrocode}
+% \end{macro}
+% \ExplSyntaxOff
+%
+% \subsection{Emulating \file{lscape.hak}}
+% First we declare the options using the new key-value interface:
+%    \begin{macrocode}
+\DeclareKeys{%
+  lscape .code      = \@@_switch_lscape:n { #1 },
+  lscape .default:n = true,
+  lscape .usage     = preamble,
+}
+%    \end{macrocode}
+%
+% \ExplSyntaxOn
+% \begin{macro}{\__scrhack_switch_lscape:n}
+% \ExplSyntaxOff
+% This is used to switch the state and add or remove the hook if needed. A new
+% boolean is used to know, whether the hook has been put. Using
+% \opt{lscape=true}, if package \pkg{lscapeenhanced} already has been
+% loaded isn't a foul. So we just write an information to the \file{log}. But
+% using \opt{lscape=false}, if package \pkg{lscapeenhanced} already has
+% been loaded may be wrong. So we use a warning message. We also warn if a not
+% allowed value is used.
+%    \begin{macrocode}
+\bool_new:N \@@_lscape_bool
+
+\cs_new:Nn \@@_switch_lscape:n
+  {
+    \str_case_e:nnF { \str_foldcase:n { #1 } }
+      {
+        {true}  {
+                  \@ifpackageloaded { lscapeenhanced }
+                    {
+                      \msg_info:nnnn { scrhack } { option-too-late }
+                        { lscape = true } { lscapeenhanced }
+                    }
+                    {
+                      \bool_if:NF \@@_lscape_bool
+                        {
+                          \hook_gput_code:nnn { package/lscape/after }
+                                              { scrhack }
+                            {
+                              \RequirePackage { lscapeenhanced }
+                            }
+                          \bool_gset_true:N \@@_lscape_bool
+                        }  
+                    }
+                }
+        {false} {
+                  \@ifpackageloaded { lscapeenhanced }
+                    {
+                      \msg_warning:nnnn { scrhack } { option-too-late }
+                        { lscape=false } { lscapeenhanced }
+                    }
+                    {
+                      \bool_if:NT \@@_lscape_bool
+                        {
+                          \hook_gremove_code:nn { package/lscape/after }
+                                                { scrhack }
+                        }
+                      \bool_gset_false:N \@s@_lscape_bool
+                    }
+                }
+      }
+      {
+        \msg_warning:nnn { keys } { boolean-values-only } { lscape }
+      }
+  }
+\SetKeys{lscape=true}
 %    \end{macrocode}
 % \end{macro}
 % \ExplSyntaxOff

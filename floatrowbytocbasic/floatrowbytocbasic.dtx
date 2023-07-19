@@ -81,6 +81,26 @@
             The \pkg*{floatrow} package borrows core code from the \pkg{float}
             and \pkg{rotfloat} packages, so you must not load these packages.},
 }
+@online{pkg:xpatch,
+  author   = {Enrico Gregorio},
+  version  = {0.3},
+  date     = {2020-03-25},
+  title    = {\pkg*{xpatch} – Extending \pkg{etoolbox} patching commands},
+  url      = {https://ctan.org/pkg/xpatch},
+  urldate  = {2023-07-19},
+  note     = {The package generalises the macro patching commands provided
+              by Philipp Lehmann's \pkg{etoolbox}.},
+}
+@manual{pkg:xpatch:manual,
+  author   = {Enrico Gregorio},
+  version  = {0.3},
+  date     = {2020-03-25},
+  title    = {The \pkg*{xpatch} package
+              extending \pkg{etoolbox} patching commands},
+  url      = {http://mirrors.ctan.org/macros/latex/contrib/xpatch/xpatch.pdf},
+  urldate  = {2023-07-19},
+  abstract = {},
+}
 @online{pkg:koma-script,
   author={Markus Kohm},
   version={3.41},
@@ -225,7 +245,7 @@ Package \pkg{tocbasic} provides several additional features, e.g.:
 \end{itemize}
 Several more features can be added by the class or other packages. See section
 about \pkg*{tocbasic} in the \KOMAScript{} manual, either
-\cite{pkg:koma-script:manual:en} or \cite{pkg:koma-script:manual:de}.
+\autocite{pkg:koma-script:manual:en} or \autocite{pkg:koma-script:manual:de}.
 
 \section{How to use
   \texorpdfstring{\pkg*{floatrowbytocbasic}}{floatrowbytocbasic}}
@@ -336,7 +356,7 @@ resp. \autocite{pkg:koma-script:manual:de}.
 %    \end{macrocode}
 %
 % As often as possible, we do not redefine macors of \pkg{floatrow}, but patch
-% them using \pkg{xpatch}\nocite{xpatch}:
+% them using \pkg{xpatch}\nocite{pkg:xpatch}:
 %    \begin{macrocode}
 \RequirePackage{xpatch}
 %    \end{macrocode}

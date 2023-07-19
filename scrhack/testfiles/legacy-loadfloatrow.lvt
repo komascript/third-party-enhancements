@@ -1,16 +1,16 @@
 % Testfile for the legacy version
 % Tests:
-% * does the automatic loading of floatrowbytocbasic work?
+% * does the automatic loading of floatrow.hak work?
 \input regression-test.tex
 \documentclass{article}
 \usepackage{scrhack}[=v3.41]
 \usepackage{floatrow}
 \makeatletter
-\let\IfPackageLoadedTF\@ifpackageloaded
+\newcommand*{\IfHackLoadedTF}{\@ifl@aded{hak}}
 \makeatother
 \START
-\TEST{Has floatrowbytocbasic been loaded automatically (should be YES)?}{%
-  \typeout{\IfPackageLoadedTF{floatrowbytocbasic}{YES}{NO}}%
+\TEST{Has floatrow.hak been loaded automatically (should be YES)?}{%
+  \typeout{\IfHackLoadedTF{floatrow}{YES}{NO}}%
 }
 \END
 \begin{document}

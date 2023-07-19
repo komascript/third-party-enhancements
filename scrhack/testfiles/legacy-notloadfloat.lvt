@@ -1,16 +1,16 @@
 % Testfile for the legacy version
 % Tests:
-% * does preventing the automatic loading of floatbytocbasic work?
+% * does preventing the automatic loading of float.hak work?
 \input regression-test.tex
 \documentclass{article}
 \usepackage[float=false]{scrhack}[=v3.41]
 \usepackage{float}
 \makeatletter
-\let\IfPackageLoadedTF\@ifpackageloaded
+\newcommand*{\IfHackLoadedTF}{\@ifl@aded{hak}}
 \makeatother
 \START
-\TEST{Has floatbytocbasic been loaded automatically (should be NO)?}{%
-  \typeout{\IfPackageLoadedTF{floatbytocbasic}{YES}{NO}}%
+\TEST{Has float.hak been loaded automatically (should be NO)?}{%
+  \typeout{\IfHackLoadedTF{float}{YES}{NO}}%
 }
 \END
 \makeatletter

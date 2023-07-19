@@ -1,0 +1,18 @@
+% Testfile for the legacy version
+% Tests:
+% * does the automatic loading of listings.hak work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}[=v3.41]
+\usepackage{listings}
+\makeatletter
+\newcommand*{\IfHackLoadedTF}{\@ifl@aded{hak}}
+\makeatother
+\START
+\TEST{Has listings.hak been loaded automatically (should be YES)?}{%
+  \typeout{\IfHackLoadedTF{listings}{YES}{NO}}%
+}
+\END
+\begin{document}
+\end{document}
+

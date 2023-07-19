@@ -26,7 +26,10 @@
 --       to the scrhack package and may therefore require a new release
 --       of scrhack.
 
-modules = { "scrhack", "floatbytocbasic", "floatrowbytocbasic" }
+modules = { "scrhack",
+	    "floatbytocbasic",
+	    "floatrowbytocbasic",
+	    "listingsbytocbasic" }
 
 -- Packaging for and upload to CTAN ----------------------------------------
 -- Note: You never should package or upload from here!

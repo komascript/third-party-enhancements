@@ -55,6 +55,9 @@ standalone packages. Currently these are:
 * `floatrowbytocbasic` — an enhancement to package
   [`floatrow`](https://ctan.org/pkg/float) using package
   [`tocbasic`](https://ctan.org/pkg/tocbasic).
+* `listingsbytocbasic` — an enhancement to package
+  [`listings`](https://ctan.org/pkg/listings) using package
+  [`tocbasic`](https://ctan.org/pkg/tocbasic).
   
 There is also a `build.lua` for `l3build` in the main folder. However, this
 can be used only to do all the checks using:

@@ -1,0 +1,26 @@
+% Testfile
+% Tests:
+% * does the automatic loading of listingsbytocbasic work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}
+\START
+\TEST{Does setting true again work without error (should be empty?}{%
+  \SetKeys[scrhack]{listings=true}%
+}
+\TEST{Does setting without value work without error (should be empty)?}{%
+  \SetKeys[scrhack]{listings}%
+}
+\OMIT
+\usepackage{listings}
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\TIMO
+\TEST{Has listingsbytocbasic been loaded automatically (should be YES)?}{%
+  \typeout{\IfPackageLoadedTF{listingsbytocbasic}{YES}{NO}}%
+}
+\END
+\begin{document}
+\end{document}
+

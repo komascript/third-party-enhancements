@@ -1,0 +1,22 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Does using option nomencl without value result in a warning (should)?
+============================================================
+Package scrhack Warning: deprecated option `nomencl=true' ignored.
+============================================================
+============================================================
+TEST 2: Does using option nomencl with value true result in a warning (should)?
+============================================================
+Package scrhack Warning: deprecated option `nomencl=true' ignored.
+============================================================
+============================================================
+TEST 3: Does using option nomencl with value TRUE result in a warning (should)?
+============================================================
+Package scrhack Warning: deprecated option `nomencl=TRUE' ignored.
+============================================================
+============================================================
+TEST 4: Does using option nomencl with value false result in an info (should)?
+============================================================
+Package scrhack Info: deprecated option `nomencl=false' ignored.
+============================================================

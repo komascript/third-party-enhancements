@@ -1,0 +1,22 @@
+% Testfile
+% Tests:
+% * what happens, if the nomencl option is used?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}
+\START
+\TEST{Does using option nomencl without value result in a warning (should)?}{%
+  \SetKeys[scrhack]{nomencl}%
+}
+\TEST{Does using option nomencl with value true result in a warning (should)?}{%
+  \SetKeys[scrhack]{nomencl=true}%
+}
+\TEST{Does using option nomencl with value TRUE result in a warning (should)?}{%
+  \SetKeys[scrhack]{nomencl=TRUE}%
+}
+\TEST{Does using option nomencl with value false result in an info (should)?}{%
+  \SetKeys[scrhack]{nomencl=false}%
+}
+\END
+\begin{document}
+\end{document}

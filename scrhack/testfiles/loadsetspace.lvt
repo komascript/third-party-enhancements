@@ -1,0 +1,30 @@
+% Testfile
+% Tests:
+% * does the automatic loading of setspacebytocbasic work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}
+\START
+\TEST{Does setting true again work without error (should be empty?}{%
+  \SetKeys[scrhack]{setspace=true}%
+}
+\TEST{Does setting without value work without error (should be empty)?}{%
+  \SetKeys[scrhack]{setspace}%
+}
+\OMIT
+\usepackage[onehalfspacing]{setspace}
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\TIMO
+\TEST{Has setspacebytocbasic been loaded automatically (should be YES)?}{%
+  \typeout{\IfPackageLoadedTF{setspaceenhanced}{YES}{NO}}%
+  \typeout{\string\baselinestretch\space is \baselinestretch}%
+  \typeout{\expandafter\string\csname __setspaceenhanced_fp\endcsname\space is
+           \csname fp_to_decimal:N\expandafter\endcsname
+	   \csname __setspaceenhanced_fp\endcsname}%
+}
+\END
+\begin{document}
+\end{document}
+

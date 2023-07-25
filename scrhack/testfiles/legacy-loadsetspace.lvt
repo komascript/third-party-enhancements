@@ -1,0 +1,19 @@
+% Testfile for the legacy version
+% Tests:
+% * does the automatic loading of setspace.hak work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}[=v3.41]
+\usepackage[onehalfspacing]{setspace}
+\makeatletter
+\newcommand*{\IfHackLoadedTF}{\@ifl@aded{hak}}
+\makeatother
+\START
+\TEST{Has setspace.hak been loaded automatically (should be YES)?}{%
+  \typeout{\IfHackLoadedTF{setspace}{YES}{NO}}%
+  \typeout{\string\baselinestretch\space is \baselinestretch}%
+}
+\END
+\begin{document}
+\end{document}
+

@@ -1,0 +1,18 @@
+% Testfile for the legacy version
+% Tests:
+% * does preventing the automatic loading of setspace.hak work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage[setspace=false]{scrhack}[=v3.41]
+\usepackage{setspace}
+\makeatletter
+\newcommand*{\IfHackLoadedTF}{\@ifl@aded{hak}}
+\makeatother
+\START
+\TEST{Has setspace.hak been loaded automatically (should be NO)?}{%
+  \typeout{\IfHackLoadedTF{setspace}{YES}{NO}}%
+}
+\END
+\makeatletter
+\begin{document}
+\end{document}

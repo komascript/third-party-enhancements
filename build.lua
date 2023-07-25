@@ -30,7 +30,8 @@ modules = { "scrhack",
 	    "floatbytocbasic",
 	    "floatrowbytocbasic",
 	    "listingsbytocbasic",
-            "lscapeenhanced" }
+            "lscapeenhanced",
+            "setspaceenhanced" }
 
 -- Packaging for and upload to CTAN ----------------------------------------
 -- Note: You never should package or upload from here!

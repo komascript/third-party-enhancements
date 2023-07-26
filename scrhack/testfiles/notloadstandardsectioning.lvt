@@ -1,0 +1,17 @@
+% Testfile
+% Tests:
+% * does not automatic loading of standardsectioning work?
+\input regression-test.tex
+\documentclass{article}
+\usepackage{scrhack}
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\START
+\TEST{Has standardsectioning been loaded automatically (should be NO)?}{%
+  \typeout{\IfPackageLoadedTF{standardsectioning}{YES}{NO}}%
+}
+\END
+\makeatletter
+\begin{document}
+\end{document}

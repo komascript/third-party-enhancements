@@ -1,0 +1,17 @@
+% Testfile for the legacy version
+% Tests:
+% * does the automatic loading of standardsections.hak work?
+\input regression-test.tex
+\documentclass{scrartcl}
+\usepackage[standardsections]{scrhack}[=v3.41]
+\makeatletter
+\newcommand*{\IfHackLoadedTF}{\@ifl@aded{hak}}
+\makeatother
+\START
+\TEST{Has standardsections.hak been loaded automatically (should be YES)?}{%
+  \typeout{\IfHackLoadedTF{standardsections}{YES}{NO}}%
+}
+\END
+\begin{document}
+\end{document}
+

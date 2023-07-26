@@ -1,0 +1,22 @@
+% Testfile
+% Tests:
+% * does not automatic loading of standardsections work?
+\input regression-test.tex
+\RequirePackage[standardsections]{scrhack}
+\documentclass{scrartcl}
+\START
+\TEST{Does setting true again work without error (should be empty?}{%
+  \SetKeys[scrhack]{standardsections=true}%
+}
+\OMIT
+\makeatletter
+\let\IfPackageLoadedTF\@ifpackageloaded
+\makeatother
+\TIMO
+\TEST{Has standardsectioning been loaded automatically (should be YES)?}{%
+  \typeout{\IfPackageLoadedTF{standardsectioning}{YES}{NO}}%
+}
+\END
+\begin{document}
+\end{document}
+

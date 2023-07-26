@@ -297,6 +297,14 @@ corresponding package.
   After package \pkg{setspace} is loaded, load also package
   \pkg{setspaceenhanced} with the same options plus options \opt{byselectfont}
   and \opt{fontsize}.
+\item[\opt{standardsectioning=\meta{boolean}}:]
+  \DescribeOption[noprint]{standardsectioning=\meta{boolean}}%
+  \hfill initial: \optvalue{false}, default: \optvalue{true}\\
+  Define the sectioning commands of the standard classes using the code from
+  the standard classes. If \pkg*{scrhack} is loaded \emph{before} any
+  class\footnote{This is detected heuristic by definition of
+    \cs{normalsize}. If \cs{normalsize} contains \cs{@latex@error} no class
+    has been loaded.} the definition is delayed until a class has been loaded.
 \end{description}
 
 \paragraph{Available options with the legacy version:}
@@ -889,6 +897,94 @@ corresponding package.
       }
   }
 \SetKeys{setspace=true}
+%    \end{macrocode}
+% \end{macro}
+% \ExplSyntaxOff
+%
+% \subsection{Emulating \file{standardsectioning.hak}}
+% First we declare the options using the new key-value interface:
+%    \begin{macrocode}
+\DeclareKeys{%
+  standardsections .code      = \@@_switch_standardsectioning:n { #1 },
+  standardsections .default:n = true,
+  standardsections .usage     = preamble,
+}
+%    \end{macrocode}
+%
+% \ExplSyntaxOn
+% \begin{macro}{\__scrhack_switch_standardsectioning:n}
+% \ExplSyntaxOff
+% This is used to switch the state and add or remove the hook if needed. A new
+% boolean is used to know, whether the hook has been put. Using
+% \opt{standardsectioning=true}, if package \pkg{standardsectioning}
+% already has been loaded isn't a foul. So we just write an information to the
+% \file{log}. But using \opt{standardsectioning=false}, if package
+% \pkg{standardsectioning} already has been loaded may be wrong. So
+% we use a warning message. We also warn if a not allowed value is used.
+%    \begin{macrocode}
+\bool_new:N \@@_standardsectioning_bool
+
+\cs_new:Nn \@@_switch_standardsectioning:n
+  {
+    \str_case_e:nnF { \str_foldcase:n { #1 } }
+      {
+        {true}  {
+                  \@ifpackageloaded { standardsectioning }
+                    {
+                      \msg_info:nnnn { scrhack } { option-too-late }
+                        { standardsectioning = true } { standardsectioning }
+                    }
+                    {
+                      \bool_if:NF \@@_standardsectioning_bool
+                        {
+                          \str_set:Nx \l_tmpa_str { \cs_meaning:N \normalsize }
+                          \str_if_in:NnTF
+                            \l_tmpa_str
+                            { \@latex@error }
+                            {
+                              \hook_gput_code:nnn { class/after } { scrhack }
+                                {
+                                  \RequirePackage { standardsectioning }
+                                  \exp_args:Nnnx \hook_gput_code:nnn
+                                    { begindocument/before } { scrhack }
+                                    {
+                                      \exp_not:N \cs_gset:Npn
+                                      \exp_after:wN \exp_not:N
+                                      \cs:w ver@standardsectioning.sty \cs_end:
+                                        {
+                                          \cs:w ver@standardsectioning.sty \cs_end:
+                                        }
+                                    }
+                                  \cs_undefine:c { var@standardsectioning.sty }  
+                                }
+                              \bool_gset_true:N \@@_standardsectioning_bool
+                            }
+                            {
+                              \RequirePackage{ standardsectioning }
+                              \bool_gset_false:N \@@_standardsectioning_bool
+                            }
+                        }  
+                    }
+                }
+        {false} {
+                  \@ifpackageloaded { standardsectioning }
+                    {
+                      \msg_warning:nnnn { scrhack } { option-too-late }
+                        { standardsectioning=false } { standardsectioning }
+                    }
+                    {
+                      \bool_if:NT \@@_standardsectioning_bool
+                        {
+                          \hook_gremove_code:nn { class/after } { scrhack }
+                        }
+                      \bool_gset_false:N \@s@_standardsectioning_bool
+                    }
+                }
+      }
+      {
+        \msg_warning:nnn { keys } { boolean-values-only } { standardsectioning }
+      }
+  }
 %    \end{macrocode}
 % \end{macro}
 % \ExplSyntaxOff

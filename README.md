@@ -45,7 +45,7 @@ new standalone packages.
 # Organization
 
 The project consists of several sub-folders. Each of these hosts one of the
-standalone packages. Currently these are:
+standalone packages. These are:
 
 * `scrhack` — compatibility package to emulate the former KOMA-Script package
   `scrhack`.
@@ -63,6 +63,8 @@ standalone packages. Currently these are:
   [`pdflscape`](https://ctan.org/pkg/pdflscape).
 * `setspaceenhanced` — an enhancement to package
   [`setspace`](https://ctan.org/pkg/lscape).
+* `standardsectioning` — defining the sectioning commands of the standard
+  classes.
 
 There is also a `build.lua` for `l3build` in the main folder. However, this
 can be used only to do all the checks using:

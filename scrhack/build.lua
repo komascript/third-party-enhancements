@@ -19,7 +19,7 @@
 
 release_info = "2023-07-19 v3.42"
 -- Bundle and modules ------------------------------------------------------
--- Note: It is intended to release the previous hacks as standalone
+-- Note: It is intended to release the former hacks as standalone
 --       packages. Therefore, there is no bundle, although changes to
 --       the individual packages may also result in changes to
 --       the scrhack package and may therefore require a new release

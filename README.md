@@ -2,7 +2,7 @@
 
 Copyright © 2023 Markus Kohm <komascript at gmx.info>
 
-Release: unreleased
+Release: See the `README.md` of the individual packages.
 
 License: LPPL 1.3c
 
@@ -67,11 +67,13 @@ standalone packages. These are:
   classes.
 
 There is also a `build.lua` for `l3build` in the main folder. However, this
-can be used only to do all the checks using:
+should be used only to do all the checks using:
 
     l3build check
+
+or do a local installation of all the packages.
 	
-*You should not use it for unpacking, installation, distribution etc.* See the
+*You should not use it for distribution, uploading etc.* See the
 following section for more information.
 
 # Unpacking and Installation for Developers and Distributors
@@ -84,17 +86,17 @@ come with the next KOMA-Script release.
 *For now, distributors should just ignore this project.*
 
 Developers can use `l3build` to unpack and install all files and even the
-documentation. But this cannot be done with a single `l3build` run for all of
-the packages. Instead you have to go to the sub-folder of the package you want
-to install and run
+documentation. This can be done either with a single `l3build` run for all of
+the packages from the main directory. Instead you can also go to a
+sub-directory of a single package you want to install and run
 
     l3build install
 	
-to locally install the package of the sub-folder without manuals, or run
+to locally install the package of the sub-directory without manuals, or run
 
     l3build install --full
 	
-to locally install the package of the sub-folder with manuals.
+to locally install the package of the sub-directory with manuals.
 
 # Unpacking and Installation for Users
 

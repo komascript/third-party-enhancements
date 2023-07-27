@@ -45,15 +45,6 @@ patching and extending package [`lscape`](https://ctan.org/pkg/lscape) resp.
 
 # Unpacking and Installation for Developers and Distributors
 
-Currently distributors should still use the official release as part of
-[KOMA-Script](https://www.sourceforge.net/project/koma-script). The first
-official release of the new emulator package will hopefully come with the next
-KOMA-Script release.
-
-*For now, distributors should just ignore this project.*
-
-# Unpacking and Installation for Developers and Distributors
-
 Distributors should be aware that there is no official release of the new
 standalone packages `lscapeenhanced` yet. There is only a developer
 version. The first official release will hopefully come with the next

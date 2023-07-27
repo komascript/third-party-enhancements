@@ -42,15 +42,6 @@ do just that.
 
 # Unpacking and Installation for Developers and Distributors
 
-Currently distributors should still use the official release as part of
-[KOMA-Script](https://www.sourceforge.net/project/koma-script). The first
-official release of the new emulator package will hopefully come with the next
-KOMA-Script release.
-
-*For now, distributors should just ignore this project.*
-
-# Unpacking and Installation for Developers and Distributors
-
 Distributors should be aware that there is no official release of any of the
 new standalone packages or the new standalone `scrhack` yet. There are only
 developer versions of some parts. The first official release will hopefully

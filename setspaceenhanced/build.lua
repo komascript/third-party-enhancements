@@ -17,7 +17,7 @@
          setspaceenhanced.
 ]]
 
-release_info = "2023-07-15 v0.1"
+release_info = "2023-07-28 v0.1"
 
 -- Bundle and modules
 
@@ -68,16 +68,16 @@ function update_tag (file,content,tagname,tagdate)
    content = string.gsub (content, tagyear .. "–" .. tagyear, tagyear)
   if string.match (file, "%.dtx$") then
       return string.gsub (content,
-                          "%[%d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+",
-                          "[" .. tagdate .. " v" .. tagname)
+                          "  %{%d%d%d%d%-%d%d%-%d%d%}%{[%d%.]*%d+%}%s*\n",
+                          "  {" .. tagdate .. "}{" .. tagname .. "}\n" )
    elseif string.match (file, "%.md$") then
       return string.gsub (content,
                           "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+  \n",
                           "\nRelease: " .. tagdate .. " v" .. tagname .. "  \n")
    elseif string.match (file, "%.lua$") then
       return string.gsub (content,
-                          '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"%s*\n',
-                          '\nrelease_info = "' .. tagdate .. " v" .. tagname .. '"\n')
+                          '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"',
+                          '\nrelease_info = "' .. tagdate .. " v" .. tagname .. '"')
    end
    return content
 end

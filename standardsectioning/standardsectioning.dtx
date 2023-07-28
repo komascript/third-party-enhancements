@@ -37,21 +37,20 @@
 % ======================================================================
 %
 %<*dtx>
-\ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
-\ProvidesFile{standardsectioning.dtx}[%
+\ifx\ProvidesExplFile\undefined\def\ProvidesExplFile#1#2#3#4{}\fi
+\ProvidesFile{standardsectioning.dtx}
 %</dtx>
 %<*dtx|package>
-%<package>\ProvidesExplPackage{standardsectioning}{%
-  2023-07-26
-%<package>}{%
-  0.1
-%<package>}{%
-%<dtx> sources and unpack driver of
-  re-implementation of deprecated KOMA-Script code%
-%<package>}
+%<package>\ProvidesExplPackage{standardsectioning}
+  {2023-07-28}{0.1}
+  {%
+%<*dtx>
+    sources and unpack driver of
+%</dtx>
+    re-implementation of deprecated KOMA-Script code%
+  }
 %</dtx|package>
 %<*dtx>
-]
 \ifx\documentclass\undefined
   \input docstrip.tex
   \generate{%
@@ -60,7 +59,7 @@
     }%
   }%
 \else
-  \let\endbatchfile\relax
+  \let\endbatchfile\ExplSyntaxOff
 \fi
 \endbatchfile
 \documentclass[ngerman,USenglish]{koma-script-source-doc}

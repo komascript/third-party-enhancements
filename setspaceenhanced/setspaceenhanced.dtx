@@ -29,24 +29,20 @@
 % ======================================================================
 %
 %<*dtx>
-\ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
-\ProvidesFile{setspaceenhanced.dtx}[%
+\ifx\ProvidesExplFile\undefined\def\ProvidesExplFile#1#2#3#4{}\fi
+\ProvidesExplFile{setspaceenhanced.dtx}
 %</dtx>
 %<*dtx|package>
-%<package>\ProvidesExplPackage{setspaceenhanced}{%
-  2023-07-24
-%<package> }{%
+%<package>\ProvidesExplPackage{setspaceenhanced}
+  {2023-07-28}{0.1}
+  {%
 %<*dtx>
-  v%
+    sources and unpack driver of
 %</dtx>
-  0.1
-%<package>}{%
-%<dtx> sources and unpack driver of
-  improved setspace package%
-%<package>}
+    improved setspace package%
+  }
 %</dtx|package>
 %<*dtx>
-]
 \ifx\documentclass\undefined
   \input docstrip.tex
   \generate{%
@@ -55,7 +51,7 @@
     }%
   }%
 \else
-  \let\endbatchfile\relax
+  \let\endbatchfile\ExplSyntaxOff
 \fi
 \endbatchfile
 \documentclass[ngerman,USenglish]{koma-script-source-doc}

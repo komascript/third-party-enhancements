@@ -440,6 +440,8 @@ resp. \autocite{pkg:koma-script:manual:de}.
   }{%
     \addtotoclist[float]{\@nameuse{ext@\FB@captype}}%
   }%
+  \xdef\@tempa{\noexpand\flrow@types{\the\flrow@types \FR@tmp{#1}}}%
+  \@tempa
 }{}{%
   \floatrowbytocbasic@incompatibility@error{DeclareNewFloatType}%
 }
@@ -460,7 +462,7 @@ resp. \autocite{pkg:koma-script:manual:de}.
 }{}{%
   \floatrowbytocbasic@incompatibility@error{DeclareNewFloatType}%
 }  
-\xpatchcmd{\DeclareNewFloatType}{%
+\xpatchcmd{\DeclareFloatType}{%
   \@namedef{l@#1}{\@dottedtocline{1}{1.5em}{2.3em}}%
 }{%
   \@ifundefined{l@#1}{\expandafter\let\csname l@#1\endcsname\l@figure

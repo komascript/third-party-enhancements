@@ -238,7 +238,7 @@ can avoid it using \pkg{floatrowbytocbasic} as explained in
 \label{sec:whywithoutkomascript}
 
 Package \pkg{floatrow} does not check if a file extension or environment
-already has been defined when using \cs{DeclareNewFloatTape}. So several
+already has been defined when using \cs{DeclareNewFloatType}. So several
 definitions of float environments either with the same name or the same file
 extension could happen by accident. Package \pkg*{floatrowbytocbasic} adds
 test to avoid such issues. But it also allows to redefine an environment or
@@ -322,7 +322,8 @@ here is to decide what to do, if \meta{ext} already has been
 registered. Package \pkg{floatrow} simply does not care for this case. It does
 neither report an error nor a warning, but just redefine the float \meta{type}
 and reuses the auxiliary file extension. Because of the ``\texttt{New}'' in
-the name of the command, we have decided to report an error instead. But we
+the name of the command, we have decided to report an error instead, but only
+of the owner/category differs and therefore is not \texttt{float}. But we
 also decided to define three new commands:
 \begin{quote}\raggedright
   \cs{DeclareFloatType}\marg{type}\marg{options}\\
@@ -330,16 +331,18 @@ also decided to define three new commands:
   \cs{RedeclareFloatType}\marg{type}\marg{options}
 \end{quote}
 \cs{DeclareFloatTpye} also does not care for already existing \meta{type}
-environment or already registered file extension. \cs{ProvideFloatType} does
-not overwrite existing \meta{type} environment or already registered file
-extensions for other owners. \cs{RedeclareFloatType} does overwrite only
-already existing \meta{type} environment with registered file extension. There
-are also cases like defined \cs{\meta{type}} but not \cs{end\meta{type}} or
-not defined environment \meta{type} but registered file extension. But there
-are no special commands to handle these. If users need to take care for these
-cases, they can test for definition using the \LaTeX{} kernel macro
-\cs{@ifundefined} and the \pkg{tocbasic} command \cs{Ifattoclist}, described
-in the \KOMAScript{} user manuals \autocite{pkg:koma-script:manual:en}
+environment or already registered file extension. \cs{DeclareNewFloatType}
+reports and error for an already existing \meta{type}
+environment. \cs{ProvideFloatType} does not overwrite existing \meta{type}
+environment or already registered file extensions for other
+owners. \cs{RedeclareFloatType} does overwrite only already existing
+\meta{type} environment with registered file extension. There are also cases
+like defined \cs{\meta{type}} but not \cs{end\meta{type}} or not defined
+environment \meta{type} but registered file extension. But there are no
+special commands to handle these. If users need to take care for these cases,
+they can test for definition using the \LaTeX{} kernel macro \cs{@ifundefined}
+and the \pkg{tocbasic} command \cs{Ifattoclist}, described in the
+\KOMAScript{} user manuals \autocite{pkg:koma-script:manual:en}
 resp. \autocite{pkg:koma-script:manual:de}.
 %
 % \iffalse
@@ -382,8 +385,8 @@ resp. \autocite{pkg:koma-script:manual:de}.
 %    \end{macrocode}
 %
 % \begin{command}{\DeclareFloatType}
-%   Basicly \cs{DeclareFloatType} is \cs{DeclareNewFloatType} of
-%   \pkg{floatrow}:
+% Basicly \cs{DeclareFloatType} is \cs{DeclareNewFloatType} of
+% \pkg{floatrow}:
 %    \begin{macrocode}
 \@ifundefined{NewCommandCopy}{\let\DeclareFloatType\DeclareNewFloatType}{%
   \NewCommandCopy\DeclareFloatType\DeclareNewFloatType
@@ -480,45 +483,90 @@ resp. \autocite{pkg:koma-script:manual:de}.
 % \cs{DeclareNewFloatType} and \cs{RedeclareFloatType} similar to
 % \cs{newcommand} and \cs{renewcommand} do some tests and maybe report an
 % error, before (nevertheless) defining the float.
+% \begin{description}
+% \item[Note:] The test for already defined floats is somehow complicated,
+%   because \pkg{floatrow} delays the definition until
+%   |\begin{document}|. Before, there is only a list of \cs{FR@tmp} commands
+%   stored in toks register \cs{flrow@types}. But we also have to test for
+%   reusing another environment instead of a float.
+% \end{description}
 %    \begin{macrocode}
 \renewcommand{\DeclareNewFloatType}[2]{%
   \floatrowbytocbasic@get@currext{#1}{#2}%
   \@tempswatrue
-  \Ifattoclist{\floatrowbytocbasic@currext}{%
-    \let\reserved@a\relax
-    \owneroftoc[\def\reserved@a]{\floatrowbytocbasic@currext}\relax
-    \@ifundefined{reserved@a}{}{%
-      \Ifstr{\reserved@a}{float}{}{%
-        \PackageError{floatrowbytocbasic}{%
-          reusing `\floatrowbytocbasic@currext' of owner `\reserved@a' not allowed%
+  \begingroup
+    \def\FR@tmp##1{%
+      \Ifstr{#1}{##1}{\aftergroup\@tempswafalse}{}%
+    }%
+    \the\flrow@types
+  \endgroup
+  \if@tempswa
+    \expandafter\@ifdefinable\csname #1\endcsname {%
+      \Ifattoclist{\floatrowbytocbasic@currext}{%
+        \let\reserved@a\relax
+        \owneroftoc[\def\reserved@a]{\floatrowbytocbasic@currext}\relax
+        \@ifundefined{reserved@a}{%
+          \DeclareFloatType{#1}{#2}%
         }{%
-          Each file extension should be used only once.\MessageBreak
-          Reusing is only allowed with the same owner/category.\MessageBreak
-          You, the class, or another package already uses
-          `\floatrowbytocbasic@currext'.\MessageBreak
-          \@eha
+          \Ifstr{\reserved@a}{float}{%
+            \PackageInfo{floatrowbytocbasic}{%
+              reusing `\floatrowbytocbasic@currext' of owner `float'%
+            }%
+            \DeclareFloatType{#1}{#2}%
+          }{%
+            \PackageError{floatrowbytocbasic}{%
+              reusing `\floatrowbytocbasic@currext' of owner `\reserved@a' not
+              allowed%
+            }{%
+              Each file extension should be used only once.\MessageBreak
+              Reusing is only allowed with the same owner/category.\MessageBreak
+              You, the class, or another package already uses
+              `\floatrowbytocbasic@currext'.\MessageBreak
+              \@eha
+            }%
+          }%
         }%
-        \@tempswafalse
+      }{%
+        \DeclareFloatType{#1}{#2}%
       }%
     }%
-  }{}%
-  \if@tempswa
-    \expandafter\@ifdefinable\csname #1\endcsname{%
-      \DeclareFloatType{#1}{#2}%
+  \else
+    \PackageError{floatrowbytocbasic}{Float `#1' already defined}{%
+      Each float can be defined only once using
+      \string\DeclareNewFloatType.\MessageBreak
+      If you want to redefine an already existing float, please
+      use\MessageBreak
+      \string\RedeclareFloatType.\MessageBreak
+      \@eha
     }%
   \fi
 }
 \newcommand{\ProvideFloatType}[2]{%
   \@ifundefined{#1}{%
-    \DeclareNewFloatType{#1}{#2}%
-  }{}%
+    \@tempswatrue
+    \begingroup
+      \def\FR@tmp##1{%
+        \Ifstr{#1}{##1}{\aftergroup\@tempswafalse}{}%
+      }%
+      \the\flrow@types
+    \endgroup
+    \if@tempswa    
+      \DeclareNewFloatType{#1}{#2}%
+    \fi
+  }{}% 
 }
 \newcommand{\RedeclareFloatType}[2]{%
-  \floatrowbytocbasic@get@currext{#1}{#2}%
+  \@tempswafalse
   \@ifundefined{#1}{%
-    \@latex@error{Environment #1 undefined}\@ehc
-    \removefromtoclist{\floatrowbytocbasic@currext}%
-  }{%
+    \begingroup
+      \def\FR@tmp##1{%
+        \Ifstr{#1}{##1}{\aftergroup\@tempswatrue}{}%
+      }%
+      \the\flrow@types
+    \endgroup
+  }{\@tempswatrue}%  
+  \floatrowbytocbasic@get@currext{#1}{#2}%
+  \if@tempswa
     \Ifattoclist{\floatrowbytocbasic@currext}{%
       \removefromtoclist{\floatrowbytocbasic@currext}%
     }{%
@@ -530,10 +578,11 @@ resp. \autocite{pkg:koma-script:manual:de}.
         \@ehc
       }%
     }%
-  }%
-  \expandafter\let\csname #1\endcsname\relax
-  \expandafter\let\csname end#1\endcsname\relax
-  \DeclareNewFloatType{#1}{#2}%
+  \else
+    \@latex@error{Environment #1 undefined}\@ehc
+    \removefromtoclist{\floatrowbytocbasic@currext}%
+  \fi
+  \DeclareFloatType{#1}{#2}%
 }
 %    \end{macrocode}
 % \end{command}

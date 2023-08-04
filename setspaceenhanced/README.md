@@ -41,15 +41,15 @@ replacements for the original packages they were intended to improve. Package
 features and improvements by patching package
 [`setspace`](https://ctan.org/pkg/setspace).
 
-# Unpacking and Installation for Users
+# Installation for Users
 
-If you are a user, you should wait until all the packages has been added to
+If you are a user, you should wait until all the package has been added to
 your preferred TeX distribution. Then you can use the package manager of your
-TeX distribution to install all the packages.
+TeX distribution to install the packages.
 
 # Unpacking for Distributors
 
-Distributors should download the [distribution from
+Distributors should download [the distribution from
 CTAN](https://www.ctan.org/pkg/setspaceenhanced). This consists in:
 
 * `setspaceenhanced.dtx`
@@ -86,16 +86,16 @@ using
 
 	git clone https://github.com/komascript/third-party-enhancements.git
 
-You can
-than either unpack and install all the third-party enhancements using:
+You can than either unpack and install all the third-party enhancements using:
 
 	l3build install --full
 	
-from within the main directory of the cloned respository (omit option `--full`
-if you don't want the manual) or `setspaceenhanced` only doing the same from
-within the `setspaceenhanced` sub-directory.
+from within the main directory of the cloned respository. For installation of
+`setspaceenhanced` only run the same command from within the
+`setspaceenhanced` subdirectory. For installation without the manual omit
+option `--full`, but this is not recommended for developers.
 
-# How to get the Manuals
+# How to get the Manual
 
 After installation you should get the user manual using:
 
@@ -103,17 +103,17 @@ After installation you should get the user manual using:
 	
 See the manual of your TeX distribution for more information. 
 
-Developers or distributors can also build the manuals from the source using:
+Developers or distributors can also build the manual from the source using:
 
 	l3build doc
 	
 # How to Contribute
 
 To become a contributor, e.g., do heavy testing. If you find an issue, please
-report it using the [issue
+report it using [the issue
 tracker](https://github.com/komascript/third-party-enhancements/issues). You
 can also become a developer and, e.g., make new test files to the
-packages. See the [`l3build`](https://ctan.prg/pkg/l3build) manual for more
+packages. See the [`l3build`](https://ctan.org/pkg/l3build) manual for more
 information about tests. If you've created a new test and think that it would
 be useful. Please either do a pull request or [add a new
 issue](https://github.com/komascript/third-party-enhancements/issues/new/choose)
@@ -126,12 +126,12 @@ corresponding enhancement package from this project into her or his package.
 # How to Report Issues
 
 If you think you have found a bug (or another kind of issue) using
-`setspaceenhanced` you should use the [issue
+`setspaceenhanced` you should use [the issue
 tracker](https://github.com/komascript/third-party-enhancements/issues). Please
 first search for similar issues already reported and maybe also already fixed
 and closed. Maybe the replies to such a similar report would help you too.
 
-If your issue is new, you should report it also using the [issue
+If your issue is new, you should report it also using [the issue
 tracker](https://github.com/komascript/third-party-enhancements/issues). Please
 be kind, not only when writing the report but also when reading replies and
 commenting or answering. And please always add a minimal working example and

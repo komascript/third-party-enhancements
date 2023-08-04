@@ -2,7 +2,7 @@
 
 Copyright © 2008–2023 Markus Kohm
 
-Release: unreleased
+Release: 2023-08-04 v1.0
 
 License: LPPL 1.3c
 
@@ -25,7 +25,7 @@ The Current Maintainer and author of this work is Markus Kohm.
 
 ----------------------------------------------------------------------------
 
-# ABSTRACT
+# Abstract
 
 For several years
 [KOMA-Script](https://www.sourceforge.net/project/koma-script) provided a
@@ -41,33 +41,59 @@ replacements for the original packages they were intended to improve. Package
 features and improvements by patching package
 [`setspace`](https://ctan.org/pkg/setspace).
 
-# Unpacking and Installation for Developers and Distributors
-
-Distributors should be aware that there is no official release of the new
-standalone packages `setspaceenhanced` yet. There is only a developer
-version. The first official release will hopefully come with the next
-KOMA-Script release.
-
-*For now, distributors should just ignore this package.*
-
-Developers can use `l3build` to unpack and install all files and even the
-documentation. But this cannot be done with a single `l3build` run for all of
-the packages. Instead you have to go to the sub-folder of the package you want
-to install and run
-
-    l3build install
-	
-to locally install the package of the sub-folder without manuals, or run
-
-    l3build install --full
-	
-to locally install the package of the sub-folder with manuals.
-
 # Unpacking and Installation for Users
 
 If you are a user, you should wait until all the packages has been added to
 your preferred TeX distribution. Then you can use the package manager of your
 TeX distribution to install all the packages.
+
+# Unpacking for Distributors
+
+Distributors should download the [distribution from
+CTAN](https://www.ctan.org/pkg/setspaceenhanced). This consists in:
+
+* `setspaceenhanced.dtx`
+* `README.md`
+* `LICENSE.md`
+* `setspaceenhanced.pdf`
+
+If distributors also want to distribute `setspaceenhanced.sty`, they can
+unpack it using
+
+    tex setspaceenhanced.dtx
+	
+Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
+`lualatex`!
+
+Note also, that a legal distribution consists at least in:
+
+* `setspaceenhanced.dtx`
+* `README.md`
+
+The following files are optionally, but must not be distributed without the
+previous ones:
+
+* `LICENSE.md`
+* `setspaceenhanced.sty`
+* `setspaceenhanced.pdf`
+
+# Unpacking and Installation for Developers
+
+Developers who want the current developer version of the code to be installed
+for testing, should clone [the `third-party-enhancements`
+repository](https://github.com/komascript/third-party-enhancements), e.g.,
+using
+
+	git clone https://github.com/komascript/third-party-enhancements.git
+
+You can
+than either unpack and install all the third-party enhancements using:
+
+	l3build install --full
+	
+from within the main directory of the cloned respository (omit option `--full`
+if you don't want the manual) or `setspaceenhanced` only doing the same from
+within the `setspaceenhanced` sub-directory.
 
 # How to get the Manuals
 
@@ -77,23 +103,21 @@ After installation you should get the user manual using:
 	
 See the manual of your TeX distribution for more information. 
 
-You can also build the manuals from the source. To do so, clone the source of
-the whole project, go to the sub-folder `setspaceenhanced` and run:
+Developers or distributors can also build the manuals from the source using:
 
 	l3build doc
 	
-This will result in the file `setspaceenhanced.pdf`. This is the user manual 
-and (optionally) the implemenation documentation of `setspaceenhanced`.
-
 # How to Contribute
 
-To become a contributor, clone the code and do heavy testing. If you find an
-issue, please report it using the [issue tracker](../../../issues). You can
-also, e.g., make new test files to the packages. See the
-[`l3build`](https://ctan.prg/pkg/l3build) manual for more information about
-tests. If you've created a new test and think that it would be useful. Please
-either do a pull request or [add a new issue](../../../issues/new/choose) and
-include your test file.
+To become a contributor, e.g., do heavy testing. If you find an issue, please
+report it using the [issue
+tracker](https://github.com/komascript/third-party-enhancements/issues). You
+can also become a developer and, e.g., make new test files to the
+packages. See the [`l3build`](https://ctan.prg/pkg/l3build) manual for more
+information about tests. If you've created a new test and think that it would
+be useful. Please either do a pull request or [add a new
+issue](https://github.com/komascript/third-party-enhancements/issues/new/choose)
+and include your test file.
 
 Another kind of contribution would be to contact an author of one of the
 third-party packages and convince her or him to integrate the code of the
@@ -102,15 +126,17 @@ corresponding enhancement package from this project into her or his package.
 # How to Report Issues
 
 If you think you have found a bug (or another kind of issue) using
-`setspaceenhanced` you should use the [issue tracker](../../../issues). Please
+`setspaceenhanced` you should use the [issue
+tracker](https://github.com/komascript/third-party-enhancements/issues). Please
 first search for similar issues already reported and maybe also already fixed
 and closed. Maybe the replies to such a similar report would help you too.
 
 If your issue is new, you should report it also using the [issue
-tracker](../../../issues). Please be kind, not only when writing the report
-but also when reading replies and commenting or answering. And please always
-add a minimal working example and usually the relevant parts of the `log`-file
-to your report. Please use the [markdown for
+tracker](https://github.com/komascript/third-party-enhancements/issues). Please
+be kind, not only when writing the report but also when reading replies and
+commenting or answering. And please always add a minimal working example and
+usually the relevant parts of the `log`-file to your report. Please use the
+[markdown for
 code](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks)
 to add such files into the text of your report. The correct language
 identifier for LaTeX code would be `latex`. For `log`-files you won't need any

@@ -18,8 +18,6 @@
 % and version 1.<3c or later is part of all distributions of LaTeX
 % version 2005/12/01 or later and of this work.
 %
-% This work has the LPPL maintenance status "author-maintained".
-%
 % The Current Maintainer and author of this work is Markus Kohm.
 %
 % This work consists of the file `setspaceenhanced.dtx' and `README.md'.
@@ -34,7 +32,7 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesExplPackage{setspaceenhanced}
-  {2023-07-28}{0.1}
+  {2023-08-04}{1.0}
   {%
 %<*dtx>
     sources and unpack driver of
@@ -156,11 +154,13 @@
 %</dtx>
 %\fi
 %
-% \changes{v0.1}{2023/06/01}{start of \KOMAScript{} spin-off}
+% \changes{v0.1}{2023/06/01}{new \KOMAScript{} spin-off}
 %
 % \GetFileInfo{setspaceenhanced.dtx}
 % \title{Improving ``\pkg{setspace}''}
-% \author{\href{mailto:komascript@gmx.info}{Markus Kohm}}
+% \author{\href{mailto:komascript@gmx.info}{Markus Kohm}\thanks{Repository and
+%   bug reports:
+%   \url{https://github.com/komascript/third-party-enhancements}}}
 % \date{Version \filedate{} \fileversion}
 % \maketitle
 % \begin{abstract}
@@ -229,11 +229,12 @@ which also apply when using a \KOMAScript{} class or the \KOMAScript{} package
 \pkg{setspace} does not care for the \cs{baselineskip} selected by
 \cs{fontsize}. Instead it sets the stretch factor always depending on the
 document font size. And using \cs{singlespacing}, \cs{onehalfspacing} or
-\cs{doublespacing} or even \cs{setstretch} after switching the font size using
-\cs{fontsize} instead of \cs{Huge}, \cs{huge}, \cs{LARGE}, \cs{Large},
-\cs{large}, \cs{normalsize}, \cs{small}, \cs{footnotesize}, \cs{scriptsize},
-\cs{tiny}, or another command defined using \cs{@setsize}, reactivates the
-last used such font size commd. So using something like
+\cs{doublespacing} or even \cs{setstretch}\SpecialCommandIndex{\setstretch}
+after switching the font size using \cs{fontsize} instead of \cs{Huge},
+\cs{huge}, \cs{LARGE}, \cs{Large}, \cs{large}, \cs{normalsize}, \cs{small},
+\cs{footnotesize}, \cs{scriptsize}, \cs{tiny}, or another command defined
+using \cs{@setsize}, reactivates the last used such font size commd. So using
+something like
 \begin{verbatim}
   \normalsize\fontsize{5pt}{7pt}\selectfont\onehalfspacing
 \end{verbatim}
@@ -252,7 +253,7 @@ of the 5\,pt font.
 In other words: Package \pkg*{setspaceenhanced} uses a completely different
 definition of \cs{onehalfspacing} and \cs{doublespacing}. It always uses
 \cs{f@size} and \cs{f@baselineskip} to calculate a factor resulting in real
-onehalfspacing resp. doublespacing. This also means, if you use one of these
+onehalfspacing and doublespacing. This also means, if you use one of these
 commands after changing the font size, a new stretch factor is calculated
 depending on the current font size without changing the font size.
 
@@ -296,8 +297,8 @@ use of \cs{singlespacing}, \cs{onehalfspacing}, \cs{doublespacing}, or
 \cs{setstretch} can it be ensured that the enhancements of
 \pkg*{setspaceenhanced} are initialized and used correctly.
 
-When using a class that uses \pkg{setspace}, the correct operation can be ensured
-with
+When using a class that uses \pkg{setspace}, the correct operation can be
+ensured with
 \begin{verbatim}
   \AddToHook{package/setspace/after}{\RequirePackage{setspaceenhanced}}
 \end{verbatim}
@@ -314,7 +315,7 @@ same optional argument for \cs{RequirePackage}, that is used for loading
 
 Package \pkg*{setspaceenhanced} provides all options and commands of the user
 interface of \pkg{setspace}, see \autocite{pkg:setspace:manual}. Following we
-document only the differences resp. enhancements.
+document only the differences and enhancements.
 
 There are some options influencing the behavior and result of the examples
 shown in the section before. All these options are
@@ -335,50 +336,52 @@ group.
 
 \begin{description}\setkomafont{descriptionlabel}{\ttfamily}
 \item[byselectfont=\meta{boolean}]%
-  \DescribeOption[noprint]{byselectfont}%
+  \DescribeOption{byselectfont}%
   \hfill initial=\optvalue{false}, default=\optvalue{true}\\
   In the \pkg*{setspaceenhanced} examples in the previous section, the correct
   factor has only been used, because of using \cs{onehalfspacing} after
   changing the font size, e.g., to \cs{small}. If you use \cs{onehalfspacing}
   before changing the font size, the factor is calculated with the previous
   valid font size, which is the document font size 12\,pt in all these
-  examples. This behavior can be changed to a more dynamic automatism using
-  option \opt{byselectfont} resp. \opt{byselectfont=true}. This will use the
-  generic \LaTeX{} hook \texttt{selectfont} to reactivate \cs{onehalfspacing}
-  or \cs{doublespacing} after every \texttt{selectfont} if the font size has
-  been changed.
+  examples. This\SpecialCommandIndex{\selectfont}\marginline{\cs{selectfont}}
+  behavior can be changed to a more dynamic automatism using option
+  \opt{byselectfont} or \opt{byselectfont=true}. This will use the generic
+  \LaTeX{} hook \texttt{selectfont} to reactivate \cs{onehalfspacing} or
+  \cs{doublespacing} after every \cs{selectfont} if the font size has been
+  changed.
 \item[doublespacing=\meta{real}]%
   \DescribeOption{onehalfspacing}%
   \hfill initial=\texttt{nan}, default=\emph{empty}\\
   If this option is used without value, it is the same as \pkg{setspace}'s
-  package option \opt{doublespacing} resp. using command
-  \cs{doublespacing}. But if you assign a real
-  number\footnote{\label{ftn:fp}Here are all values allowed, that would be
-    allowed as second argument of \LaTeX3 function \cs{fp\string_set:Nn}} this
-  would be used as the new stretch factor used for doublespacing. This also
-  means, that the default calculation of the factor is deactivated. But a
-  factor of \texttt{nan} would reactivate the calculation of the factor
-  depending on the font size and the baseline skip set for the font size. It
-  is recommended to use the option always without value!
+  package option \opt{doublespacing} or using command \cs{doublespacing}. But
+  if you assign a real number\footnote{\label{ftn:fp}Here are all values
+    allowed, that would be allowed as second argument of \LaTeX3 function
+    \cs{fp\string_set:Nn}} this would be used as the new stretch factor used
+  for doublespacing. This also means, that the default calculation of the
+  factor is deactivated. But a factor of \texttt{nan} would reactivate the
+  calculation of the factor depending on the font size and the baseline skip
+  set for the font size. It is recommended to use the option always without
+  value!
 \item[fontsize=\meta{boolean}]%
   \DescribeOption{fontsize}%
+  \DescribeCommand{\setstretch}%
   \hfill initial=\optvalue{false}, default=\optvalue{true}\\
   As explained in \autoref{sec:whywithoutkomascript}, \pkg{setspace}'s
   \cs{setstretch} behaves different after a font size command like \cs{Huge},
   \cs{huge}, \cs{LARGE}, \cs{Large}, \cs{large}, \cs{normalsize}, \cs{small},
   \cs{footnotesize}, \cs{scriptsize}, \cs{tiny}, or another command defined
-  using \cs{@setsize} than after using \cs{fontsize}\cs{selectfont}. With the
+  using \cs{@setsize} than after using |\fontsize{…}{…}\selectfont|. With the
   last the font size will be reset to the previous usage of one of the other
   or the document font size. For a lot of users this is somehow
-  unexpected. With option \opt{fontsize} resp. \opt{fontsize=true} this is
+  unexpected. With option \opt{fontsize} or \opt{fontsize=true} this is
   changed and using \cs{setstretch} does not reactivate the last used
   \cs{Huge}, \cs{huge}, \cs{LARGE}, \cs{Large}, \cs{large}, \cs{normalsize},
   \cs{small}, \cs{footnotesize}, \cs{scriptsize}, \cs{tiny}.
 \item[onehalfspacing=\meta{real}]%
   \DescribeOption{onehalfspacing}%
-  \hfill initial=nan, default=\emph{empty}\\
+  \hfill initial=\texttt{nan}, default=\emph{empty}\\
   If this option is used without value, it is the same as \pkg{setspace}'s
-  package option \opt{onehalfspacing} resp. using command
+  package option \opt{onehalfspacing} or using command
   \cs{onehalfspacing}. But if you assign a real number\footref{ftn:fp} this
   would be used as the new stretch factor used for onehalfspacing. This also
   means, that the default calculation of the factor is deactivated. But a
@@ -389,13 +392,24 @@ group.
   \DescribeOption{singlespacing}%
   \hfill initial=1, default=\emph{empty}\\
   If this option is used without value, it is the same as \pkg{setspace}'s
-  package option \opt{singlespacing} resp. using command
-  \cs{singlespacing}. But if you assign a real number\footref{ftn:fp} this
-  would be used as the new stretch factor used for singlespacing. So this is
-  similar to using \cs{SetSinglespace}\marg{real}\cs{singlespacing}.  A factor
-  of \texttt{nan} would activate the calculation of the factor depending on
-  the font size and the baseline skip set for the font size. It is recommended
-  to use the option always without value!
+  package option \opt{singlespacing} or using command \cs{singlespacing}. But
+  if you assign a real number\footref{ftn:fp} this would be used as the new
+  stretch factor used for singlespacing. So this is similar to using
+  \cs{SetSinglespace}\marg{real}\cs{singlespacing}.  A factor of \texttt{nan}
+  would activate the calculation of the factor depending on the font size and
+  the baseline skip set for the font size. It is recommended to use the option
+  always without value!
+\end{description}
+
+\subsubsection*{Compatibility Notes:}
+
+\begin{description}
+\item[\pkg*{scrhack}] If you want to use this package together with package
+  \pkg*{scrhack} from \href{https://www.ctan.org/pkg/koma-script}{\KOMAScript}
+  before version 3.42, you should deactivate the \file{setspace} hack using
+  \pkg*{scrhack}' option \opt{setspace=false}. From version 3.42
+  \pkg*{scrhack} does not use the old hacks any longer but
+  \pkg*{setspaceenhanced} and is therefore compatible again.
 \end{description}
 
 \section{How does the result of
@@ -448,7 +462,7 @@ Here the difference from the correct value 16.425\,pt is very, very small:
 0.00004\,pt. So you can say, this is really onehalfspacing depending on the
 used font size.
 
-Moreover of you have a document:
+Moreover if you have a document:
 \begin{verbatim}
   \documentclass[12pt]{article}
   \usepackage{setspace}

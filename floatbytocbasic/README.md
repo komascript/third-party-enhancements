@@ -2,7 +2,7 @@
 
 Copyright © 2008–2023 Markus Kohm
 
-Release: unreleased
+Release: 2023-08-16 v1.0
 
 License: LPPL 1.3c
 
@@ -18,8 +18,6 @@ The latest version of this license is in
     http://www.latex-project.org/lppl.txt
 and version 1.3c or later is part of all distributions of LaTeX
 version 2005/12/01 or later.
-
-This work has the LPPL maintenance status "maintained".
 
 The Current Maintainer and author of this work is Markus Kohm.
 
@@ -49,12 +47,33 @@ distribution to install the package.
 
 # Unpacking for Distributors
 
-Distributors should be aware that there is no official release of the new
-standalone packages `floatbytocbasic` yet. There is only a developer
-version. The first official release will hopefully come with the next
-KOMA-Script release.
+Distributors should download [the distribution from
+CTAN](https://www.ctan.org/pkg/floatbytocbasic). This consists in:
 
-*For now, distributors should just ignore this package.*
+* `floatbytocbasic.dtx`
+* `README.md`
+* `LICENSE.md`
+* `floatbytocbasic.pdf`
+
+If distributors also want to distribute `floatbytocbasic.sty`, they can
+unpack it using
+
+    tex floatbytocbasic.dtx
+	
+Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
+`lualatex`!
+
+Note also, that a legal distribution consists at least in:
+
+* `floatbytocbasic.dtx`
+* `README.md`
+
+The following files are optionally, but must not be distributed without the
+previous ones:
+
+* `LICENSE.md`
+* `floatbytocbasic.sty`
+* `floatbytocbasic.pdf`
 
 # Unpacking and Installation for Developers
 

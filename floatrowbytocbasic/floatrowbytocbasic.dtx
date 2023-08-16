@@ -18,8 +18,6 @@
 % and version 1.<3c or later is part of all distributions of LaTeX
 % version 2005/12/01 or later and of this work.
 %
-% This work has the LPPL maintenance status "author-maintained".
-%
 % The Current Maintainer and author of this work is Markus Kohm.
 %
 % This work consists of the file `floatrowbytocbasic.dtx' and
@@ -35,7 +33,7 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesPackage{floatrowbytocbasic}
-             [2023-07-14 v0.1
+             [2023-08-16 v1.0
 %<dtx>              sources and unpack driver of
               improved floatrow package using tocbasic]
 %</dtx|package>
@@ -57,7 +55,7 @@
 \usepackage[style=alphabetic]{biblatex}
 \begin{filecontents}[force]{\jobname.bib}
 @online{pkg:floatrow,
-  author={Olga Kapko},
+  author={Olga Lapko},
   title={\pkg*{floatrow} --- Modifying the layout of floats},
   version={0.3b},
   date={2008-08-02},
@@ -162,6 +160,7 @@
 %\fi
 %
 % \changes{v0.1}{2023/06/01}{start of \KOMAScript{} spin-off}
+% \changes{v1.0}{2023/08/19}{first package release}
 %
 % \GetFileInfo{floatrowbytocbasic.dtx}
 % \title{Improving Package \pkg{floatrow} Using
@@ -377,7 +376,7 @@ resp. \autocite{pkg:koma-script:manual:de}.
 %    \end{macrocode}
 %
 % We also use some \LaTeX3 functions. So if the \LaTeX{} kernel is
-% too old, we require \pkg{expl3}\nocite{expl3}:
+% too old, we require \pkg{expl3}:
 %    \begin{macrocode}
 \@ifundefined{ExplSyntaxOn}{%
   \RequirePackage{expl3}%

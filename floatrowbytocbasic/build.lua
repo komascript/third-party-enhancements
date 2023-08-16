@@ -17,8 +17,7 @@
          floatrowbytocbasic.
 ]]
 
-release_info = "2023-07-18 v0.1"
-
+release_info = "2023-08-16 v1.0"
 -- Bundle and modules
 
 module  = "floatrowbytocbasic"
@@ -72,8 +71,8 @@ function update_tag (file,content,tagname,tagdate)
                           "[" .. tagdate .. " v" .. tagname)
    elseif string.match (file, "%.md$") then
       return string.gsub (content,
-                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+  \n",
-                          "\nRelease: " .. tagdate .. " v" .. tagname .. "  \n")
+                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+",
+                          "\nRelease: " .. tagdate .. " v" .. tagname )
    elseif string.match (file, "%.lua$") then
       return string.gsub (content,
                           '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"%s*\n',

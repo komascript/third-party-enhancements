@@ -18,8 +18,6 @@
 % and version 1.<3c or later is part of all distributions of LaTeX
 % version 2005/12/01 or later and of this work.
 %
-% This work has the LPPL maintenance status "author-maintained".
-%
 % The Current Maintainer and author of this work is Markus Kohm.
 %
 % This work consists of the file `floatbytocbasic.dtx' and `README.md'.
@@ -34,7 +32,7 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesPackage{floatbytocbasic}
-             [2023-07-14 v0.1
+             [2023-08-16 v1.0
 %<dtx>              sources and unpack driver of
               improved float package using tocbasic]
 %</dtx|package>
@@ -164,6 +162,7 @@
 %\fi
 %
 % \changes{v0.1}{2023/06/01}{start of \KOMAScript{} spin-off}
+% \changes{v1.0}{2023/08/19}{first package release}
 %
 % \GetFileInfo{floatbytocbasic.dtx}
 % \title{Improving Package \pkg{float} Using
@@ -298,6 +297,12 @@ even before \cs{documentclass}. This requires at least \LaTeX{}
 also before \cs{documentclass}. This would require the \KOMAScript{} package
 \pkg{scrlfile}\nocite{pkg:scrlfile}.
 
+\begin{description}
+  \item[Note:] You \emph{should not} load \pkg*{float} after loading package
+    \pkg*{floatrow}. However, if you do, \pkg{floatrowbytocbasic} will be
+    loaded automatically.
+\end{description}
+
 The user interface of \pkg*{floatbytocbasic} is the same as of \pkg{float},
 see \autocite{pkg:float:manual}. Following we document only the differences.
 
@@ -355,6 +360,14 @@ resp. \autocite{pkg:koma-script:manual:de}.
 % at least \KOMAScript{} 3.41, which is one version before the intended
 % spin-off.
 %    \begin{macrocode}
+\@ifpackageloaded{floatrow}{%
+  \PackageWarning{floatbytocbasic}{%
+    package incompatible with package floatrow.\MessageBreak
+    Automatically using floatrowbytocbasic%
+  }%
+  \RequirePackage{floatrowbytocbasic}%
+  \endinput
+}{}
 \RequirePackage{tocbasic}[2023/07/07]
 %    \end{macrocode}
 %
@@ -370,7 +383,7 @@ resp. \autocite{pkg:koma-script:manual:de}.
 %    \end{macrocode}
 %
 % We also use the new document command interface. So if the \LaTeX{} kernel is
-% too old, we require \pkg{xparse}\nocite{xparse}:
+% too old, we require \pkg{xparse}:
 %    \begin{macrocode}
 \@ifundefined{NewDocumentCommand}{%
   \RequirePackage{xparse}%

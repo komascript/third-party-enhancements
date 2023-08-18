@@ -38,8 +38,9 @@ checkdeps = {
 
 -- Unpacking and creating documentation ------------------------------------
 
-unpackfiles = { "*.dtx" }
-sourcefiles = { "*.dtx" }
+unpackfiles  = { "*.dtx" }
+sourcefiles  = { "*.dtx" }
+installfiles = { "*.sty", "*.hak" }
 
 typesetruns = 4
 

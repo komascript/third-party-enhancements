@@ -17,7 +17,7 @@
          setspaceenhanced.
 ]]
 
-release_info = "2023-08-04 v1.0"
+release_info = "2023-09-19 v1.01"
 
 -- Bundle and modules
 
@@ -42,8 +42,8 @@ uploadconfig = {
    summary  = "an enhancement to package setspace",
    topic    = { "line-space" },
    ctanPath = "/macros/latex/contrib/"..module,
-   home        = "https://github.com/komascript/thirdpartyhacks",
-   bugtracker  = "https://github.com/komascript/thirdpartyhacks/issues",
+   home        = "https://github.com/komascript/third-party-enhancements",
+   bugtracker  = "https://github.com/komascript/third-party-enhancements/issues",
    description = "This package adds support for all font sizes, even non-integer resp. non-pt sizes to package `setspace`. This not only improves compatibility with KOMA-Script but also corrects the stretch value of the usual font sizes.",
    version     = release_info,
    announcement_file = "announcement-" .. release_info .. ".txt",

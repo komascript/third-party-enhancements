@@ -157,7 +157,7 @@ that page.
 
 v1.01 2023-09-19:
 
-- option `fontsize` has been renamed to `keepfontsize` because of issue
+- option `fontsize` has been renamed to `keepfontsize` because of
   incompatibility with KOMA-Script → [issue
   #1](https://github.com/komascript/third-party-enhancements/issues/1)
 

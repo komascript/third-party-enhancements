@@ -2,7 +2,7 @@
 
 Copyright © 2008–2023 Markus Kohm
 
-Release: 2023-08-04 v1.0
+Release: 2023-09-19 v1.01
 
 License: LPPL 1.3c
 
@@ -152,3 +152,12 @@ fop, so I'm certainly up for a quick thank you by email. On komascript.de you
 can find an [explanation of my wishes](https://komascript.de/wunschliste) if
 you want to give more. If you don't understand German, just click to links at
 that page.
+
+# Changes
+
+v1.01 2023-09-19:
+
+- option `fontsize` has been renamed to `keepfontsize` because of issue
+  incompatibility with KOMA-Script → [issue
+  #1](https://github.com/komascript/third-party-enhancements/issues/1)
+

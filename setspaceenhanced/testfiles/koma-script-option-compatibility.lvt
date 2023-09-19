@@ -1,0 +1,14 @@
+% Testfile
+% -  Option fontsize is incompatible with KOMA-Script classes and scrextend #1
+\input{regression-test.tex}
+\documentclass[fontsize=12pt]{scrartcl}
+\START
+\usepackage{setspaceenhanced}
+\END
+\begin{document}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

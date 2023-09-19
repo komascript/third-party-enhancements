@@ -32,7 +32,7 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesExplPackage{setspaceenhanced}
-  {2023-08-04}{1.0}
+  {2023-09-19}{1.01}
   {%
 %<*dtx>
     sources and unpack driver of
@@ -155,6 +155,7 @@
 %\fi
 %
 % \changes{v0.1}{2023/06/01}{new \KOMAScript{} spin-off}
+% \changes{v1.0}{2023/08/04}{release}
 %
 % \GetFileInfo{setspaceenhanced.dtx}
 % \title{Improving ``\pkg{setspace}''}
@@ -362,8 +363,9 @@ group.
   calculation of the factor depending on the font size and the baseline skip
   set for the font size. It is recommended to use the option always without
   value!
-\item[fontsize=\meta{boolean}]%
-  \DescribeOption{fontsize}%
+\item[keepfontsize=\meta{boolean}]%
+  \DescribeOption{keepfontsize}%
+  \marginpar{\raggedleft\footnotesize (changed 2023-09-19)}%
   \DescribeCommand{\setstretch}%
   \hfill initial=\optvalue{false}, default=\optvalue{true}\\
   As explained in \autoref{sec:whywithoutkomascript}, \pkg{setspace}'s
@@ -373,8 +375,8 @@ group.
   using \cs{@setsize} than after using |\fontsize{…}{…}\selectfont|. With the
   last the font size will be reset to the previous usage of one of the other
   or the document font size. For a lot of users this is somehow
-  unexpected. With option \opt{fontsize} or \opt{fontsize=true} this is
-  changed and using \cs{setstretch} does not reactivate the last used
+  unexpected. With option \opt{keepfontsize} or \opt{keepfontsize=true} this
+  is changed and using \cs{setstretch} does not reactivate the last used
   \cs{Huge}, \cs{huge}, \cs{LARGE}, \cs{Large}, \cs{large}, \cs{normalsize},
   \cs{small}, \cs{footnotesize}, \cs{scriptsize}, \cs{tiny}.
 \item[onehalfspacing=\meta{real}]%
@@ -482,7 +484,7 @@ this result in:
 But
 \begin{verbatim}
   \documentclass[12pt]{article}
-  \usepackage[fontsize]{setspaceenhanced}
+  \usepackage[keepfontsize]{setspaceenhanced}
   \begin{document}
   \fontsize{5pt}{7pt}\selectfont\onehalfspacing This is font size
   \csname f@size\endcsname pt with
@@ -497,7 +499,9 @@ results in:
   factor is 1.071428571428571. This results in a baseline skip of 7.49998pt.
 \end{quote}
 In my opinion this is more the expected result. See the previous
-\autoref{sec:howtouse} for more information about options like \opt{fontsize}.
+\autoref{sec:howtouse} for more information about options like
+\opt{keepfontsize}.
+
 % \iffalse
 %</doc>
 % \fi
@@ -640,8 +644,8 @@ In my opinion this is more the expected result. See the previous
 % \end{command}
 %
 % \begin{command}{\setstretch}
-% If \opt{fontsize=false}, we use the original functionality of
-% \pkg{setspace}. But with \opt{fontsize=true} we use \cs{linespread}:
+% If \opt{keepfontsize=false}, we use the original functionality of
+% \pkg{setspace}. But with \opt{keepfontsize=true} we use \cs{linespread}:
 %    \begin{macrocode}
 \renewcommand*{\setstretch}[1]{
   \bool_if:NTF \@@_fontsize_bool
@@ -657,6 +661,10 @@ In my opinion this is more the expected result. See the previous
 % \end{command}
 %
 % Almost the end of the package we define all options:
+% \changes{v1.01}{2023/09/19}{option \opt{fontsize} renamed to
+%   \opt{keepfontsize} because of incompatibility (issue
+%   \href{https://github.com/komascript/third-party-enhancements/issues/1}
+%        {\#1})}
 %    \begin{macrocode}
 \DeclareKeys{%
   singlespacing  .code        = \@@_set_spacing:nn {#1} {single},
@@ -668,9 +676,9 @@ In my opinion this is more the expected result. See the previous
   byselectfont   .bool_set:N  = \@@_byselectfont_bool,
   byselectfont   .default:n   = true,
   byselectfont   .initial:n   = false,
-  fontsize       .bool_set:N  = \@@_fontsize_bool,
-  fontsize       .default:n   = true,
-  fontsize       .initial:n   = false,
+  keepfontsize   .bool_set:N  = \@@_fontsize_bool,
+  keepfontsize   .default:n   = true,
+  keepfontsize   .initial:n   = false,
 }
 %    \end{macrocode}
 % And process them:

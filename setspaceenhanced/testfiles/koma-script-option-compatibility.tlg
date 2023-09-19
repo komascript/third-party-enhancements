@@ -1,0 +1,7 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(setspaceenhanced.sty
+Package: setspaceenhanced ....-..-.. v... improved setspace package
+(../setspace.sty
+Package: setspace ....-..-.. v... set line spacing
+))

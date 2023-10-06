@@ -29,7 +29,6 @@
 modules = { "scrhack",
 	    "floatbytocbasic",
 	    "floatrowbytocbasic",
-	    "listingsbytocbasic",
             "lscapeenhanced",
             "setspaceenhanced",
             "standardsectioning" }

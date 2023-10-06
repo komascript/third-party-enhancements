@@ -17,7 +17,7 @@
    Note: You should not copy this file to the distribution of scrhack.
 ]]
 
-release_info = "2023-07-19 v3.42"
+release_info = "2023-07-14 v0.1"
 -- Bundle and modules ------------------------------------------------------
 -- Note: It is intended to release the former hacks as standalone
 --       packages. Therefore, there is no bundle, although changes to
@@ -30,7 +30,6 @@ maindir = ".."
 checkdeps = {
    maindir .. "/floatbytocbasic",
    maindir .. "/floatrowbytocbasic",
-   maindir .. "/listingsbytocbasic",
    maindir .. "/lscapeenhanced",
    maindir .. "/setspaceenhanced",
    maindir .. "/standardsectioning"
@@ -64,9 +63,9 @@ uploadconfig = {
 }
 
 -- Detail how to set the version automatically
--- Example: `l3build tag --date 2023-07-15 v3.42'
+-- Example: `l3build tag --date 2023-07-15 v0.1'
 
-tagfiles = {module..".dtx","README.md","build.lua"}
+tagfiles = { } -- module..".dtx","README.md","build.lua"}
 
 function update_tag (file,content,tagname,tagdate)
    tagname = string.gsub (tagname, "v(%d+%.%d+)", "%1")

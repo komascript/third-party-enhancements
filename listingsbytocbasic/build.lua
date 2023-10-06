@@ -17,8 +17,7 @@
          listingsbytocbasic.
 ]]
 
-release_info = "2023-07-15 v0.1"
-
+release_info = "2023-08-30 v1.0"
 -- Bundle and modules
 
 module  = "listingsbytocbasic"
@@ -42,8 +41,9 @@ uploadconfig = {
    summary  = "an enhancement to package listngs using package tocbasic",
    topic    = { "float", "listing" },
    ctanPath = "/macros/latex/contrib/"..module,
-   home        = "https://github.com/komascript/thirdpartyhacks",
-   bugtracker  = "https://github.com/komascript/thirdpartyhacks/issues",
+   bugtracker  = "https://github.com/komascript/third-party-enhancements",
+   bugtracker  = "https://github.com/komascript/third-party-enhancements/issues",
+   repository  = "https://github.com/komascript/third-party-enhancements/tree/main/"..module,
    description = "This package adds usage of package `tocbasic` to package `listings`. This not only improves compatibility with KOMA-Script but also adds several new features to `listings` like optional automatic entries to the table of contents for the lists of new floats, optional numbering of the lists of new floats etc.",
    version     = release_info,
    announcement_file = "announcement-" .. release_info .. ".txt",
@@ -72,8 +72,8 @@ function update_tag (file,content,tagname,tagdate)
                           "[" .. tagdate .. " v" .. tagname)
    elseif string.match (file, "%.md$") then
       return string.gsub (content,
-                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+  \n",
-                          "\nRelease: " .. tagdate .. " v" .. tagname .. "  \n")
+                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+",
+                          "\nRelease: " .. tagdate .. " v" .. tagname )
    elseif string.match (file, "%.lua$") then
       return string.gsub (content,
                           '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"%s*\n',

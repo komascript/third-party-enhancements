@@ -57,7 +57,8 @@ standalone packages. These are:
   [`tocbasic`](https://ctan.org/pkg/tocbasic).
 * `listingsbytocbasic` — an enhancement to package
   [`listings`](https://ctan.org/pkg/listings) using package
-  [`tocbasic`](https://ctan.org/pkg/tocbasic).
+  [`tocbasic`](https://ctan.org/pkg/tocbasic) (withdrawn without beeing
+  released).
 * `lscapeenhanced` — an enhancement to package
   [`lscape`](https://ctan.org/pkg/lscape) resp. package
   [`pdflscape`](https://ctan.org/pkg/pdflscape).

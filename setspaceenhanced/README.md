@@ -155,6 +155,10 @@ that page.
 
 # Changes
 
+Following only important changes, which are relevant for average users, will
+be listed. [The complete history can be found in the
+repository.](https://github.com/komascript/third-party-enhancements/commits/main/setspaceenhanced)
+
 v1.01 2023-09-19:
 
 - option `fontsize` has been renamed to `keepfontsize` because of

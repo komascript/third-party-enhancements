@@ -32,7 +32,7 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesExplPackage{setspaceenhanced}
-  {2023-09-19}{1.01}
+  {2023-10-09}{1.02}
   {%
 %<*dtx>
     sources and unpack driver of
@@ -549,49 +549,58 @@ In my opinion this is more the expected result. See the previous
 %    \end{macrocode}
 % \end{Constant}
 %
-% \begin{Variable}{\@@_single_factor_fp,
-%   \@@_onehalf_factor_fp,
-%   \@@_double_factor_fp}
+% \begin{Variable}{\g_@@_single_factor_fp,
+%   \g_@@_onehalf_factor_fp,
+%   \g_@@_double_factor_fp}
 % \ExplSyntaxOff
+% \changes{v1.02}{2023-10-09}{missing prefix \texttt{g} added to variable
+%   name}
 % The internal variables used to store the configured stretch factors for
 % singlespacing, onehalfspacing and doublespacing. If \texttt{nan}
 % \cs{@@\_linespread} is calculated.
 %    \begin{macrocode}
-\fp_new:N \@@_single_factor_fp \fp_set:Nn \@@_single_factor_fp { 1.0 }
-\fp_new:N \@@_onehalf_factor_fp \fp_set_eq:NN \@@_onehalf_factor_fp \c_nan_fp
-\fp_new:N \@@_double_factor_fp \fp_set_eq:NN \@@_double_factor_fp \c_nan_fp
+\fp_new:N \g_@@_single_factor_fp
+\fp_set:Nn \g_@@_single_factor_fp { 1.0 }
+\fp_new:N \g_@@_onehalf_factor_fp
+\fp_set_eq:NN \g_@@_onehalf_factor_fp \c_nan_fp
+\fp_new:N \g_@@_double_factor_fp
+\fp_set_eq:NN \g_@@_double_factor_fp \c_nan_fp
 %    \end{macrocode}
 % \end{Variable}
 %
-% \begin{Variable}{\@@_linespread_fp,\@@_fp}
+% \begin{Variable}{\g_@@_linespread_fp,\g_@@_fp}
 % \ExplSyntaxOff
+% \changes{v1.02}{2023-10-09}{missing prefix \texttt{g} added to variable
+%   name}
 % Storage of the current calculated stretch factor and the used constant.
 %    \begin{macrocode}
-\fp_new:N \@@_linespread_fp \fp_set:Nn \@@_linespread_fp { 1.0 }
+\fp_new:N \g_@@_linespread_fp
+\fp_set:Nn \g_@@_linespread_fp { 1.0 }
+\fp_new:N \g_@@_fp
 %    \end{macrocode}
 % \end{Variable}
 %
 % \begin{macro}{\@@_set_spacing:nn}
 % \ExplSyntaxOff
-% These commands are used to set the stretch factor for one of the
+% This function is used to set the stretch factor for one of the
 % spacings.
 %    \begin{macrocode}
 \cs_new:Nn \@@_set_spacing:nn
   {
     \tl_if_blank:nF { #1 }
       {
-        \fp_set:cn { @@_#2_factor_fp } { #1 }
+        \fp_set:cn { g_@@_#2_factor_fp } { #1 }
       }
-    \fp_if_nan:nTF { \tl_use:c { @@_#2_factor_fp } }
+    \fp_if_nan:nTF { \tl_use:c { g_@@_#2_factor_fp } }
       {
-        \fp_set_eq:Nc \@@_fp { c_@@_#2_fp }
+        \fp_set_eq:Nc \g_@@_fp { c_@@_#2_fp }
         \@@_calc_stretch:
       }
       {
-        \fp_set_eq:Nc \@@_linespread_fp { @@_#2_factor_fp }
-        \fp_set_eq:NN \@@_fp \c_nan_fp
+        \fp_set_eq:Nc \g_@@_linespread_fp { g_@@_#2_factor_fp }
+        \fp_set_eq:NN \g_@@_fp \c_nan_fp
       }
-      \setstretch{ \fp_to_decimal:N \@@_linespread_fp }
+      \setstretch{ \fp_to_decimal:N \g_@@_linespread_fp }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -599,16 +608,16 @@ In my opinion this is more the expected result. See the previous
 % \begin{macro}{\@@_calc_stretch:}
 % \ExplSyntaxOff
 % This macro is used to (re-)calculate the stretch factor
-% \cs{@@\_calcstretch} if the the current used constant is not
+% \cs{@@\_calcstretch} if the currently used constant is not
 % \texttt{nan}.
 %    \begin{macrocode}
 \cs_new:Nn \@@_calc_stretch:
   {
-    \fp_if_nan:nF { \@@_fp }
+    \fp_if_nan:nF { \g_@@_fp }
       {
-        \fp_set:Nn \@@_linespread_fp
+        \fp_set:Nn \g_@@_linespread_fp
           {
-            \f@size / \dim_to_fp:n { \f@baselineskip } * \@@_fp
+            \f@size / \dim_to_fp:n { \f@baselineskip } * \g_@@_fp
           }
       }
   }
@@ -623,17 +632,17 @@ In my opinion this is more the expected result. See the previous
 %    \begin{macrocode}
 \hook_gput_code:nnn { selectfont } { setspaceenhanced }
   {%
-    \bool_if:NT \__setspaceenhanced_byselectfont_bool
+    \bool_if:NT \g_@@_byselectfont_bool
       {
         \cs_if_exist:NT \size@update
           {
             \fp_set:Nn \l_tmpa_fp { \f@linespread }
-            \fp_compare:nNnT \__setspaceenhanced_linespread_fp = \l_tmpa_fp
+            \fp_compare:nNnT \g_@@_linespread_fp = \l_tmpa_fp
               {
-                \__setspaceenhanced_calc_stretch:
+                \@@_calc_stretch:
                 \set@fontsize
                   {
-                    \fp_to_decimal:N \__setspaceenhanced_linespread_fp
+                    \fp_to_decimal:N \g_@@_linespread_fp
                   }
                   \f@size \f@baselineskip
               }
@@ -648,7 +657,7 @@ In my opinion this is more the expected result. See the previous
 % \pkg{setspace}. But with \opt{keepfontsize=true} we use \cs{linespread}:
 %    \begin{macrocode}
 \renewcommand*{\setstretch}[1]{
-  \bool_if:NTF \@@_fontsize_bool
+  \bool_if:NTF \g_@@_fontsize_bool
     {
       \linespread{#1}\selectfont
     }
@@ -673,10 +682,10 @@ In my opinion this is more the expected result. See the previous
   onehalfspacing .usage       = general,
   doublespacing  .code        = \@@_set_spacing:nn {#1} {double},
   doublespacing  .usage       = general,
-  byselectfont   .bool_set:N  = \@@_byselectfont_bool,
+  byselectfont   .bool_set:N  = \g_@@_byselectfont_bool,
   byselectfont   .default:n   = true,
   byselectfont   .initial:n   = false,
-  keepfontsize   .bool_set:N  = \@@_fontsize_bool,
+  keepfontsize   .bool_set:N  = \g_@@_fontsize_bool,
   keepfontsize   .default:n   = true,
   keepfontsize   .initial:n   = false,
 }
@@ -691,16 +700,16 @@ In my opinion this is more the expected result. See the previous
 % singlespacing, onehalfspacing and doublespacing.
 %    \begin{macrocode}
 \renewcommand*{\singlespacing}{
-  \__setspaceenhanced_set_spacing:nn {} {single}
+  \@@_set_spacing:nn {} {single}
 }
 \renewcommand*{\onehalfspacing}{
-  \__setspaceenhanced_set_spacing:nn {} {onehalf}
+  \@@_set_spacing:nn {} {onehalf}
 }
 \renewcommand*{\doublespacing}{
-  \__setspaceenhanced_set_spacing:nn {} {double}
+  \@@_set_spacing:nn {} {double}
 }
 \renewcommand*{\SetSinglespace}[1]{
-  \fp_set:Nn \@@_single_factor_fp { #1 }
+  \fp_set:Nn \g_@@_single_factor_fp { #1 }
 }
 %    \end{macrocode}
 % \end{command}

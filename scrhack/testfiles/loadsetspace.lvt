@@ -20,9 +20,9 @@
 \TEST{Has setspacebytocbasic been loaded automatically (should be YES)?}{%
   \typeout{\IfPackageLoadedTF{setspaceenhanced}{YES}{NO}}%
   \typeout{\string\baselinestretch\space is \baselinestretch}%
-  \typeout{\expandafter\string\csname __setspaceenhanced_fp\endcsname\space is
+  \typeout{\expandafter\string\csname g__setspaceenhanced_fp\endcsname\space is
            \csname fp_to_decimal:N\expandafter\endcsname
-	   \csname __setspaceenhanced_fp\endcsname}%
+	   \csname g__setspaceenhanced_fp\endcsname}%
 }
 \END
 \begin{document}

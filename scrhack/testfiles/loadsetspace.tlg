@@ -13,5 +13,5 @@ TEST 3: Has setspacebytocbasic been loaded automatically (should be YES)?
 ============================================================
 YES
 \baselinestretch is 1.25
-\__setspaceenhanced_fp is 1.5
+\g__setspaceenhanced_fp is 1.5
 ============================================================

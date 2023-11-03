@@ -297,7 +297,7 @@ corresponding package.
   \hfill initial: \optvalue{true}, default: \optvalue{true}\\
   After package \pkg{setspace} is loaded, load also package
   \pkg{setspaceenhanced} with the same options plus options \opt{byselectfont}
-  and \opt{fontsize}.
+  and \opt{keepfontsize}.
 \item[\opt{standardsectioning=\meta{boolean}}:]
   \DescribeOption[noprint]{standardsectioning=\meta{boolean}}%
   \hfill initial: \optvalue{false}, default: \optvalue{true}\\
@@ -870,7 +870,7 @@ corresponding package.
                                 {
                                   [ \use:c { @raw@opt@setspace.sty },
                                     byselectfont,
-                                    fontsize ]
+                                    keepfontsize ]
                                 }
                                 { setspaceenhanced }
                             }

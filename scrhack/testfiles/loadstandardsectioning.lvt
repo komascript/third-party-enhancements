@@ -5,7 +5,7 @@
 \RequirePackage[standardsections]{scrhack}
 \documentclass{scrartcl}
 \START
-\TEST{Does setting true again work without error (should be empty?}{%
+\TEST{Does setting true again work without error but info?}{%
   \SetKeys[scrhack]{standardsections=true}%
 }
 \OMIT

@@ -1,6 +1,6 @@
 # Package `lscapeenhanced`
 
-Copyright © 2008–2023 Markus Kohm
+Copyright © 2008–2024 Markus Kohm
 
 Release: unreleased
 
@@ -39,9 +39,7 @@ from the KOMA-Script collection, it was decided to create independent packages
 from the individual hacks. These new independent packages then serve as
 replacements for the original packages they were intended to improve. Package
 `lscapeenhanced` is such an enhancement package. It provides additional
-features of using package [`tocbasic`](https://ctan.org/pkg/tocbasic) by
-patching and extending package [`lscape`](https://ctan.org/pkg/lscape) resp.
- [`pdflscape`](https://ctan.org/pkg/pdflscape).
+features and a consistent handling of `\textwidth` and `\textheight`.
 
 # Installation for Users
 

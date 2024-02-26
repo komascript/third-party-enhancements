@@ -48,24 +48,24 @@ The project consists of several sub-folders. Each of these hosts one of the
 standalone packages. These are:
 
 * `scrhack` — compatibility package to emulate the former KOMA-Script package
-  `scrhack`.
-* `floatbytocbasic` — an enhancement to package
+  `scrhack` (not yet released).
+* [`floatbytocbasic`](https://ctan.org/pkg/floatbytocbasic) — an enhancement to package
   [`float`](https://ctan.org/pkg/float) using package
   [`tocbasic`](https://ctan.org/pkg/tocbasic).
-* `floatrowbytocbasic` — an enhancement to package
+* [`floatrowbytocbasic`](https://ctan.org/pkg/floatrowbytocbasic) — an enhancement to package
   [`floatrow`](https://ctan.org/pkg/float) using package
   [`tocbasic`](https://ctan.org/pkg/tocbasic).
 * `listingsbytocbasic` — an enhancement to package
   [`listings`](https://ctan.org/pkg/listings) using package
-  [`tocbasic`](https://ctan.org/pkg/tocbasic) (withdrawn without beeing
-  released).
+  [`tocbasic`](https://ctan.org/pkg/tocbasic) ([withdrawn without beeing
+  released](https://github.com/komascript/third-party-enhancements/tree/main/listingsbytocbasic#readme)).
 * `lscapeenhanced` — an enhancement to package
   [`lscape`](https://ctan.org/pkg/lscape) resp. package
-  [`pdflscape`](https://ctan.org/pkg/pdflscape).
-* `setspaceenhanced` — an enhancement to package
+  [`pdflscape`](https://ctan.org/pkg/pdflscape) (not yet released).
+* [`setspaceenhanced`](https://ctan.org/pkg/setspaceenhanced) — an enhancement to package
   [`setspace`](https://ctan.org/pkg/lscape).
 * `standardsectioning` — defining the sectioning commands of the standard
-  classes.
+  classes (not yet released).
 
 There is also a `build.lua` for `l3build` in the main folder. However, this
 should be used only to do all the checks using:

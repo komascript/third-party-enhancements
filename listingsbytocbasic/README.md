@@ -1,14 +1,14 @@
 # Package `listingsbytocbasic`
 
-Copyright © 2008–2023 Markus Kohm
+Copyright © 2008–2024 Markus Kohm
 
-Release: unreleased
+Release: stays unreleased
 
 License: LPPL 1.3c
 
 Thanks to Jobst Hoffmann's willingness to integrate the complete functionality
-into the package [`listings`](https://ctan.org/pkg/listings), this work could
-be withdrawn before the first release.
+into release 1.10 of [the `listings` package](https://ctan.org/pkg/listings),
+this work was withdrawn before the first release.
 
 ----------------------------------------------------------------------------
 
@@ -40,10 +40,10 @@ provides additional features of using package
 [`tocbasic`](https://ctan.org/pkg/tocbasic) by patching package
 [`listings`](https://ctan.org/pkg/float). But thanks to Jobst Hoffmann's
 willingness to integrate the complete functionality into the package
-[`listings`](https://ctan.org/pkg/listings), this work could be withdrawn
+[`listings`](https://ctan.org/pkg/listings), this work was withdrawn
 before the first release.
 
 # How to Report Issues
 
-Please don't report issues to this package any longer. It is finalized and
-will not be oficially released.
+Please refrain from reporting any further issues with this package as it has
+been finalized and will not receive an official release.

@@ -115,7 +115,7 @@ tracker](https://github.com/komascript/third-party-enhancements/issues). You
 can also become a developer and, e.g., make new test files to the
 packages. See the [`l3build`](https://ctan.org/pkg/l3build) manual for more
 information about tests. If you've created a new test and think that it would
-be useful. Please either do a pull request or [add a new
+be useful, please either do a pull request or [add a new
 issue](https://github.com/komascript/third-party-enhancements/issues/new/choose)
 and include your test file.
 

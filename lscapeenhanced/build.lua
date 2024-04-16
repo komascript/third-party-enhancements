@@ -2,7 +2,7 @@
 
 --[[
    Build script for lscapeenhanced (KOMA-Script spin-off)
-   Copyright © 2023 Markus Kohm
+   Copyright © 2023–2024 Markus Kohm
 
    This file is part of the build system of lscapeenhanced.
 
@@ -17,8 +17,7 @@
          lscapeenhanced.
 ]]
 
-release_info = "2023-07-19 v0.1"
-
+release_info = "2024-04-16 v1.0"
 -- Bundle and modules
 
 module  = "lscapeenhanced"
@@ -42,9 +41,9 @@ uploadconfig = {
    summary  = "an enhancement to package lscape resp. pdflscape",
    topic    = { "landscape", "layout" },
    ctanPath = "/macros/latex/contrib/"..module,
-   home        = "https://github.com/komascript/thirdpartyhacks",
-   bugtracker  = "https://github.com/komascript/thirdpartyhacks/issues",
-   description = "The package solved an issue with the detection of text height, e.g., by package `scrlayer` or `showframe`, when using `landscape` environment of package `lscape` or `pdflscape`.",
+   home        = "https://github.com/komascript/third-party-enhancements",
+   bugtracker  = "https://github.com/komascript/third-party-enhancements/issues",
+   description = "The package solves an issue with the detection of text height, e.g., by package `scrlayer` or `showframe`, when using `landscape` environment of package `lscape` or `pdflscape`.",
    version     = release_info,
    announcement_file = "announcement-" .. release_info .. ".txt",
    note_file         = "upload-note-" .. release_info .. ".txt",

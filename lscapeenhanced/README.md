@@ -2,7 +2,7 @@
 
 Copyright © 2008–2024 Markus Kohm
 
-Release: unreleased
+Release: 2024-04-16 v1.0
 
 License: LPPL 1.3c
 
@@ -49,12 +49,33 @@ distribution to install the package.
 
 # Unpacking for Distributors
 
-Distributors should be aware that there is no official release of the new
-standalone packages `lscapeenhanced` yet. There is only a developer
-version. The first official release will hopefully come with the next
-KOMA-Script release.
+Distributors should download [the distribution from
+CTAN](https://www.ctan.org/pkg/lscapeenhanced). This consists in:
 
-*For now, distributors should just ignore this package.*
+* `lscapeenhanced.dtx`
+* `README.md`
+* `LICENSE.md`
+* `lscapeenhanced.pdf`
+
+If distributors also want to distribute `lscapeenhanced.sty`, they can
+unpack it using
+
+    tex lscapeenhanced.dtx
+	
+Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
+`lualatex`!
+
+Note also, that a legal distribution consists at least in:
+
+* `lscapeenhanced.dtx`
+* `README.md`
+
+The following files are optionally, but must not be distributed without the
+previous ones:
+
+* `LICENSE.md`
+* `lscapeenhanced.sty`
+* `lscapeenhanced.pdf`
 
 # Unpacking and Installation for Developers
 
@@ -94,7 +115,7 @@ tracker](https://github.com/komascript/third-party-enhancements/issues). You
 can also become a developer and, e.g., make new test files to the
 packages. See the [`l3build`](https://ctan.org/pkg/l3build) manual for more
 information about tests. If you've created a new test and think that it would
-be useful. Please either do a pull request or [add a new
+be useful, please either do a pull request or [add a new
 issue](https://github.com/komascript/third-party-enhancements/issues/new/choose)
 and include your test file.
 

@@ -59,9 +59,9 @@ standalone packages. These are:
   [`listings`](https://ctan.org/pkg/listings) using package
   [`tocbasic`](https://ctan.org/pkg/tocbasic) ([withdrawn without beeing
   released](https://github.com/komascript/third-party-enhancements/tree/main/listingsbytocbasic#readme)).
-* `lscapeenhanced` — an enhancement to package
+* [`lscapeenhanced`](https://ctan.org/pkg/lscapeenhanced) — an enhancement to package
   [`lscape`](https://ctan.org/pkg/lscape) resp. package
-  [`pdflscape`](https://ctan.org/pkg/pdflscape) (not yet released).
+  [`pdflscape`](https://ctan.org/pkg/pdflscape).
 * [`setspaceenhanced`](https://ctan.org/pkg/setspaceenhanced) — an enhancement to package
   [`setspace`](https://ctan.org/pkg/lscape).
 * `standardsectioning` — defining the sectioning commands of the standard

@@ -273,11 +273,12 @@ corresponding package.
   results in a warning. Using \opt{hyperref=false} results in an info only.
 \item[\opt{listings=\meta{boolean}}:] 
   \DescribeOption[noprint]{listings=\meta{boolean}}%
-  \hfill initial: \optvalue{true}, default: \optvalue{true}\\
-  After package \pkg{listings} is loaded, load also package
-  \pkg{listingsbytocbasic} to fix the issue explained in
-  \autoref{sec:history}. This also provides the full functionality of
-  \pkg{tocbasic} to \pkg{listings}.
+  \hfill
+  \marginline{\raisebox{\dimexpr\ht\strutbox-\height\relax}{\Huge\textcolor{red}{!}}}%
+  initial: \optvalue{false}, default: \optvalue{true}\\
+  Option \opt{listings} is deprecated. It is implemented for compatibility
+  reasons only. Using \opt{listings} without value or \opt{listings=true}
+  results in a warning. Using \opt{listings=false} results in an info only.
 \item[\opt{lscape=\meta{boolean}}:] 
   \DescribeOption[noprint]{lscape=\meta{boolean}}%
   \hfill initial: \optvalue{true}, default: \optvalue{true}\\
@@ -334,7 +335,9 @@ corresponding package.
   initial: \optvalue{true}, default: \optvalue{true}\\
   After package \pkg{listings} is loaded, load \file{listings.hak} to fix the
   issue explained in \autoref{sec:history}. This also provides the full
-  functionality of \pkg{tocbasic} to \pkg{listings}.
+  functionality of \pkg{tocbasic} to old versions of \pkg{listings}. With
+  newer versions, also the legacy version of \pkg*{scrhack} automatically
+  deactivates this unnecessary patch.
 \item[\opt{lscape=\meta{boolean}}:] \hfill
   initial: \optvalue{true}, default: \optvalue{true}\\
   The \pkg{lscape} package defines a \env{landscape} environment to set the
@@ -659,59 +662,30 @@ corresponding package.
 % \ExplSyntaxOn
 % \begin{macro}{\__scrhack_switch_listings:n}
 % \ExplSyntaxOff
-% This is used to switch the state and add or remove the hook if needed. A new
-% boolean is used to know, whether the hook has been put. Using
-% \opt{listings=true}, if package \pkg{listingsbytocbasic} already has been
-% loaded isn't a foul. So we just write an information to the \file{log}. But
-% using \opt{listings=false}, if package \pkg{listingsbytocbasic} already has
-% been loaded may be wrong. So we use a warning message. We also warn if a not
-% allowed value is used.
+% This is somehow special, because the hack is deprecated. It only has
+% been needed for \pkg{listings} version released before 2024-02-15. So
+% instead of using any patch hacks, users should update \pkg{listings}. So
+% emulating the hack does not make sense. Instead the initial value of the
+% option is changed to implicit \optvalue{false} and switching it on
+% explicitly does result in a warning.
 %    \begin{macrocode}
-\bool_new:N \@@_listings_bool
-
 \cs_new:Nn \@@_switch_listings:n
   {
     \str_case_e:nnF { \str_foldcase:n { #1 } }
       {
         {true}  {
-                  \@ifpackageloaded { listingsbytocbasic }
-                    {
-                      \msg_info:nnnn { scrhack } { option-too-late }
-                        { listings = true } { listingsbytocbasic }
-                    }
-                    {
-                      \bool_if:NF \@@_listings_bool
-                        {
-                          \hook_gput_code:nnn { package/listings/after }
-                                              { scrhack }
-                            {
-                              \RequirePackage { listingsbytocbasic }
-                            }
-                          \bool_gset_true:N \@@_listings_bool
-                        }  
-                    }
+                  \msg_warning:nnn { scrhack } { deprecated-option }
+                                   { listings=#1 }
                 }
         {false} {
-                  \@ifpackageloaded { listingsbytocbasic }
-                    {
-                      \msg_warning:nnnn { scrhack } { option-too-late }
-                        { listings=false } { listingsbytocbasic }
-                    }
-                    {
-                      \bool_if:NT \@@_listings_bool
-                        {
-                          \hook_gremove_code:nn { package/listings/after }
-                                                { scrhack }
-                        }
-                      \bool_gset_false:N \@s@_listings_bool
-                    }
+                  \msg_info:nnn { scrhack } { deprecated-option }
+                                { listings=#1 }
                 }
       }
       {
         \msg_warning:nnn { keys } { boolean-values-only } { listings }
       }
   }
-\SetKeys{listings=true}
 %    \end{macrocode}
 % \end{macro}
 % \ExplSyntaxOff

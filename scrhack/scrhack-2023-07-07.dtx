@@ -53,7 +53,7 @@
 %<nomencl&identify>\ProvidesFile{nomencl.hak}[%
 %<standardsections&identify>\ProvidesFile{standardsections.hak}[%
 %<*dtx|identify>
-  2023-07-07 v3.41
+  2024-04-17 v3.42
 %<*dtx>
   source of
 %</dtx>
@@ -322,7 +322,7 @@
       \KOMAExecuteOptions[scrhack.sty]{hyperref=false}%
     }{%
       \AtEndOfPackage{%
-        \KOMA@key[scrhack.sty]{hyperref}{%
+        \KOMA@key[scrhack.sty]{hyperref}[true]{%
           \PackageWarning{scrhack}{option `hyperref=#1' ignored}%
           \FamilyKeyStateProcessed
         }%
@@ -744,14 +744,21 @@
 % effort to do so, it very small and I do not understand, why package authors
 % are not willing to use it. Because the benefit would be a lot.
 %
-% This hack adds \pkg*{tocbasic} usage to \pkg{listings}. Nevertheless it is
-% more complicated than adding \pkg*{tocbasic} support into \pkg{listings}.
+% This hack adds \pkg*{tocbasic} usage to old versions of
+% \pkg{listings}. Nevertheless it is more complicated than adding
+% \pkg*{tocbasic} support into \pkg{listings}.
 %
 % \begin{option}{listings}
 % \changes{v3.12}{2013/03/05}{using \cs{FamilyKeyStateProcessed}}
 % \changes{v3.17}{2015/03/09}{using \cs{KOMAExecuteOptions}}
 % \changes{v3.39}{2022/11/11}{initial dot in member argument of \cs{KOMA@key}
 %   removed}
+% \changes{v3.42}{2024/04/17}{automatic deactivation for new \pkg{listings}}
+% Note: The deactivation of the hack for new version of \pkg{listings} cannot
+% be done comparing the \pkg{listings} version, because \pkg{listings} version
+% 1.10 uses \cs{AtEndOfPackage} for \cs{ProvidesPackage} and therefore the
+% version is not defined when the after package hook is executed. So we test
+% instead the \pkg{lstmisc} version.
 %    \begin{macrocode}
 %<*package&option>
 \KOMA@ifkey{listings}{@scrhack@listings}
@@ -759,11 +766,18 @@
 %</package&option>
 %<*package&body>
 \AfterPackage*{listings}{%
-  \KOMA@key[scrhack.sty]{listings}{%
-    \PackageWarning{scrhack}{option `listings' ignored}%
+  \@ifpackagelater{lstmisc}{2024/02/15}{%
+    \PackageInfo{scrhack}{listings hack deactivated because of\MessageBreak
+      detection of listings version, that doesn't\MessageBreak
+      need that hack,}%
+    \KOMAExecuteOptions[scrhack.sty]{listings=false}%
+  }{%
+    \if@scrhack@listings\scr@hack@load\@pkgextension{listings}\fi
+  }%
+  \KOMA@key[scrhack.sty]{listings}[true]{%
+    \PackageWarning{scrhack}{option `listings=#1' ignored}%
     \FamilyKeyStateProcessed
   }%
-  \if@scrhack@listings\scr@hack@load\@pkgextension{listings}\fi
 }
 %</package&body>
 %    \end{macrocode}

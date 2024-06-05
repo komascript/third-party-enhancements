@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 % ======================================================================
 % standardsectioning.dtx
-% Copyright © 2008–2023 Markus Kohm
+% Copyright © 2008–2024 Markus Kohm
 %
 % This work is a KOMA-Script spin-off.  For the original sources of
 % KOMA-Script's `float.hak' see file `scrhack.dtx' in the KOMA-Script
@@ -42,12 +42,12 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesExplPackage{standardsectioning}
-  {2023-07-28}{0.1}
+  {2024-06-05}{0.1}
   {%
 %<*dtx>
     sources and unpack driver of
 %</dtx>
-    re-implementation of deprecated KOMA-Script code%
+    forcing standard class sectioning definitions%
   }
 %</dtx|package>
 %<*dtx>
@@ -253,6 +253,40 @@ same:
   \AfterClass{scrreport}{\RequirePackage{standardsectioning}}
 \end{verbatim}
 also \emph{before} loading the class.
+
+\section{How to select the correct sectioning code, if the automatism fails?}
+\label{sec:options}
+
+By default, the package uses an automatism to decide which code of which
+standard class should be used. If the \KOMAScript{} class \cls{scrartcl} is
+detected, automatically the code of \cls{article} is used. If the
+\KOMAScript{} class \cls{scrreprt} is detected, automatically the code of
+\cls{report} is used. If the \KOMAScript{} class \cls{scrbook} is detected,
+automatically the code of \cls{book} is used. If none of these classes is
+detected, the existence of two commands is used. If \cs{chapter} is not
+defined, the code of \cls{article} is used. If \cs{chapter} is defined, but
+\cs{frontmatter} is not defined, the code of \cls{report} is used. If both
+\cs{chapter} and \cs{frontmatter} are defined, the code of \cls{book} is used.
+
+%\DescribeOption{article}
+%\DescribeOption{book}
+%\DescribeOption{report}
+Very seldom this automatism fails and the wrong code is used, which results in
+error messages or printing mistakes. In this case you can load package
+\pkg*{standardsectioning} with one of the options \opt{article}, \opt{report}
+or \opt{book} to force the usage of the sectioning code of either
+\cls{article}, \cls{report}, or \cls{book}. This could, e.g., be needed, if
+you are using a class, that defines \cs{chapter} and \cs{frontmatter} but not
+\cs{if@mainmatter}. In this case, you should use
+\begin{verbatim}
+  \usepackage[report]{standardsectioning}
+\end{verbatim}
+instead of
+\begin{verbatim}
+  \usepackage{standardsectioning}
+\end{verbatim}
+because otherwise the not defined \cs{if@mainmatter} will result in errors,
+when using \cs{chapter}.
 % \iffalse
 %</doc>
 % \fi
@@ -281,10 +315,14 @@ also \emph{before} loading the class.
     Loading aborted!
   }
 
-\msg_new:nnn { standardsectioning }
-  { deactivate-extended-section-commands }
+\msg_new:nnn { standardsectioning } { deactivate-extended-section-commands }
   {
     extended~sectioning~option~handling~deactivated.
+  }
+
+\msg_new:nnn { standardsectioning } { no-force-with-KOMA-Script-class }
+  {
+    package~option~`#1'~is~ignored~due~to~usage~of~KOMA-Script~class~\KOMAClassName.
   }
 %    \end{macrocode}
 %
@@ -370,6 +408,13 @@ also \emph{before} loading the class.
     \cs_undefine:N \ProvideSectionCommands
 %    \end{macrocode}
 % \end{command}
+% \begin{macro}{\minisec}
+% This also has to be undefined, because it also uses internal \KOMAScript{}
+% definitions, which are deactivated.
+%    \begin{macrocode}
+    \cs_undefine:N \minisec
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\scr@chapter@before@hyperref@patch,
 %               \scr@chapter@after@hyperref@patch}
 % Now, definitions without respecting \pkg{hyperref} are used, so
@@ -446,7 +491,8 @@ also \emph{before} loading the class.
 %   \paragraph,\subparagraph}
 % These commands are redefined using code from
 % \href{https://ctan.org/tex-archive/macros/latex/base/classes.dtx}
-%      {\file{classes.dtx}}.
+%      {\file{classes.dtx}}
+% 2024/02/08 v1.4n.
 % Only \cs{newcommand} is replaced by \cs{def} and \texttt{\#} are
 % doubled. Depending on the class, we use different code:
 % \ExplSyntaxOn
@@ -462,33 +508,34 @@ also \emph{before} loading the class.
       \addvspace{4ex}%
       \@afterindentfalse
       \secdef\@part\@spart}%
-      \def\@part[##1]##2{%
-        \ifnum \c@secnumdepth >\m@ne
-          \refstepcounter{part}%
-          \addcontentsline{toc}{part}{\thepart\hspace{1em}##1}%
-        \else
-          \addcontentsline{toc}{part}{##1}%
-        \fi
-        {\parindent \z@ \raggedright
-         \interlinepenalty \@M
-         \normalfont
-         \ifnum \c@secnumdepth >\m@ne
-           \Large\bfseries \partname\nobreakspace\thepart
-           \par\nobreak
-         \fi
-         \huge \bfseries ##2%
-         \markboth{}{}\par}%
-        \nobreak
-        \vskip 3ex
-        \@afterheading}%
+    \def\@part[##1]##2{%
+      \ifnum \c@secnumdepth >\m@ne
+        \refstepcounter{part}%
+        \addcontentsline{toc}{part}{\thepart\hspace{1em}##1}%
+      \else
+        \addcontentsline{toc}{part}{##1}%
+      \fi
+      {\parindent \z@ \raggedright
+       \interlinepenalty \@M
+       \normalfont
+       \ifnum \c@secnumdepth >\m@ne
+         \Large\bfseries \partname\nobreakspace\thepart
+         \par\nobreak
+       \fi
+       \huge \bfseries ##2%
+       \markboth{}{}\par}%
+      \nobreak
+      \vskip 3ex
+      \@afterheading}%
     \def\@spart##1{%
-        {\parindent \z@ \raggedright
-         \interlinepenalty \@M
-         \normalfont
-         \huge \bfseries ##1\par}%
-         \nobreak
-         \vskip 3ex
-         \@afterheading}%
+      {\parindent \z@ \raggedright
+        \interlinepenalty \@M
+        \normalfont
+        \huge \bfseries ##1\par}%
+      \nobreak
+      \vskip 3ex
+      \@afterheading}%
+
     \def\section{\@startsection {section}{1}{\z@}%
                                        {-3.5ex \@plus -1ex \@minus -.2ex}%
                                        {2.3ex \@plus.2ex}%
@@ -741,27 +788,26 @@ also \emph{before} loading the class.
         \Huge \bfseries  ##1\par\nobreak
         \vskip 40\p@
       }}
-    \newcommand\section{\@startsection {section}{1}{\z@}%
+    \def\section{\@startsection {section}{1}{\z@}%
                                        {-3.5ex \@plus -1ex \@minus -.2ex}%
                                        {2.3ex \@plus.2ex}%
                                        {\normalfont\Large\bfseries}}
-    \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    \def\subsection{\@startsection{subsection}{2}{\z@}%
                                          {-3.25ex\@plus -1ex \@minus -.2ex}%
                                          {1.5ex \@plus .2ex}%
                                          {\normalfont\large\bfseries}}
-    \newcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    \def\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                          {-3.25ex\@plus -1ex \@minus -.2ex}%
                                          {1.5ex \@plus .2ex}%
                                          {\normalfont\normalsize\bfseries}}
-    \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+    \def\paragraph{\@startsection{paragraph}{4}{\z@}%
                                         {3.25ex \@plus1ex \@minus.2ex}%
                                         {-1em}%
                                         {\normalfont\normalsize\bfseries}}
-    \newcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+    \def\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
                                            {3.25ex \@plus1ex \@minus .2ex}%
                                            {-1em}%
                                           {\normalfont\normalsize\bfseries}}
-    \@@_standard_sectioning_common_code:
   }
 %    \end{macrocode}
 % \end{macro}
@@ -772,57 +818,99 @@ also \emph{before} loading the class.
 %
 % If a \KOMAScript{} class has been loaded we need use the common deactivation
 % code and the \cls*{article} sectioning code.
+% \ExplSyntaxOn
+% \begin{macro}{\@@_acticvation_code:}
+% \ExplSyntaxOff
 %    \begin{macrocode}
-\@ifclassloaded { scrartcl }
+\cs_new:Nn \@@_activation_code:
   {
-    \@@_common_komascript_deactivation_code:
-    \@@_article_sectioning_code:
-  }
-  {
+    \@ifclassloaded { scrartcl }
+      {
+        \@@_common_komascript_deactivation_code:
+        \@@_article_sectioning_code:
+      }
+      {
 %    \end{macrocode}
 % \begin{command}{\chapterlineswithprefixformat,\chapterlinesformat}
 % For \cls*{scrbook} and \cls*{scrreprt} we need additional deactivation
 % code and the \cls*{book} resp. \cls*{report} sectioning code.
 %    \begin{macrocode}
-    \@ifclassloaded { scrbook }
-      {
-        \@@_common_komascript_deactivation_code:
-        \cs_undefine:N \chapterlineswithprefixformat
-        \cs_undefine:N \chapterlinesformat
-        \@@_book_sectioning_code:
-      }
-      {
-        \@ifclassloaded { scrreprt }
+        \@ifclassloaded { scrbook }
           {
             \@@_common_komascript_deactivation_code:
             \cs_undefine:N \chapterlineswithprefixformat
             \cs_undefine:N \chapterlinesformat
-            \@@_report_sectioning_code:
+            \@@_book_sectioning_code:
           }
           {
+            \@ifclassloaded { scrreprt }
+              {
+                \@@_common_komascript_deactivation_code:
+                \cs_undefine:N \chapterlineswithprefixformat
+                \cs_undefine:N \chapterlinesformat
+                \@@_report_sectioning_code:
+              }
+              {
 %    \end{macrocode}
 % \end{command}
 % For all other classes, we use a heuristic to either use the sectioning code
 % of \cls*{article}, \cls*{book}, or \cls*{report}
 %    \begin{macrocode}
-            \cs_if_exist:NTF \chapter
-              {
-                \cs_if_exist:cTF { frontmatter }
+                \cs_if_exist:NTF \chapter
                   {
-                    \@@_book_sectioning_code:
+                    \cs_if_exist:cTF { frontmatter }
+                      {
+                        \@@_book_sectioning_code:
+                      }
+                      {
+                        \@@_report_sectioning_code:
+                      }
                   }
                   {
-                    \@@_report_sectioning_code:
+                    \@@_article_sectioning_code:
                   }
               }
-              {
-                \@@_article_sectioning_code:
-              }
+          }
+       }
+  }   
+%    \end{macrocode}
+% \end{macro}
+% \ExplSyntaxOff
+%
+% \begin{option}{book,article,report}
+%   These options can be used to force the usage of one of the selection
+%   codes, but only if no \KOMAScript{} class has been used. So in the code
+%   section we first have to test for a \KOMAScript{} class and either throw a
+%   warning or do the redefinition of \cs{@@\_activation\_code:}.
+%    \begin{macrocode}
+\DeclareKeys
+  {
+    article .meta:nn = { @@/internal } { force=article },
+    article .usage   = load,
+    book    .meta:nn = { @@/internal } { force=book },
+    book    .usage   = load,
+    report  .meta:nn = { @@/internal } { force=report },
+    report  .usage   = load,
+  }
+\keys_define:nn { @@/internal }
+  {  
+     force .code =
+      {
+        \cs_if_exist:NTF \KOMAClassName
+          {
+            \msg_warning:nnn { standardsectioning }
+                             { no-force-with-KOMA-Script-class }
+                             { #1 }
+          }
+          {
+            \cs_set_eq:Nc \@@_activation_code: { @@_#1_sectioning_code: }
           }
       }
   }
+\ProcessKeyOptions
+\@@_activation_code:  
 %    \end{macrocode}
-%
+% \end{option}
 %
 % \iffalse
 %</package>

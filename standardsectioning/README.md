@@ -1,6 +1,6 @@
 # Package `standardsectioning`
 
-Copyright © 2019–2023 Markus Kohm
+Copyright © 2019–2024 Markus Kohm
 
 Release: unreleased
 

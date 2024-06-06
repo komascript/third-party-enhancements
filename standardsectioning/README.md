@@ -38,7 +38,7 @@ completely different implementation of the sectioning commands. But some
 packages depend on an implementation similar to the standard classes.
 
 Package `standardsectioning` implements these commands with the code of the
-standard classes. If used with a KOMA-Script clas, it also deactivates parts
+standard classes. If used with a KOMA-Script class, it also deactivates parts
 of the KOMA-Script user interface, which should not be used with these
 changes. These are more or less all commands to configure sectioning
 commands. It also undefines some internal macros of KOMA-Script.

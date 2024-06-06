@@ -2,8 +2,7 @@
 
 Copyright © 2019–2024 Markus Kohm
 
-Release: 2024-06-06 v0.1
-
+Release: 2024-06-06 v0.9
 License: LPPL 1.3c
 
 KOMA presents the `standardsectioning` micro package to force the usage of

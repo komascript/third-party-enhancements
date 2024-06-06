@@ -73,8 +73,8 @@ function update_tag (file,content,tagname,tagdate)
                           "  {" .. tagdate .. "}{" .. tagname .. "}\n" )
    elseif string.match (file, "%.md$") then
       return string.gsub (content,
-                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+  \n",
-                          "\nRelease: " .. tagdate .. " v" .. tagname .. "  \n")
+                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+%s*\n",
+                          "\nRelease: " .. tagdate .. " v" .. tagname .. "\n")
    elseif string.match (file, "%.lua$") then
       return string.gsub (content,
                           '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"+%s*\n',

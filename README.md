@@ -64,8 +64,8 @@ standalone packages. These are:
   [`pdflscape`](https://ctan.org/pkg/pdflscape).
 * [`setspaceenhanced`](https://ctan.org/pkg/setspaceenhanced) — an enhancement to package
   [`setspace`](https://ctan.org/pkg/lscape).
-* `standardsectioning` — defining the sectioning commands of the standard
-  classes (not yet released).
+* [`standardsectioning`](https://ctan.org/pkg/standardsectioning) — defining the sectioning commands of the standard
+  classes.
 
 There is also a `build.lua` for `l3build` in the main folder. However, this
 should be used only to do all the checks using:

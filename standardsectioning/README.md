@@ -2,14 +2,14 @@
 
 Copyright © 2019–2024 Markus Kohm
 
-Release: unreleased
+Release: 2024-06-06 v0.1
 
 License: LPPL 1.3c
 
-KOMA presents the `standardsectioning` package to bring back deprecated,
-superseded or removed implementations of
-[KOMA-Script](https://www.ctan.org/pkg/koma-script) classes at the cost of
-breaking corresponding new features of those classes.
+KOMA presents the `standardsectioning` micro package to force the usage of
+the sectioning command definition of the standard classes also when using
+other classes like the [KOMA-Script](https://www.ctan.org/pkg/koma-script)
+classes.
 
 ----------------------------------------------------------------------------
 
@@ -38,16 +38,16 @@ completely different implementation of the sectioning commands. But some
 packages depend on an implementation similar to the standard classes.
 
 Package `standardsectioning` implements these commands with the code of the
-standard classes and also deactivates parts of the KOMA-Script user interface,
-which should not be used with these changes. These are more or less all
-commands to configure sectioning commands. It also reverts some
-internal macros of KOMA-Script.
+standard classes. If used with a KOMA-Script clas, it also deactivates parts
+of the KOMA-Script user interface, which should not be used with these
+changes. These are more or less all commands to configure sectioning
+commands. It also undefines some internal macros of KOMA-Script.
  
 # Note
 
 Using package `standardsectioning` is only a kind of first-aid
-workaround. Usually is is better not to use the incompatible package with
-KOMA-Script.
+workaround. Usually it is better not to use the incompatible package with
+KOMA-Script similar classes.
 
 This package is also a replacement of the `standardsections.hak` of
 `scrhack` before version 3.42.
@@ -60,12 +60,34 @@ distribution to install all the packages.
 
 # Unpacking for Distributors
 
-Distributors should be aware that there is no official release of the new
-standalone packages `standardsectioning` yet. There is only a developer
-version. The first official release will hopefully come with the next
-KOMA-Script release.
+Distributors should download [the distribution from
+CTAN](https://www.ctan.org/pkg/standardsectioning). This consists in:
 
-*For now, distributors should just ignore this package.*
+* `standardsectioning.dtx`
+* `README.md`
+* `LICENSE.md`
+* `standardsectioning.pdf`
+
+If distributors also want to distribute `standardsectioning.sty`, they can
+unpack it using
+
+    tex standardsectioning.dtx
+	
+Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
+`lualatex`!
+
+Note also, that a legal distribution consists at least in:
+
+* `standardsectioning.dtx`
+* `README.md`
+
+The following files are optionally, but must not be distributed without the
+previous ones:
+
+* `LICENSE.md`
+* `standardsectioning.sty`
+* `standardsectioning.pdf`
+
 
 # Unpacking and Installation for Developers
 
@@ -101,17 +123,22 @@ Developers or distributors can also build the manual from the source using:
 
 To become a contributor, e.g., do heavy testing. If you find an issue, please
 report it using [the issue
-tracker](https://github.com/komascript/third-party-enhancements/issues). You
-can also become a developer and, e.g., make new test files to the
+tracker](https://github.com/komascript/third-party-enhancements/issues). 
+Please note, however, that the loss of class features as a result of using 
+this package is generally an intended side effect and does not necessarily
+constitute an issue.
+
+You can also become a developer and, e.g., make new test files to the
 packages. See the [`l3build`](https://ctan.org/pkg/l3build) manual for more
 information about tests. If you've created a new test and think that it would
 be useful. Please either do a pull request or [add a new
 issue](https://github.com/komascript/third-party-enhancements/issues/new/choose)
 and include your test file.
 
-Another kind of contribution would be to contact an author of one of the
-third-party packages and convince her or him to integrate the code of the
-corresponding enhancement package from this project into her or his package.
+Another kind of contribution would be to contact the author of the package,
+that depends on the sectioning implementation of the standard classes and is
+therefore incompatible with the class you are using to convince her or him to
+make his package compatible.
 
 # How to Report Issues
 
@@ -120,6 +147,9 @@ If you think you have found a bug (or another kind of issue) using
 tracker](https://github.com/komascript/third-party-enhancements/issues). Please
 first search for similar issues already reported and maybe also already fixed
 and closed. Maybe the replies to such a similar report would help you too.
+Please also note, however, that the loss of class features as a result of using 
+this package is generally an intended side effect and does not necessarily
+constitute a bug.
 
 If your issue is new, you should report it also using [the issue
 tracker](https://github.com/komascript/third-party-enhancements/issues). Please

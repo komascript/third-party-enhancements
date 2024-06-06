@@ -17,8 +17,7 @@
          standardsectioning.
 ]]
 
-release_info = "2024-06-05 v0.1"
-
+release_info = "2024-06-06 v0.9"
 -- Bundle and modules
 
 module  = "standardsectioning"
@@ -42,12 +41,14 @@ uploadconfig = {
    summary  = "define sectioning commands identical to the standard classes",
    topic    = { "headings" },
    ctanPath = "/macros/latex/contrib/"..module,
-   home        = "https://github.com/komascript/thirdpartyhacks",
-   bugtracker  = "https://github.com/komascript/thirdpartyhacks/issues",
+   home        = "https://github.com/komascript/hacksthird-party-enhancements",
+   bugtracker  = "https://github.com/komascript/third-party-enhancements/issues",
+   repository  = "https://github.com/komascript/third-party-enhancements/tree/main/standardsectioning",
    description = "The package implements the sectioning commands fully compatible with the standard classes. This is intended, e.g., to make the KOMA-Script classes work with packages like `titlesec`, which depend on the implementation of these commands.",
    version     = release_info,
    announcement_file = "announcement-" .. release_info .. ".txt",
    note_file         = "upload-note-" .. release_info .. ".txt",
+   update      = false
 }
 
 -- Detail how to set the version automatically
@@ -76,8 +77,8 @@ function update_tag (file,content,tagname,tagdate)
                           "\nRelease: " .. tagdate .. " v" .. tagname .. "  \n")
    elseif string.match (file, "%.lua$") then
       return string.gsub (content,
-                          '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"',
-                          '\nrelease_info = "' .. tagdate .. " v" .. tagname .. '"')
+                          '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"+%s*\n',
+                          '\nrelease_info = "' .. tagdate .. " v" .. tagname .. '"\n')
    end
    return content
 end

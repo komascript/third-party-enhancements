@@ -1,6 +1,6 @@
 # Project *third-party enhancements*
 
-Copyright © 2023 Markus Kohm <komascript at gmx.info>
+Copyright © 2023–2024 Markus Kohm <komascript at gmx.info>
 
 Release: See the `README.md` of the individual packages.
 

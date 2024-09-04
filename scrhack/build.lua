@@ -61,7 +61,6 @@ uploadconfig = {
    version     = release_info,
    announcement_file = "announcement-" .. release_info .. ".txt",
    note_file   = "upload-note-" .. release_info .. ".txt",
-   update =false, -- Don't forget to remove this line after first upload!
 }
 
 -- Detail how to set the version automatically

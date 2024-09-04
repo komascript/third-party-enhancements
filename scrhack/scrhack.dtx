@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 % ======================================================================
 % scrhack.dtx
-% Copyright © 2008–2023 Markus Kohm
+% Copyright © 2008–2024 Markus Kohm
 %
 % This work is a KOMA-Script spin-off.  For the original sources of
 % KOMA-Script's `scrhack.sty' see file `scrhack.dtx' in the KOMA-Script
@@ -39,7 +39,7 @@
 %<package>\DeclareCurrentRelease{}{2023-07-15}
 %<*dtx|package>
 %<package>\ProvidesPackage{scrhack}
-             [2023-07-21 v3.42
+             [2024-09-04 v3.42
 %<dtx>              sources and unpack driver of
               scrhack emulation package]
 %</dtx|package>
@@ -219,8 +219,8 @@ corresponding package.
 
 \paragraph{Notes:}
 \begin{itemize}
-\item From version 3.42 you cannot use \cs{KOMAoptions} or \cs{KOMAoption} any
-  longer to change the options. Instead loading \pkg*{scrhack} again with
+\item From version 3.42, you cannot use \cs{KOMAoptions} or \cs{KOMAoption}
+  any longer to change the options. Instead loading \pkg*{scrhack} again with
   other options does not result in an option clash, but in a change of the
   option settings.
 \item Switching off an option of an already loaded enhancement package is
@@ -228,8 +228,9 @@ corresponding package.
   back to a not patched functionality.
 \item Switching on an option of a not yet loaded enhancement package would
   result in loading the enhancement package.
-\item From version 3.42 instead of loading \pkg*{scrhack} you can
-  alternatively load the individual enhancement package only if needed.
+\item From version 3.42, you should no longer load package
+  \pkg*{scrhack}. Instead you can and should simply load the individual
+  enhancement package when you need it.
 \item If you need the old legacy version of \pkg*{scrhack} from
   \href{https://komascript.de/}{\KOMAScript} 3.41 you can use:
 \begin{verbatim}
@@ -302,9 +303,9 @@ corresponding package.
 \item[\opt{standardsectioning=\meta{boolean}}:]
   \DescribeOption[noprint]{standardsectioning=\meta{boolean}}%
   \hfill initial: \optvalue{false}, default: \optvalue{true}\\
-  Define the sectioning commands of the standard classes using the code from
-  the standard classes. If \pkg*{scrhack} is loaded \emph{before} any
-  class\footnote{This is detected heuristic by definition of
+  Load package \pkg{standardsectioning} to (re-)define the sectioning commands
+  using the code from the standard classes. If \pkg*{scrhack} is loaded
+  \emph{before} any class\footnote{This is detected heuristic by definition of
     \cs{normalsize}. If \cs{normalsize} contains \cs{@latex@error} no class
     has been loaded.} the definition is delayed until a class has been loaded.
 \end{description}

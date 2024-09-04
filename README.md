@@ -47,8 +47,7 @@ new standalone packages.
 The project consists of several sub-folders. Each of these hosts one of the
 standalone packages. These are:
 
-* `scrhack` — compatibility package to emulate the former KOMA-Script package
-  `scrhack` (not yet released).
+* [`scrhack`](https://ctan.org/pkg/scrhack) — compatibility package to emulate the former KOMA-Script package `scrhack`.
 * [`floatbytocbasic`](https://ctan.org/pkg/floatbytocbasic) — an enhancement to package
   [`float`](https://ctan.org/pkg/float) using package
   [`tocbasic`](https://ctan.org/pkg/tocbasic).

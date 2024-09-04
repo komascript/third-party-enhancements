@@ -1,16 +1,16 @@
 # Package `scrhack`
 
-Copyright © 2008–2023 Markus Kohm
+Copyright © 2008–2024 Markus Kohm
 
-Release: 2023-07-07 v3.41
+Release: 2024-09-04 v3.42
 
 License: LPPL 1.3c
 
 KOMA presents the compatibility package to emulate the former
-[KOMA-Script](https://www.ctan.org/pkg/koma-script) package `scrhack` as part of
-the *third-party enhancements* project.
+[KOMA-Script](https://www.ctan.org/pkg/koma-script) package `scrhack` as part
+of the *third-party enhancements* project.
 
-----------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 This work may be distributed and/or modified under the conditions of
 the LaTeX Project Public License, version 1.3c of the license.
@@ -23,7 +23,7 @@ This work has the LPPL maintenance status "maintained".
 
 The Current Maintainer and author of this work is Markus Kohm.
 
-----------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 # Abstract
 
@@ -53,20 +53,61 @@ Note: If you have installed a
       [KOMA-Script](https://www.ctan.org/pkg/koma-script) before version 3.42,
       you should also update
       [KOMA-Script](https://www.ctan.org/pkg/koma-script) using the package
-      manager of your TeX distribution. Otherwise it could happen, that the
-      old integrated `scrhack` of
-      [KOMA-Script](https://www.ctan.org/pkg/koma-script) is used instead of
-      the new installed version.
+      manager of your TeX distribution as soon as such an update is
+      availiabe. Otherwise it could happen, that the old integrated `scrhack`
+      of [KOMA-Script](https://www.ctan.org/pkg/koma-script) is used instead
+      of the new installed version. On the one hand, KOMA-Script 3.41 works
+      with both the integrated `scrhack` and the new standalone `scrhack`. On
+      the other hand, KOMA-Script from version 3.42 does not provide an
+      integrated `scrhack`. So installing the new standalone `scrhack` before
+      or at least with KOMA-Script version 3.42 is the best option.
 
 # Unpacking for Distributors
 
-Distributors should be aware that there is no official release of any of the
-new standalone packages or the new standalone `scrhack` yet. There are only
-developer versions of some parts. The first official release will hopefully
-come with the next [KOMA-Script](https://www.ctan.org/pkg/koma-script)
-release.
+Distributors should download [the distribution from
+CTAN](https://www.ctan.org/pkg/scrhack). This consists in:
 
-*For now, distributors should just ignore this project.*
+* `scrhack.dtx`
+* `scrhack-2023-07-07.dtx`
+* `README.md`
+* `LICENSE.md`
+* `scrhack.pdf`
+* `scrhack-2023-07-07.pdf`
+
+If distributors also want to distribute `scrhack.sty`,
+`scrhack-2023-07-07.sty`, `float.hak`, `floatrow.hak`, `hyperref.hak`,
+`listings.hak`, `lscape.hak`, `nomencl.hak`, `setspace.hak`, and
+`standardsectioning.hak` they can unpack these using:
+
+    tex scrhack.dtx
+	tex scrhack-2023-07-07.dtx
+	
+Note, that you have to use `tex` not `latex`, `pdflatex`, `xelatex` or
+`lualatex`!
+
+Note also, that a legal distribution consists at least in:
+
+* `scrhack.dtx`
+* `scrhack-2023-07-07.dtx`
+* `README.md`
+
+The following files are optionally, but must not be distributed without the
+previous ones:
+
+* `LICENSE.md`
+* `scrhack.sty`
+* `scrhack.pdf`
+* `scrhack-2023-07-07.sty`
+* `scrhack-2023-07-07.pdf`
+* `float.hak`
+* `floatrow.hak`
+* `hyperref.hak`
+* `listings.hak`
+* `lscape.hak`
+* `nomencl.hak`
+* `setspace.hak`
+* `standardsectioning.hak`
+
 
 # Unpacking and Installation for Developers
 
@@ -86,7 +127,7 @@ from within the main directory of the cloned respository. For installation of
 `scrhack` subdirectory. For installation without the manual omit
 option `--full`, but this is not recommended for developers.
 
-Note: Installation of `scrhack` does make sense only, if all other packages of
+Note: Installation of `scrhack` does make sense only if all other packages of
       the third-party enhancement project are also installed. The new 
 	  `scrhack` does not work without these packages.
 	  
@@ -111,7 +152,7 @@ Note: If you have already an installation of
 After installation you should get the user manual using:
 
     texdoc scrhack
-	
+
 See the manual of your TeX distribution for more information. 
 
 Developers or distributors can also build the manual from the source using:
@@ -122,8 +163,9 @@ Developers or distributors can also build the manual from the source using:
 
 To become a contributor, e.g., do heavy testing. If you find an issue, please
 report it using [the issue
-tracker](https://github.com/komascript/third-party-enhancements/issues). You
-can also become a developer and, e.g., make new test files to the
+tracker](https://github.com/komascript/third-party-enhancements/issues). 
+
+You can also become a developer and, e.g., make new test files to the
 packages. See the [`l3build`](https://ctan.org/pkg/l3build) manual for more
 information about tests. If you've created a new test and think that it would
 be useful. Please either do a pull request or [add a new

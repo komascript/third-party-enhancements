@@ -1,0 +1,89 @@
+% Testfile
+% - Option byselectfont compatible with baselineskip < fontsize or
+% baselineskip = 0
+
+\input{regression-test.tex}
+\documentclass[a5paper]{article}
+\usepackage[byselectfont]{setspaceenhanced}
+\newcommand*{\Text}{%
+  This is a dummy test, that produces more than one line of text in the
+  output.
+}
+\begin{document}
+\START
+\makeatletter
+\TEST{default}{%
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\fontsize{20}{24}}{\fontsize{20}{24}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\fontsize{10}{5}}{\fontsize{10}{5}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\fontsize{10}{0}}{\fontsize{10}{0}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing}{%
+  \doublespacing
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing\fontsize{20}{24}}{\doublespacing\fontsize{20}{24}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing\fontsize{10}{5}}{\doublespacing\fontsize{10}{5}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing\fontsize{10}{0}}{\doublespacing\fontsize{10}{0}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing\def\baselinestretch{1}}{%
+  \doublespacing\def\baselinestretch{1}%
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing\def\baselinestretch{1}\fontsize{20}{24}}{%
+  \doublespacing\def\baselinestretch{1}\fontsize{20}{24}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing\def\baselinestretch{1}\fontsize{10}{5}}{%
+  \doublespacing\def\baselinestretch{1}\fontsize{10}{5}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\doublespacing\def\baselinestretch{1}\fontsize{10}{0}}{%
+  \doublespacing\def\baselinestretch{1}\fontsize{10}{0}\selectfont
+  \show\f@size
+  \show\baselinestretch\showthe\baselineskip
+  \Text
+}
+\TEST{\setstretch{1.5}\footnote}{%
+  \setstretch{1.5}\Text\footnote{\LaTeX}%
+}
+\END
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

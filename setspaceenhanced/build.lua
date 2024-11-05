@@ -2,7 +2,7 @@
 
 --[[
    Build script for setspaceenhanced (KOMA-Script spin-off)
-   Copyright © 2023 Markus Kohm
+   Copyright © 2023–2024 Markus Kohm
 
    This file is part of the build system of setspaceenhanced.
 
@@ -17,7 +17,7 @@
          setspaceenhanced.
 ]]
 
-release_info = "2023-10-09 v1.02"
+release_info = "2024-11-05 v1.03"
 
 -- Bundle and modules
 

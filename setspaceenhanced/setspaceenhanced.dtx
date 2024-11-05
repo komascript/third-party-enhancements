@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 % ======================================================================
 % setspaceenhanced.dtx
-% Copyright © 2008–2023 Markus Kohm
+% Copyright © 2008–2024 Markus Kohm
 %
 % This work is a KOMA-Script spin-off.  For the original sources of
 % KOMA-Script's `float.hak' see file `scrhack.dtx' in the KOMA-Script
@@ -32,7 +32,7 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesExplPackage{setspaceenhanced}
-  {2023-10-09}{1.02}
+  {2024-11-05}{1.03}
   {%
 %<*dtx>
     sources and unpack driver of
@@ -349,7 +349,12 @@ group.
   \opt{byselectfont} or \opt{byselectfont=true}. This will use the generic
   \LaTeX{} hook \texttt{selectfont} to reactivate \cs{onehalfspacing} or
   \cs{doublespacing} after every \cs{selectfont} if the font size has been
-  changed.
+  changed. However note, this is only done if baselineskip is not less than
+  the font size. So for a font selection like |\fontsize{6}{0}\selectfont| the
+  factor recalculation is ignored, because it does not make sense.\footnote{In
+    my opinion using a baselineskip less than the font size never makes
+    sense. But \LaTeX{} itself uses baselineskip 0 inside the definition of
+    \cs{LaTeX}.}
 \item[doublespacing=\meta{real}]%
   \DescribeOption{onehalfspacing}%
   \hfill initial=\texttt{nan}, default=\emph{empty}\\
@@ -607,6 +612,7 @@ In my opinion this is more the expected result. See the previous
 %
 % \begin{macro}{\@@_calc_stretch:}
 % \ExplSyntaxOff
+% \changes{v1.03}{2024/11/05}{special case \cs{f@baselineskip} < \cs{f@size}}
 % This macro is used to (re-)calculate the stretch factor
 % \cs{@@\_calcstretch} if the currently used constant is not
 % \texttt{nan}.
@@ -615,9 +621,15 @@ In my opinion this is more the expected result. See the previous
   {
     \fp_if_nan:nF { \g_@@_fp }
       {
-        \fp_set:Nn \g_@@_linespread_fp
+        \fp_compare:nNnTF { \dim_to_fp:n \f@baselineskip } < \f@size
           {
-            \f@size / \dim_to_fp:n { \f@baselineskip } * \g_@@_fp
+            \fp_set_eq:NN \g_@@_fp \g_@@_linespread_fp
+          }
+          {  
+            \fp_set:Nn \g_@@_linespread_fp
+              {
+                \f@size / \dim_to_fp:n { \f@baselineskip } * \g_@@_fp
+              }
           }
       }
   }
@@ -636,8 +648,7 @@ In my opinion this is more the expected result. See the previous
       {
         \cs_if_exist:NT \size@update
           {
-            \fp_set:Nn \l_tmpa_fp { \f@linespread }
-            \fp_compare:nNnT \g_@@_linespread_fp = \l_tmpa_fp
+            \fp_compare:nNnT \g_@@_linespread_fp = \f@linespread
               {
                 \@@_calc_stretch:
                 \set@fontsize

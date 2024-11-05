@@ -1,8 +1,8 @@
 # Package `setspaceenhanced`
 
-Copyright © 2008–2023 Markus Kohm
+Copyright © 2008–2024 Markus Kohm
 
-Release: 2023-10-09 v1.02
+Release: 2024-11-05 v1.03
 
 License: LPPL 1.3c
 

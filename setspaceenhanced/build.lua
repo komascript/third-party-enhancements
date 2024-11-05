@@ -47,8 +47,8 @@ uploadconfig = {
    repository  = "https://github.com/komascript/third-party-enhancements/tree/main/setspaceenhanced",
    description = "This package adds support for all font sizes, even non-integer resp. non-pt sizes to package `setspace`. This not only improves compatibility with KOMA-Script but also corrects the stretch value of the usual font sizes.",
    version     = release_info,
-   announcement_file = "announcement-" .. release_info .. ".txt",
-   note_file         = "upload-note-" .. release_info .. ".txt",
+   announcement_file = "announcement.txt",
+   note_file         = "upload-note.txt",
 }
 
 -- Detail how to set the version automatically

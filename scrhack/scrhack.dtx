@@ -300,6 +300,12 @@ corresponding package.
   After package \pkg{setspace} is loaded, load also package
   \pkg{setspaceenhanced} with the same options plus options \opt{byselectfont}
   and \opt{keepfontsize}.
+
+  Note: The use of the two options is a change compared to \pkg*{scrhack} up
+  to version 3.41, as the versions of \pkg*{scrhack} previously available in
+  \KOMAScript{} did not have comparable functionality. If you do not want this
+  change, it can be deactivated using \cs{spacesetup}. Further details can be
+  found in the documentation for the \pkg{setspaceenhanced} package.
 \item[\opt{standardsectioning=\meta{boolean}}:]
   \DescribeOption[noprint]{standardsectioning=\meta{boolean}}%
   \hfill initial: \optvalue{false}, default: \optvalue{true}\\
@@ -468,6 +474,27 @@ corresponding package.
   {
     deprecated~option~`#1'~ignored.
   }
+%    \end{macrocode}
+% Note about the status of this package.
+%    \begin{macrocode}
+\msg_new:nnn { scrhack } { compatibility-package }
+  {
+    This~package~exists~only~for~compatibility~reasons~to~emulate~the~
+    former~KOMA-Script~package~scrhack~by~using~the~new~packages~
+    floatbytocbasic,~floatrowbytocbasic,~lscapeenhanced,~setspaceenhanced,~
+    and~optionally~standardsectioning.\\
+    Instead~of~using~this~compatibility~package~the~following~
+    package~replacements~would~be~recommended:\\
+    \ ~float~\ ~\ ~-->~floatbytocbasic\\
+    \ ~floatrow~\ -->~floatrowbytocbasic\\
+    \ ~lscape~\ ~\ -->~lscapeenhanced\\
+    \ ~pdflscape~-->~lscapeenhanced~(with~option~pdflscape)\\
+    \ ~setspace~\ -->~setspaceenhanced\\
+    If~needed~you~can~additionally~use~package~standardsectioning.\\
+    For~more~information~please~have~a~look~into~the~documentations~
+    of~these~packages.
+  }
+\msg_info:nn { scrhack } { compatibility-package }
 %    \end{macrocode}
 %
 % \subsection{Emulating \file{float.hak}}
@@ -843,6 +870,12 @@ corresponding package.
                             {
                               \exp_last_unbraced:Ne \RequirePackage
                                 {
+%    \end{macrocode}
+% Note: Passing |\use:c { @raw@option@setspace.sty }| is only needed for
+% \pkg{setspaceenhanced} before version 1.04. From version 1.04 the package
+% initializes its options automatically with the options of an already loaded
+% \pkg{setspace}. So removing this in some future would be nice.
+%    \begin{macrocode}
                                   [ \use:c { @raw@opt@setspace.sty },
                                     byselectfont,
                                     keepfontsize ]

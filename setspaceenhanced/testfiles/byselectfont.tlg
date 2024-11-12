@@ -9,7 +9,7 @@ TEST 1: default
                          \show \baselinestretch \showthe \baselineskip \Text 
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> \show \f@size \show \baselinestretch 
                                                 \showthe \baselineskip \Text 
 l. ...}
@@ -29,7 +29,7 @@ LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <20> not available
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
@@ -47,7 +47,7 @@ TEST 3: \fontsize {10}{5}
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
@@ -65,7 +65,7 @@ TEST 4: \fontsize {10}{0}
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}

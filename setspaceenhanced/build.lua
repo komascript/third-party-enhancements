@@ -17,7 +17,7 @@
          setspaceenhanced.
 ]]
 
-release_info = "2024-11-05 v1.03"
+release_info = "2024-11-12 v1.04"
 
 -- Bundle and modules
 

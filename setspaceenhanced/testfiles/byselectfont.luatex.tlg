@@ -9,7 +9,7 @@ TEST 1: default
               \show \baselinestretch \showthe \baselineskip \Text 
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> \show \f@size \show \baselinestretch 
                                      \showthe \baselineskip \Text 
 l. ...}
@@ -27,7 +27,7 @@ TEST 2: \fontsize {20}{24}
                                             \show \baselinestretch \showthe \ba
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> ...electfont \show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
@@ -45,7 +45,7 @@ TEST 3: \fontsize {10}{5}
                                            \show \baselinestretch \showthe \bas
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> ...electfont \show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
@@ -63,7 +63,7 @@ TEST 4: \fontsize {10}{0}
                                            \show \baselinestretch \showthe \bas
 l. ...}
 > \baselinestretch=macro:
-->.
+->1.
 <argument> ...electfont \show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}

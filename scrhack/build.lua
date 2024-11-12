@@ -17,7 +17,7 @@
    Note: You should not copy this file to the distribution of scrhack.
 ]]
 
-release_info = "2024-09-04 v3.42"
+release_info = "2024-11-12 v3.43"
 -- Bundle and modules ------------------------------------------------------
 -- Note: It is intended to release the former hacks as standalone
 --       packages. Therefore, there is no bundle, although changes to

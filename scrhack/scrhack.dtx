@@ -39,7 +39,7 @@
 %<package>\DeclareCurrentRelease{}{2023-07-15}
 %<*dtx|package>
 %<package>\ProvidesPackage{scrhack}
-             [2024-09-04 v3.42
+             [2024-11-12 v3.43
 %<dtx>              sources and unpack driver of
               scrhack emulation package]
 %</dtx|package>
@@ -179,7 +179,7 @@ advantages and features than the two old commands.
 
 Although the effort to use this package is very small, so far the authors of
 most of the packages that use the old interface have not made any adjustments.
-Therefore the \KOMAScript author designed a new
+Therefore the \KOMAScript{} author designed a new
 package \pkg*{scrhack} as part of
 \href{https://komascript.de/}{\KOMAScript}. That package contained appropriate
 modifications of the packages
@@ -197,7 +197,13 @@ With release of version 3.42 package \pkg*{scrhack} has been removed from
 been split into several standalone packages, that can be loaded individually
 if needed. However, for compatibility and maybe for convenience there is also
 a new standalone package \pkg*{scrhack} almost compatible with the old
-one.
+one. Therefore, you can still use the \pkg*{scrhack} package. However, we
+recommend replacing the individual packages with the corresponding extended
+packages, which means \pkg{float} by \pkg{floatbytocbasic}, \pkg{floatrow} by
+\pkg{floatrowbytocbasic}, \pkg{lscape} by \pkg{lscapeenhanced},
+\pkg{pdflscape} by \pkg{lscapeenhanced} with option \opt{psdlscape}, and last
+but not least \pkg{setspace} by \pkg{setspaceenhanced}. And if you need, you
+can use package \pkg{standardsectioning}.
 
 \section{Using \texorpdfstring{\pkg*{scrhack}}{scrhack}}
 \seclabel{usage}
@@ -306,8 +312,8 @@ corresponding package.
   \KOMAScript{} did not have comparable functionality. If you do not want this
   change, it can be deactivated using \cs{spacesetup}. Further details can be
   found in the documentation for the \pkg{setspaceenhanced} package.
-\item[\opt{standardsectioning=\meta{boolean}}:]
-  \DescribeOption[noprint]{standardsectioning=\meta{boolean}}%
+\item[\opt{standardsections=\meta{boolean}}:]
+  \DescribeOption[noprint]{standardsections=\meta{boolean}}%
   \hfill initial: \optvalue{false}, default: \optvalue{true}\\
   Load package \pkg{standardsectioning} to (re-)define the sectioning commands
   using the code from the standard classes. If \pkg*{scrhack} is loaded

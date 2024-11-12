@@ -284,8 +284,8 @@ by
 \end{verbatim}
 
 If you want you can alternatively also load both packages explicitly, either
-\pkg{setspace} before \pkg{setspaceenhanced} or---if you
-want---\pkg{setspaceenhanced} before \pkg{setspace}. In this case, you should
+\pkg{setspace} before \pkg*{setspaceenhanced} or---if you
+want---\pkg*{setspaceenhanced} before \pkg{setspace}. In this case, you should
 use the same options for both package.
 
 This is also useful, if you use a package, that uses \pkg{setspace} itself. In
@@ -316,12 +316,12 @@ same optional argument for \cs{RequirePackage}, that is used for loading
 
 \leavevmode\marginpar{\raggedleft\footnotesize\textcolor{black}{(added 2024-11-12)}}%
 Note: If package \pkg{setspace} has been loaded \emph{before} package
-\pkg{setspaceenhanced}, \pkg{setspaceenhanced} uses the options to
+\pkg*{setspaceenhanced}, \pkg*{setspaceenhanced} uses the options to
 package \pkg{setspace} for the initialization. But you can overwrite the
-initialization by loading \pkg{setspaceenhancded} with options or passing
-options to \pkg{setspaceenhanced}. On the other hand, package \pkg{setspace}
+initialization by loading \pkg*{setspaceenhancded} with options or passing
+options to \pkg*{setspaceenhanced}. On the other hand, package \pkg{setspace}
 \emph{should never} be loaded with options after loading
-\pkg{setspaceenhanced}. So
+\pkg*{setspaceenhanced}. So
 \begin{verbatim}
   \usepackage[doublespacing]{setspace}
   \usepackage{setspaceenhanced}
@@ -345,7 +345,7 @@ But
   \usepackage{setspaceenhanced}
   \usepackage[doublespacing]{setspace}
 \end{verbatim}
-would fail with an option clash error, because \pkg{setspaceenhanced} already
+would fail with an option clash error, because \pkg*{setspaceenhanced} already
 loaded \pkg{setspace} without options.
 
 Package \pkg*{setspaceenhanced} provides all options and commands of the user
@@ -389,6 +389,14 @@ group.
     my opinion using a baselineskip less than the font size never makes
     sense. But \LaTeX{} itself uses baselineskip 0 inside the definition of
     \cs{LaTeX}.}
+
+  Please note:\marginpar{\raggedleft\raisebox{\dimexpr\ht\strutbox-\height\relax}{\Huge\textcolor{red}{!}}}
+  The capabilities of this option are unfortunately limited.
+  Among other things, it is dependent on the internal function of
+  \cs{selectfont}. It can therefore lead to undesirable effects in some cases.
+  In this case, you should disable the option either locally or globally
+  via |\spacesetup{byselectfont=false}| or directly when loading
+  \pkg*{setspaceenhanced}.
 \item[doublespacing=\meta{real}]%
   \DescribeOption{onehalfspacing}%
   \hfill initial=\texttt{nan}, default=\emph{empty}\\
@@ -486,7 +494,7 @@ font size. It is also not onehalfspacing depending on the document font size,
 because this would need a baseline skip of 18\,pt. So what is it? It is using
 the stretch factor of 12\,pt for the 10.95\,pt of \cs{small}.
 
-With \pkg{setspaceenhanced}:
+With \pkg*{setspaceenhanced}:
 \begin{verbatim}
   \documentclass[12pt]{article}
   \usepackage{setspaceenhanced}
@@ -761,7 +769,7 @@ In my opinion this is more the expected result. See the previous
 % Now, test for the options used by \pkg{setspace} and use them also for
 % the initialization of the keys above. We do it option by option instead
 % of processing all \pkg{setspace} options, because we want to process only
-% those options \pkg{setspaceenhanced} also knows.
+% those options \pkg*{setspaceenhanced} also knows.
 %    \begin{macrocode}
 \clist_map_inline:nn
   { nodisplayskipstretch, singlespacing, onehalfspacing, doublespacing }

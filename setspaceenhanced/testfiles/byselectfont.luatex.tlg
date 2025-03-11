@@ -6,15 +6,15 @@ TEST 1: default
 > \f@size=macro:
 ->10.
 <argument> \show \f@size 
-              \show \baselinestretch \showthe \baselineskip \Text 
+                         \show \baselinestretch \showthe \baselineskip \Text 
 l. ...}
 > \baselinestretch=macro:
 ->1.
 <argument> \show \f@size \show \baselinestretch 
-                                     \showthe \baselineskip \Text 
+                                                \showthe \baselineskip \Text 
 l. ...}
 > 12.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -23,16 +23,16 @@ TEST 2: \fontsize {20}{24}
 ============================================================
 > \f@size=macro:
 ->20.
-<argument> \fontsize {20}{24}\selectfont \show \f@size 
-                                            \show \baselinestretch \showthe \ba
+<argument> ...e {20}{24}\selectfont \show \f@size 
+                                                  \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 24.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -41,16 +41,16 @@ TEST 3: \fontsize {10}{5}
 ============================================================
 > \f@size=macro:
 ->10.
-<argument> \fontsize {10}{5}\selectfont \show \f@size 
-                                           \show \baselinestretch \showthe \bas
+<argument> ...ze {10}{5}\selectfont \show \f@size 
+                                                  \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 5.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -59,16 +59,16 @@ TEST 4: \fontsize {10}{0}
 ============================================================
 > \f@size=macro:
 ->10.
-<argument> \fontsize {10}{0}\selectfont \show \f@size 
-                                           \show \baselinestretch \showthe \bas
+<argument> ...ze {10}{0}\selectfont \show \f@size 
+                                                  \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 0.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -78,15 +78,15 @@ TEST 5: \doublespacing
 > \f@size=macro:
 ->10.
 <argument> \doublespacing \show \f@size 
-                             \show \baselinestretch \showthe \baselineskip \Tex
+                                        \show \baselinestretch \showthe \bas...
 l. ...}
 > \baselinestretch=macro:
 ->1.666666666666667.
-<argument> ...lespacing \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 20.00006pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -95,16 +95,16 @@ TEST 6: \doublespacing \fontsize {20}{24}
 ============================================================
 > \f@size=macro:
 ->20.
-<argument> ...ng \fontsize {20}{24}\selectfont \show \f@size 
+<argument> ...e {20}{24}\selectfont \show \f@size 
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.666666666666667.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 40.00012pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -113,16 +113,16 @@ TEST 7: \doublespacing \fontsize {10}{5}
 ============================================================
 > \f@size=macro:
 ->10.
-<argument> ...ing \fontsize {10}{5}\selectfont \show \f@size 
+<argument> ...ze {10}{5}\selectfont \show \f@size 
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.666666666666667.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 8.33336pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -131,16 +131,16 @@ TEST 8: \doublespacing \fontsize {10}{0}
 ============================================================
 > \f@size=macro:
 ->10.
-<argument> ...ing \fontsize {10}{0}\selectfont \show \f@size 
+<argument> ...ze {10}{0}\selectfont \show \f@size 
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.666666666666667.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 0.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -149,16 +149,16 @@ TEST 9: \doublespacing \def \baselinestretch {1}
 ============================================================
 > \f@size=macro:
 ->10.
-<argument> ...spacing \def \baselinestretch {1}\show \f@size 
+<argument> ...f \baselinestretch {1}\show \f@size 
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.
-<argument> ...tretch {1}\show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 20.00006pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -167,16 +167,16 @@ TEST 10: \doublespacing \def \baselinestretch {1}\fontsize {20}{24}
 ============================================================
 > \f@size=macro:
 ->20.
-<argument> ...{1}\fontsize {20}{24}\selectfont \show \f@size 
+<argument> ...e {20}{24}\selectfont \show \f@size 
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 24.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -185,16 +185,16 @@ TEST 11: \doublespacing \def \baselinestretch {1}\fontsize {10}{5}
 ============================================================
 > \f@size=macro:
 ->10.
-<argument> ... {1}\fontsize {10}{5}\selectfont \show \f@size 
+<argument> ...ze {10}{5}\selectfont \show \f@size 
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 5.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================
@@ -203,16 +203,16 @@ TEST 12: \doublespacing \def \baselinestretch {1}\fontsize {10}{0}
 ============================================================
 > \f@size=macro:
 ->10.
-<argument> ... {1}\fontsize {10}{0}\selectfont \show \f@size 
+<argument> ...ze {10}{0}\selectfont \show \f@size 
                                                   \show \baselinestretch \sh...
 l. ...}
 > \baselinestretch=macro:
 ->1.
-<argument> ...electfont \show \f@size \show \baselinestretch 
+<argument> ...show \f@size \show \baselinestretch 
                                                   \showthe \baselineskip \Text 
 l. ...}
 > 0.0pt.
-<argument> ... \show \baselinestretch \showthe \baselineskip 
+<argument> ...elinestretch \showthe \baselineskip 
                                                   \Text 
 l. ...}
 ============================================================

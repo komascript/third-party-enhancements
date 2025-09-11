@@ -2,7 +2,7 @@
 
 --[[
    Build script for standardsectioning (KOMA-Script spin-off)
-   Copyright © 2023–2024 Markus Kohm
+   Copyright © 2023–2025 Markus Kohm
 
    This file is part of the build system of standardsectioning.
 
@@ -17,7 +17,7 @@
          standardsectioning.
 ]]
 
-release_info = "2024-06-06 v0.9"
+release_info = "2025-09-11 v0.10"
 -- Bundle and modules
 
 module  = "standardsectioning"

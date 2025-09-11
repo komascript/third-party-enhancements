@@ -1,8 +1,8 @@
 # Package `standardsectioning`
 
-Copyright © 2019–2024 Markus Kohm
+Copyright © 2019–2025 Markus Kohm
 
-Release: 2024-06-06 v0.9
+Release: 2025-09-11 v0.10
 
 License: LPPL 1.3c
 

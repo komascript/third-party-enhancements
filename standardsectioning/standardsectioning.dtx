@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 % ======================================================================
 % standardsectioning.dtx
-% Copyright © 2008–2024 Markus Kohm
+% Copyright © 2008–2025 Markus Kohm
 %
 % This work is a KOMA-Script spin-off.  For the original sources of
 % KOMA-Script's `float.hak' see file `scrhack.dtx' in the KOMA-Script
@@ -42,7 +42,7 @@
 %</dtx>
 %<*dtx|package>
 %<package>\ProvidesExplPackage{standardsectioning}
-  {2024-06-06}{0.9}
+  {2025-09-11}{0.10}
   {%
 %<*dtx>
     sources and unpack driver of
@@ -372,22 +372,28 @@ when using \cs{chapter}.
   {
 %    \end{macrocode}
 % \begin{macro}{\@startsection}
-% \KOMAScript{} classes redefine this internal \LaTeX{} kernel macro. In this
-% case \cs{scr@saved@startsection} is defined, differs from
+% \changes{v0.10}{2025-09-11}{conditional restore}
+% \KOMAScript{} classes before v3.49 redefine this internal \LaTeX{} kernel
+% macro. In this case \cs{scr@saved@startsection} is defined, differs from
 % \cs{@startsection} and has the definition found before redefining the
 % original macro. We do nothing else but resetting \cs{@startsection} to this
 % saved definition.
 %    \begin{macrocode}
-    \RenewCommandCopy \@startsection \scr@saved@startsection
+    \cs_if_exist:NT \scr@saved@startsection
+      { \RenewCommandCopy \@startsection \scr@saved@startsection }
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\@sect,\@ssect,\@xsect}
-% All these should be resetted to their original definitions stored in
+% \changes{v0.10}{2025-09-11}{conditional restore}
+% All these should be restored to their original definitions stored in
 % \cs{scr@latex@\dots}.
 %    \begin{macrocode}
-    \RenewCommandCopy\@sect\scr@latex@sect
-    \RenewCommandCopy\@ssect\scr@latex@ssect
-    \RenewCommandCopy\@xsect\scr@latex@xsect
+    \cs_if_exist:NT \scr@latex@sect
+      { \RenewCommandCopy\@sect\scr@latex@sect }
+    \cs_if_exist:NT \scr@latex@ssect
+      { \RenewCommandCopy\@ssect\scr@latex@ssect }
+    \cs_if_exist:NT \scr@latex@xsect
+      { \RenewCommandCopy\@xsect\scr@latex@xsect }
 %    \end{macrocode}
 % \end{macro}
 % \begin{command}{\DeclareSectionCommand,\RedeclareSectionCommand,

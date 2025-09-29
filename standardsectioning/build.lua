@@ -50,7 +50,6 @@ uploadconfig = {
    repository  = "https://github.com/komascript/third-party-enhancements/tree/main/standardsectioning",
    description = "The package implements the sectioning commands fully compatible with the standard classes. This is intended, e.g., to make the KOMA-Script classes work with packages like `titlesec`, which depend on the implementation of these commands.",
    version     = release_info,
-   update      = false
 }
 
 -- Detail how to set the version automatically

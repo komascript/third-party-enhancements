@@ -14,3 +14,7 @@
 	path = setspaceenhanced
 	url = ssh://git@codeberg.org/komascript/setspaceenhanced.git
 	branch = main
+[submodule "standardsectioning"]
+	path = standardsectioning
+	url = ssh://git@codeberg.org/komascript/standardsectioning.git
+	branch = main

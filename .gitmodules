@@ -10,3 +10,7 @@
 	path = lscapeenhanced
 	url = ssh://git@codeberg.org/komascript/lscapeenhanced.git
 	branch = main
+[submodule "setspaceenhanced"]
+	path = setspaceenhanced
+	url = ssh://git@codeberg.org/komascript/setspaceenhanced.git
+	branch = main

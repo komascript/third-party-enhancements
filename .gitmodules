@@ -1,0 +1,4 @@
+[submodule "floatbytocbasic"]
+	path = floatbytocbasic
+	url = ssh://git@codeberg.org/komascript/floatbytocbasic.git
+	branch = main

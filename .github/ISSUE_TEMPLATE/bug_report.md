@@ -7,6 +7,16 @@ assignees: ''
 
 ---
 
+**Important:**
+
+Issue to one of the submodules should be reported in the corresponding issue tracker:
+
+* [`floatbytocbasic`](https://codeberg.org/komascript/floatbytocbasic/issues)
+* [`floatrowbytocbasic`](https://codeberg.org/komascript/floatrowbytocbasic/issues)
+* [`lscapeenhanced`](https://codeberg.org/komascript/lscapeenhanced/issues)
+* [`setspaceenhanced`](https://codeberg.org/komascript/setspaceenhanced/issues)
+* [`standardsectioning`](https://codeberg.org/komascript/standardsectioning/issues)
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 

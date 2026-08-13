@@ -6,3 +6,7 @@
 	path = floatrowbytocbasic
 	url = ssh://git@codeberg.org/komascript/floatrowbytocbasic.git
 	branch = main
+[submodule "lscapeenhanced"]
+	path = lscapeenhanced
+	url = ssh://git@codeberg.org/komascript/lscapeenhanced.git
+	branch = main

@@ -2,3 +2,7 @@
 	path = floatbytocbasic
 	url = ssh://git@codeberg.org/komascript/floatbytocbasic.git
 	branch = main
+[submodule "floatrowbytocbasic"]
+	path = floatrowbytocbasic
+	url = ssh://git@codeberg.org/komascript/floatrowbytocbasic.git
+	branch = main
